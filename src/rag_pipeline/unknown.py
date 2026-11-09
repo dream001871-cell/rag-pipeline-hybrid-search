@@ -1,11 +1,12 @@
 from typing import List, Optional, Dict
 from dataclasses import dataclass, field
 import re
+import math
 
 from .retrieval import RetrievalResult
-from .generation import Generator, GroundedPrompt
+from .generation import Generator, GroundedClaim, GroundedPrompt
 from .confidence import ConfidenceScorer, ConfidenceReport
-from .citation import CitationReport
+from .citation import CitationReport, CitationParser
 
 
 @dataclass
@@ -69,13 +70,7 @@ class AnswerOutcome:
 
 
 class UnknownHandler:
-    """Gates answer generation on confidence, producing a graceful
-    "I don't know" response when the system is not confident enough.
-
-    This prevents hallucination: rather than fabricating an answer when
-    retrieval is weak, it returns a structured explanation of what was found,
-    what was not found, and which documents deserve a manual look.
-    """
+    """先检查引用依据与最低完整度，再按综合分数决定回答或拒答。"""
 
     def __init__(
         self,
@@ -83,13 +78,17 @@ class UnknownHandler:
         threshold: float = 0.5,
         found_highlights: int = 4,
         candidate_docs: int = 3,
+        min_completeness: float = 0.5,
     ):
         if not 0.0 <= threshold <= 1.0:
             raise ValueError("threshold must be in [0, 1]")
+        if not 0.0 <= min_completeness <= 1.0:
+            raise ValueError("min_completeness 必须位于 [0, 1]")
         self.scorer = scorer
         self.threshold = threshold
         self.found_highlights = found_highlights
         self.candidate_docs = candidate_docs
+        self.min_completeness = min_completeness
 
     def decide(
         self,
@@ -97,13 +96,59 @@ class UnknownHandler:
         answer: str,
         source_chunks: List[RetrievalResult],
         citation_report: Optional[CitationReport] = None,
+        *,
+        claims: Optional[list[GroundedClaim]] = None,
+        generation_error: Optional[str] = None,
     ) -> AnswerOutcome:
-        """Return an AnswerOutcome after applying the confidence gate."""
+        """必要条件不能被其他高分抵消；失败原因保留在评分报告中。"""
         confidence = self.scorer.score(
             question, answer, source_chunks, citation_report=citation_report
         )
 
-        if confidence.composite >= self.threshold:
+        failures = []
+        parser = CitationParser()
+        parsed = parser.parse(answer, claims)
+        if generation_error:
+            failures.append("结构化答案格式无效")
+            confidence.details["generation_error"] = generation_error
+        if not answer.strip():
+            failures.append("答案为空")
+        if not source_chunks:
+            failures.append("没有可供核验的来源片段")
+        if not parsed:
+            failures.append("答案没有引用")
+        elif any(c.number < 1 or c.number > len(source_chunks) for c in parsed):
+            failures.append("引用编号超出本次来源范围")
+
+        if claims is None:
+            # 兼容旧文本调用，仍要求每个文本句子都有引用。
+            for sentence in parser._split_sentences(answer):
+                if not parser.CITATION_RE.search(sentence):
+                    failures.append("存在未标注引用的句子")
+                    break
+        elif claims and answer != "\n".join(claim.render() for claim in claims):
+            failures.append("答案与已核验的事实不匹配")
+
+        if citation_report is None or not citation_report.verified:
+            failures.append("引用尚未完成校验")
+        else:
+            expected = [(c.number, c.claim) for c in parsed]
+            received = [(c.number, c.claim) for c in citation_report.citations]
+            if citation_report.answer != answer or expected != received:
+                failures.append("引用报告与当前答案不匹配")
+            if any(c.supported is False for c in citation_report.citations):
+                failures.append("存在原文不支持的引用")
+            if any(c.supported is not True and c.supported is not False for c in citation_report.citations):
+                failures.append("存在无法验证的引用")
+
+        if not math.isfinite(confidence.completeness) or confidence.completeness < self.min_completeness:
+            failures.append("回答完整度低于最低要求")
+        if not math.isfinite(confidence.composite) or confidence.composite < self.threshold:
+            failures.append("综合置信度低于阈值")
+        confidence.details["gate_failures"] = failures
+        confidence.details["min_completeness"] = self.min_completeness
+
+        if not failures:
             return AnswerOutcome(
                 can_answer=True,
                 answer=answer,
@@ -130,6 +175,9 @@ class UnknownHandler:
         gaps = self._what_was_missing(question, answer, found)
         docs = self._candidate_documents(source_chunks)
         summary = self._summarize(question, found, gaps)
+        failures = confidence.details.get("gate_failures", [])
+        if failures:
+            summary = "未通过检查：" + "；".join(failures) + "。" + summary
 
         return LowConfidenceAnswer(
             question=question,
@@ -154,7 +202,7 @@ class UnknownHandler:
             doc = (r.metadata or {}).get("source_file") or "unknown"
             item = snippet
             if doc != "unknown":
-                item = f"{snippet} (from {doc})"
+                item = f"{snippet}（来源：{doc}）"
             items.append(item)
         return items
 
@@ -204,23 +252,20 @@ class UnknownHandler:
         parts = []
         if found:
             parts.append(
-                f"I found {len(found)} relevant passage(s) related to your question, "
-                "but I am not confident enough to give a definitive answer."
+                f"找到了 {len(found)} 个与问题相关的片段，但证据不足，暂时无法给出确定回答。"
             )
         else:
             parts.append(
-                "I was unable to find relevant content for this question in the "
-                "indexed documents."
+                "在已索引的文档中未找到与该问题相关的内容。"
             )
         if gaps:
             parts.append(
-                "The following aspects could not be confirmed: "
+                "以下内容尚无法确认："
                 + ", ".join(repr(g) for g in gaps)
-                + "."
+                + "。"
             )
         parts.append(
-            "Please check the listed documents manually rather than relying on "
-            "an AI-generated answer."
+            "请手动核对列出的原始文档后再作判断。"
         )
         return " ".join(parts)
 

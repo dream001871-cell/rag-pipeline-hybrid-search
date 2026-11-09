@@ -14,6 +14,8 @@ from rag_pipeline.retrieval import DenseRetriever, SparseRetriever
 from rag_pipeline.fusion import HybridRetriever
 from rag_pipeline.reranker import LexicalReranker
 from rag_pipeline.generation import Generator
+from rag_pipeline.citation import CitationVerifier
+from rag_pipeline.confidence import ConfidenceReport
 
 DATA_DIR = Path(__file__).parent.parent
 
@@ -48,8 +50,10 @@ def build_app(base: Path):
         system = messages[0]["content"] if messages else ""
         if "completeness judge" in system:
             return '{"score": 0.9, "reason": "addresses the question"}'
-        if "Citation" in system and "verify" in system:
-            return '{"supported": true, "reason": "context supports the claim"}'
+        if "whether a citation supports a claim" in system:
+            return "SUPPORTED"
+        if "What color is the ceiling?" in messages[1]["content"]:
+            return "上下文信息不足，无法回答这个问题。"
         if "answer" in system or "cited" in system:
             return "Reciprocal Rank Fusion combines dense and sparse rankings [1]."
         # Fall back to the grounded answer prompt shape
@@ -76,7 +80,7 @@ def test_openapi_docs_available(client):
     resp = client.get("/openapi.json")
     assert resp.status_code == 200
     spec = resp.json()
-    assert spec["info"]["title"] == "RAG Pipeline Hybrid Search API"
+    assert spec["info"]["title"] == "RAG 混合检索接口"
     paths = spec["paths"]
     assert "/v1/ask" in paths
     assert "/v1/ingest" in paths
@@ -117,13 +121,41 @@ def test_ask_empty_question_400(client):
     assert resp.status_code == 400
 
 
+def test_production_trace_correlates_stages_without_sending_request_text(tmp_path, monkeypatch):
+    import json
+
+    monkeypatch.setenv("RAG_TRACE_ENDPOINT", "http://127.0.0.1:8088/v1/traces")
+    deliveries = []
+
+    def unavailable(endpoint, trace_id, payload):
+        deliveries.append((endpoint, trace_id, payload))
+        return False
+
+    monkeypatch.setattr("rag_pipeline.api.export_trace", unavailable)
+    response = TestClient(build_app(tmp_path)).post("/v1/ask", json={
+        "question": "private-question-sentinel", "retrieval_mode": "private-mode-sentinel", "top_k": 3,
+    })
+    assert response.status_code == 200
+    _, trace_id, payload = deliveries[0]
+    assert response.headers["X-Trace-Id"] == trace_id
+    serialized = json.dumps(payload, ensure_ascii=False)
+    assert "private-question-sentinel" not in serialized
+    assert "private-mode-sentinel" not in serialized
+    spans = payload["resourceSpans"][0]["scopeSpans"][0]["spans"]
+    assert [span["name"] for span in spans] == [
+        "rag.ask", "rag.retrieve", "rag.generate", "rag.verify_citations", "rag.decide",
+    ]
+    assert all(span["traceId"] == trace_id for span in spans)
+    assert all(span["parentSpanId"] == spans[0]["spanId"] for span in spans[1:])
+
+
 def test_ask_without_llm_503(tmp_path):
     app = create_app(persist_dir=str(tmp_path / "chroma"), bm25_dir=str(tmp_path / "bm25"))
     resp = TestClient(app).post(
         "/v1/ask", json={"question": "What is FastAPI?"}
     )
     assert resp.status_code == 503
-    assert "not configured" in resp.json()["detail"]
+    assert "尚未配置" in resp.json()["detail"]
 
 
 def test_retrieve_supports_modes(client):
@@ -140,6 +172,29 @@ def test_retrieve_supports_modes(client):
         assert "rerank_score" in item
         assert "dense_score" in item
         assert "sparse_score" in item
+
+
+def test_sparse_api_retrieves_chinese_document(client):
+    # 测试分词和接口链路，避免模拟向量的相似度去重影响中文样例。
+    client.app.state.pipeline.enable_deduplication = False
+    for filename, text in (
+        ("认证.md", "接口认证需要配置访问令牌。管理员在控制台创建凭据，调用方将凭据放入请求头。生产环境必须保护凭据，不应把它写入代码仓库，也不应分享给无关人员。"),
+        ("账单.md", "账单每月结算一次。财务人员可以查看费用明细，并按照项目归属进行成本分摊。每期结束之后会生成报表，历史记录可以在管理页面查询并导出保存。"),
+        ("备份.md", "数据库每天自动备份。运维人员应定期执行恢复演练，确认数据可以完整恢复。历史副本存储在独立位置，超过保留周期的副本按照管理制度进行清理。"),
+    ):
+        response = client.post(
+            "/v1/ingest", files={"file": (filename, text.encode("utf-8"), "text/markdown")}
+        )
+        assert response.status_code == 201
+        assert response.json()["chunks_added_bm25"] > 0
+    response = client.post(
+        "/v1/retrieve",
+        json={"question": "如何配置接口认证令牌？", "mode": "sparse", "top_k": 1},
+    )
+    assert response.status_code == 200
+    first = response.json()["ranking"][0]
+    assert first["source_file"] == "认证.md"
+    assert first["sparse_score"] > 0
 
 
 def test_retrieve_invalid_mode_falls_back_to_hybrid(client):
@@ -227,3 +282,19 @@ def test_ask_generator_dir(client):
 
     get = client.get("/v1/documents")
     assert len(get.json()) >= 2
+
+
+@pytest.mark.parametrize("verdict", ["UNSUPPORTED", "", "unknown"])
+def test_api_hides_answer_when_citation_fails_even_with_high_total(client, monkeypatch, verdict):
+    service = client.app.state.service
+    service.citation_verifier = CitationVerifier(judge=Generator(respond=lambda messages: verdict))
+    monkeypatch.setattr(service.handler.scorer, "score", lambda *args, **kwargs: ConfidenceReport(
+        completeness=0.9, composite=0.99,
+    ))
+    response = client.post("/v1/ask", json={"question": "What is FastAPI?", "top_k": 3})
+    assert response.status_code == 200
+    body = response.json()
+    assert body["can_answer"] is False
+    assert body["answer"] is None
+    assert body["confidence"]["details"]["gate_failures"]
+    assert "未通过检查" in body["declined"]["summary"]

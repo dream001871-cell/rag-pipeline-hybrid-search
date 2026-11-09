@@ -11,9 +11,9 @@ def test_dashboard_compiles():
 
 
 def test_modes_expose_backend_labels():
-    assert qd.MODES["Hybrid (dense + sparse)"] == "hybrid"
-    assert qd.MODES["Dense only"] == "dense"
-    assert qd.MODES["Sparse only (BM25)"] == "sparse"
+    assert qd.MODES["混合检索（向量 + 关键词）"] == "hybrid"
+    assert qd.MODES["仅向量检索"] == "dense"
+    assert qd.MODES["仅关键词检索（BM25）"] == "sparse"
 
 
 def test_fmt_handles_none_and_floats():

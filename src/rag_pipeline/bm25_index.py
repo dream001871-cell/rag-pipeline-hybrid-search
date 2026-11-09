@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 from rank_bm25 import BM25Okapi
+import jieba
 
 
 class BM25Index:
@@ -25,10 +26,15 @@ class BM25Index:
 
     @staticmethod
     def tokenize(text: str) -> List[str]:
-        """Lowercase, strip punctuation, and split into keyword tokens."""
-        text = text.lower()
-        text = re.sub(r"[^a-z0-9\s]", " ", text)
-        return [t for t in text.split() if t]
+        """中文使用搜索模式分词，英文及数字保留原有的小写词项规则。"""
+        tokens = []
+        for part in re.findall(r"[a-z0-9]+|[\u3400-\u4dbf\u4e00-\u9fff]+", text.lower()):
+            if part.isascii():
+                tokens.append(part)
+                continue
+            # 查询和文档采用相同规则，长词同时保留可检索的子词。
+            tokens.extend(jieba.cut_for_search(part))
+        return tokens
 
     def add(
         self,
@@ -56,7 +62,7 @@ class BM25Index:
         self._rebuild()
 
     def _rebuild(self) -> None:
-        if self._tokenized:
+        if any(self._tokenized):
             self._bm25 = BM25Okapi(self._tokenized)
         else:
             self._bm25 = None
@@ -124,8 +130,14 @@ class BM25Index:
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
         self._chunk_ids = data["chunk_ids"]
-        self._tokenized = data["tokenized"]
         self._lookup = data["lookup"]
+        # 分词结果是派生缓存；从原文恢复，避免旧索引沿用丢弃中文的规则。
+        self._tokenized = []
+        for chunk_id in self._chunk_ids:
+            item = self._lookup[chunk_id]
+            tokens = self.tokenize(item["content"])
+            item["tokens"] = tokens
+            self._tokenized.append(tokens)
         self._rebuild()
         return True
 

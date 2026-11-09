@@ -3,6 +3,14 @@ import pytest
 from rag_pipeline.retrieval import RetrievalResult
 from rag_pipeline.confidence import ConfidenceScorer
 from rag_pipeline.unknown import UnknownHandler, LowConfidenceAnswer
+from rag_pipeline.citation import CitationReport, CitationParser
+
+
+def verified_report(answer):
+    citations = CitationParser().parse(answer)
+    for citation in citations:
+        citation.supported = True
+    return CitationReport(answer=answer, citations=citations, verified=True)
 
 
 def chunk(content, rerank=None, dense=None, meta=None):
@@ -23,6 +31,7 @@ def test_high_confidence_returns_answer():
         "What authentication is required?",
         "An api key is required [1].",
         sources,
+        citation_report=verified_report("An api key is required [1]."),
     )
     assert outcome.can_answer is True
     assert outcome.answer == "An api key is required [1]."
@@ -96,8 +105,8 @@ def test_threshold_validation():
 
 
 def test_to_dict_round_trip_answer_direct():
-    handler = UnknownHandler(ConfidenceScorer(), threshold=0.0)
+    handler = UnknownHandler(ConfidenceScorer(), threshold=0.0, min_completeness=0.0)
     sources = [chunk("content", rerank=0.99)]
-    outcome = handler.decide("q", "answer [1].", sources)
+    outcome = handler.decide("q", "answer [1].", sources, citation_report=verified_report("answer [1]."))
     d = outcome.to_dict()
     assert d["can_answer"] is True

@@ -1,0 +1,31 @@
+{
+  "dataset_id": "crud_rag_holdout_40plus10",
+  "name": "rag基线",
+  "version": "2.0",
+  "role": "current-test",
+  "questions": "crud_rag_holdout_40plus10/questions.json",
+  "platform_records": "crud_rag_holdout_40plus10/evalsi_records.json",
+  "corpus": "crud_rag_holdout_40plus10/corpus",
+  "scoring_policy": "crud_rag_holdout_40plus10/scoring_policy.json",
+  "question_count": 50,
+  "answerable_count": 40,
+  "unanswerable_count": 10,
+  "document_count": 68,
+  "platform": {
+    "project": "default",
+    "name": "crud-rag-zh-holdout-50",
+    "version": "v2",
+    "sha256": "d42d248f7e0dfe4937909e209ae61f3b21d2a4a9864e2361e1f7045f06a06ab8",
+    "state": "DATASET_VERSION_STATE_APPROVED"
+  },
+  "regression_dataset": "crud_rag_20",
+  "instruction": "只根据本版68篇固定资料回答；证据不足时明确说明缺失信息。仅将input.text发给待测模型。",
+  "evaluation_status": "completed",
+  "latest_evaluation": {
+    "run_id": "run-01857166f3866819",
+    "scoring_run_id": "run-e21d47cc364146b3",
+    "total": 50,
+    "traces_verified": 50,
+    "batch": "rag-holdout-v2-20261107"
+  }
+}

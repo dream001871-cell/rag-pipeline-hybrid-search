@@ -1,0 +1,308 @@
+{
+  "dataset": {
+    "name": "CRUD-RAG 中文问答学习测试集（20 题）",
+    "version": "1.0",
+    "language": "zh-CN",
+    "source_repository": "https://github.com/IAAR-Shanghai/CRUD_RAG",
+    "source_url": "https://raw.githubusercontent.com/IAAR-Shanghai/CRUD_RAG/main/data/crud_split/split_merged.json",
+    "source_sha256": "b199fb281ac526c1c8da7364cad7ea22b7f6fe1d4167e511edbdda8ad3bd943a",
+    "selected_on": "2026-11-05",
+    "question_count": 20,
+    "document_count": 34,
+    "official_task_counts": {
+      "questanswer_1doc": 10,
+      "questanswer_2docs": 6,
+      "questanswer_3docs": 4
+    },
+    "selection_method": "固定种子 20261105 生成候选，人工阅读筛选并替换明显表述或证据问题；最终索引见 manifest.json。不是纯随机抽样。",
+    "corpus_directory": "corpus",
+    "category_mapping": {
+      "questanswer_1doc": "lookup",
+      "questanswer_2docs": "multi_hop",
+      "questanswer_3docs": "multi_hop"
+    },
+    "limitations": [
+      "仅为学习和流程验证用的 20 题子集，不是完整 CRUD-RAG 基准。",
+      "多文档标签表示官方提供的文档数量，不保证每题必须用齐所有文档，也不等同于严格多跳推理。",
+      "配套 34 篇原文仅构成小型检索语料，未包含官方约 8 万篇完整语料，分数不能与完整基准比较。",
+      "保留原始新闻文本，包括可能存在的重复、广告及抓取噪声；没有重写官方题目或参考答案。",
+      "未包含无答案或歧义问题，不能用于评价拒答能力。"
+    ]
+  },
+  "questions": [
+    {
+      "id": "crud_qa_001",
+      "category": "lookup",
+      "question": "中国驻阿联酋大使馆在阿布扎比举办庆祝中国人民解放军建军多少周年的招待会是在哪一天？",
+      "answer": "中国驻阿联酋大使馆在阿布扎比举办庆祝中国人民解放军建军96周年的招待会是在2023年7月26日。",
+      "source_documents": [
+        "crud_qa_001_news1.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_1doc；原始 ID=64fa9b32b82641eb8ecc0b41；源数组索引=627（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_002",
+      "category": "lookup",
+      "question": "巴巴多斯在2023年第一季度的国内生产总值（GDP）增长率是多少，并且这标志着该国连续第几个季度保持增长？",
+      "answer": "巴巴多斯在2023年第一季度的国内生产总值（GDP）增长率为6.4%，这标志着该国连续第八个季度保持增长。",
+      "source_documents": [
+        "crud_qa_002_news1.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_1doc；原始 ID=64fa9b2db82641eb8ecbf5bd；源数组索引=285（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_003",
+      "category": "lookup",
+      "question": "潮宏基珠宝联合哪个设计工作室推出了新品花丝云起系列，并且这个系列的设计灵感来源是什么？",
+      "answer": "潮宏基珠宝联合MING DESIGN STUDIO推出了新品花丝云起系列，其设计灵感来源于中国传统纹饰祥云纹。",
+      "source_documents": [
+        "crud_qa_003_news1.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_1doc；原始 ID=64fa9b32b82641eb8ecc0d17；源数组索引=654（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_004",
+      "category": "lookup",
+      "question": "在2023年7月21日，中共中央政治局委员、中央外办主任王毅访问埃塞俄比亚并与埃塞总理阿比会谈时，埃塞方面对中国的哪些方面表示了赞赏？",
+      "answer": "埃塞方面对中国特色社会主义道路取得的巨大成就表示了赞赏，赞赏中国坚定走符合自身国情的发展道路，经济社会发展日新月异，为发展中国家树立了榜样。",
+      "source_documents": [
+        "crud_qa_004_news1.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_1doc；原始 ID=64fa9b2db82641eb8ecbf52d；源数组索引=277（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_005",
+      "category": "lookup",
+      "question": "浙江省绍兴市柯桥区发布的“新农人联合计划”中，团柯桥区委已经打造了多少家乡村人才创业园，并累计培育或引进了多少名农创客？",
+      "answer": "团柯桥区委已经打造了2家乡村人才创业园，并累计培育或引进了600余名农创客。",
+      "source_documents": [
+        "crud_qa_005_news1.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_1doc；原始 ID=64fa9b2db82641eb8ecbf834；源数组索引=326（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_006",
+      "category": "lookup",
+      "question": "在合肥市举办的“青春心向党 奋进新征程”省级示范宣讲活动中，有哪两位团中央示范宣讲团成员进行了宣讲？",
+      "answer": "团中央示范宣讲团成员潘孝楠和周娜娜在该活动中进行了宣讲。",
+      "source_documents": [
+        "crud_qa_006_news1.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_1doc；原始 ID=64fa9b2db82641eb8ecbf6d9；源数组索引=308（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_007",
+      "category": "lookup",
+      "question": "维基百科联合创始人桑格透露，哪些美国情报部门被指控在过去十几年中秘密编辑维基百科内容？",
+      "answer": "美国中情局（CIA）和联邦调查局（FBI）被指控在过去十几年中秘密编辑维基百科内容。",
+      "source_documents": [
+        "crud_qa_007_news1.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_1doc；原始 ID=64fa9b32b82641eb8ecc08e1；源数组索引=578（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_008",
+      "category": "lookup",
+      "question": "广州白云法院在执行局接到市民投诉后发现了哪些被执行人绕开限高令的行为，并采取了哪些措施来堵住电商平台的监管漏洞？",
+      "answer": "广州白云法院发现有的被执行人通过“黄牛”绕开限高令购票乘机，利用电商平台的监管漏洞。为堵住这些漏洞，法院发出了司法建议，要求电商平台完善管控措施、净化网络市场交易环境，并下架相关违规商品。",
+      "source_documents": [
+        "crud_qa_008_news1.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_1doc；原始 ID=64fa9b2db82641eb8ecbf8f6；源数组索引=336（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_009",
+      "category": "lookup",
+      "question": "俄罗斯国防部正在考虑在远东地区部署一个由哪种战略轰炸机组成的航空团，且这个航空团可能会驻扎在哪个空军基地？",
+      "answer": "俄罗斯国防部正在考虑部署一个由图-160战略轰炸机组成的航空团，这个航空团可能会驻扎在阿穆尔州的乌克兰卡空军基地。",
+      "source_documents": [
+        "crud_qa_009_news1.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_1doc；原始 ID=64fa9b2fb82641eb8ecc0082；源数组索引=439（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_010",
+      "category": "lookup",
+      "question": "在安徽医科大学的“三下乡”团队在安庆市宿松县复兴镇进行急救实践时，是哪位教师带领学生发现并救助了电动车撞树的女士？",
+      "answer": "是安徽医科大学公共卫生学院的指导教师田云带领学生发现并救助了电动车撞树的女士。",
+      "source_documents": [
+        "crud_qa_010_news1.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_1doc；原始 ID=64fa9b2db82641eb8ecbf6bf；源数组索引=305（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_011",
+      "category": "multi_hop",
+      "question": "海纳云公司在山东省内的数字城市和智慧社区建设中，都实施了哪些项目，并采用了哪些技术？",
+      "answer": "海纳云公司在山东省内的数字城市建设中实施了城市生命线安全监测项目、智慧镇街、以及智慧农业监管平台等项目。在智慧社区建设方面，公司采用了基于大数据、区块链、边缘计算及人工智能等技术构建的AIoT平台，以及3D人脸识别智能门锁等技术。",
+      "source_documents": [
+        "crud_qa_011_news1.md",
+        "crud_qa_011_news2.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_2docs；原始 ID=64fa9b33b82641eb8ecc153f；源数组索引=782（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_012",
+      "category": "multi_hop",
+      "question": "结合2023年上半年中国光伏产品的出口情况和产业链产量增长，描述中国光伏产业的出口总额、主要出口市场以及产业链中哪些环节实现了显著增长。",
+      "answer": "2023年上半年，中国光伏产品出口总额达到了289.2亿美元，其中欧洲是最大的组件出口市场，而硅片和电池片的出口主要集中在亚洲地区。在光伏产业链中，多晶硅、硅片、电池、组件的产量同比增长均超过了65%，显示出中国光伏产业的快速增长和全球市场的重要性。",
+      "source_documents": [
+        "crud_qa_012_news1.md",
+        "crud_qa_012_news2.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_2docs；原始 ID=64fa9b28b82641eb8ecbe7a0；源数组索引=64（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_013",
+      "category": "multi_hop",
+      "question": "推特公司在其总部大楼顶层安装“X”标志的原因以及导致其被拆除的因素是什么？",
+      "answer": "推特公司安装“X”标志是为了推动公司更名为“X”的进程，但这个标志因为违反了城市法规，并且在夜间过于刺眼，引发了附近居民的多次投诉，最终导致其被拆除。",
+      "source_documents": [
+        "crud_qa_013_news1.md",
+        "crud_qa_013_news2.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_2docs；原始 ID=64fa9b2fb82641eb8ecc0230；源数组索引=477（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_014",
+      "category": "multi_hop",
+      "question": "首届粤港澳大湾区青年传统文化交流活动旨在培养什么，同时广州市为台湾青年提供了哪些具体的交流和服务保障？",
+      "answer": "首届粤港澳大湾区青年传统文化交流活动旨在培养健康向上的价值观、民族自豪感和文化自信，同时广州市为台湾青年提供了更多的交流便利、发展机遇创造和服务保障，以帮助他们在广州追梦筑梦圆梦。",
+      "source_documents": [
+        "crud_qa_014_news1.md",
+        "crud_qa_014_news2.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_2docs；原始 ID=64fa9b2db82641eb8ecbf867；源数组索引=328（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_015",
+      "category": "multi_hop",
+      "question": "在韩国最近的无差别持凶伤人事件中，嫌疑人的自述动机是什么，警方又是如何应对网络上的“杀人预告”来预防类似事件的？",
+      "answer": "嫌疑人赵善自述的动机是因为生活处境困难，想让其他人感到痛苦。面对网络上的“杀人预告”，警方全面展开搜查，并成立专案小组，表示将严惩发布这类预告的行为，并部署大量警力以预防凶案的发生。",
+      "source_documents": [
+        "crud_qa_015_news1.md",
+        "crud_qa_015_news2.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_2docs；原始 ID=64fa9b2fb82641eb8ecc0133；源数组索引=457（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_016",
+      "category": "multi_hop",
+      "question": "华南地区建造的“MSC 诺亚·阿莉拉”号集装箱船采用了哪种技术增强结构强度，并且该型船计划建造多少艘？",
+      "answer": "“MSC 诺亚·阿莉拉”号集装箱船采用了85毫米厚的止裂钢技术增强结构强度，计划建造8艘该型船。",
+      "source_documents": [
+        "crud_qa_016_news1.md",
+        "crud_qa_016_news2.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_2docs；原始 ID=64fa9b32b82641eb8ecc0da2；源数组索引=664（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_017",
+      "category": "multi_hop",
+      "question": "在中国基础设施建设的现代化进程中，鄂州花湖机场西跑道和长益高速扩容工程如何体现施工技术的进步及其对工作效率的影响？",
+      "answer": "鄂州花湖机场西跑道的建设采用了全自动化的数字化摊铺设备，这种设备与传统的挂线设置导轨施工相比，提高了施工效率并节省了人工，每天铺设的长度比传统工艺要长三四十米。长益高速扩容工程中引入了现代抗离析摊铺机“超级变形金刚”，这种摊铺机具有最大摊铺宽度可达20米的特点，能一次性整体摊铺单幅路面，减少接缝，提高了路面摊铺的均匀度、密实度和平整度，每天可以推进2.5公里的施工进度，显著提升了工作效率。",
+      "source_documents": [
+        "crud_qa_017_news1.md",
+        "crud_qa_017_news2.md",
+        "crud_qa_017_news3.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_3docs；原始 ID=64fa9b2fb82641eb8ecbfe92；源数组索引=407（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_018",
+      "category": "multi_hop",
+      "question": "生态环境部为保障汛期饮用水水源环境安全，提出了哪些监管措施，并要求各地如何应对极端降雨带来的新挑战？",
+      "answer": "生态环境部在《通知》中提出了三项监管措施：加强饮用水水源安全风险隐患排查，强化饮用水水源水质监测预警，以及妥善应对突发环境事件。针对极端降雨带来的新挑战，要求各地迅即采取有效措施，全面排查饮用水水源保护区及上游地区的污染源，加密监测水质变化，加强汛期应急值守，保持通讯畅通，并及时研判分析可能影响饮用水水源环境安全的情况。",
+      "source_documents": [
+        "crud_qa_018_news1.md",
+        "crud_qa_018_news2.md",
+        "crud_qa_018_news3.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_3docs；原始 ID=64fa9b33b82641eb8ecc1496；源数组索引=764（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_019",
+      "category": "multi_hop",
+      "question": "境外黑客攻击武汉市地震监测中心的可能目的是什么，以及当地政府和公安机关是如何响应这一事件的？",
+      "answer": "境外黑客攻击武汉市地震监测中心的可能目的是获取地震波数据，以推导出某一区域的地下结构和岩性，进而推测是否有大型风洞或军事基地。武汉市公安局江汉分局已经根据相关法律规定立案侦查，并对提取到的后门样本进行技术分析。武汉市应急管理局对网络安全防护工作高度重视，坚决反对任何形式的网络攻击，并已向辖区公安机关报案，保留追诉权利。",
+      "source_documents": [
+        "crud_qa_019_news1.md",
+        "crud_qa_019_news2.md",
+        "crud_qa_019_news3.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_3docs；原始 ID=64fa9b2cb82641eb8ecbf00a；源数组索引=197（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    },
+    {
+      "id": "crud_qa_020",
+      "category": "multi_hop",
+      "question": "如何概述联合国秘书长和世界气象组织秘书长对2023年7月极端高温的评价，并且他们提出了哪些对策来应对气候变化？",
+      "answer": "联合国秘书长古特雷斯将2023年7月的极端高温描述为“沸腾时代”的到来，强调极端气候已成为新常态，并呼吁发达国家兑现向发展中国家提供气候支持的承诺。世界气象组织秘书长塔拉斯则表示，7月的极端高温是气候变化的严酷现实，也是未来的预演，强调减排行动的紧迫性。他们提出的对策包括减少温室气体排放和采取适应措施来应对气候变化的趋势。",
+      "source_documents": [
+        "crud_qa_020_news1.md",
+        "crud_qa_020_news2.md",
+        "crud_qa_020_news3.md"
+      ],
+      "source_sections": [
+        "正文"
+      ],
+      "notes": "官方任务=questanswer_3docs；原始 ID=64fa9b2cb82641eb8ecbf261；源数组索引=237（从 0 开始）。分类为本项目兼容映射，不代表已验证严格多跳推理。"
+    }
+  ]
+}

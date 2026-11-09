@@ -3,6 +3,8 @@ from typing import List, Dict, Tuple, Optional
 from .retrieval import RetrievalResult, DenseRetriever, SparseRetriever
 from .reranker import Reranker, RerankerFactory
 
+DEFAULT_TOP_K = 20
+
 
 class ReciprocalRankFusion:
     """Combines multiple ranked result lists into one using Reciprocal Rank
@@ -93,9 +95,9 @@ class HybridRetriever:
         sparse_retriever: Optional[SparseRetriever] = None,
         fusion: Optional[ReciprocalRankFusion] = None,
         reranker: Optional[Reranker] = None,
-        dense_k: int = 20,
-        sparse_k: int = 20,
-        candidate_k: int = 20,
+        dense_k: int = 60,
+        sparse_k: int = 60,
+        candidate_k: int = 60,
         rerank_enabled: bool = True,
         weight_dense: float = 0.7,
         weight_sparse: float = 0.3,
@@ -114,7 +116,7 @@ class HybridRetriever:
     def retrieve(
         self,
         query: str,
-        top_k: int = 10,
+        top_k: int = DEFAULT_TOP_K,
         dense_k: Optional[int] = None,
         sparse_k: Optional[int] = None,
         candidate_k: Optional[int] = None,
@@ -122,12 +124,9 @@ class HybridRetriever:
         weight_sparse: Optional[float] = None,
         rerank: Optional[bool] = None,
     ) -> List[RetrievalResult]:
-        """Hybrid retrieval: dense -> sparse -> RRF fusion -> rerank.
+        """B 方案：每路默认召回60段，融合后重排60段，默认返回前20段。
 
-        After fusion, the top `candidate_k` candidates (default 20) are scored
-        by the reranker and the top `top_k` (default 10) are returned with
-        `rerank_score` set. Set `rerank=False` to skip the rerank pass (returns
-        fused ranking directly).
+        显式参数继续用于诊断与外部调用，rerank=False 时直接返回融合排名。
         """
         d_k = dense_k or self.dense_k
         s_k = sparse_k or self.sparse_k

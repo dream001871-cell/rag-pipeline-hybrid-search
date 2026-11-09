@@ -102,7 +102,6 @@ def make_pipeline_factory(embedding_service):
             ),
             sparse_retriever=SparseRetriever(bm25_index=pipe.bm25_index),
             reranker=LexicalReranker(),
-            candidate_k=20,
         )
         return hybrid
 

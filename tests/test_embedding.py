@@ -93,3 +93,13 @@ def test_factory_picks_mock_when_local_embeddings_false(monkeypatch, no_keys):
     monkeypatch.setenv("LOCAL_EMBEDDINGS", "false")
     svc = EmbeddingFactory().get_service()
     assert isinstance(svc, MockEmbeddingService)
+
+
+def test_deepseek_keeps_local_embeddings_even_with_inherited_openai_key(
+    monkeypatch, fake_sentence_transformer, no_keys
+):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
+    monkeypatch.setenv("OPENAI_API_KEY", "test-inherited-openai-key")
+    svc = EmbeddingFactory().get_service()
+    assert isinstance(svc, LocalEmbeddingService)
+    assert len(svc.embed_query("测试")) == 384

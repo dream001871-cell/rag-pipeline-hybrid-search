@@ -1,0 +1,15 @@
+{
+  "recorded_at": "2026-11-05T17:14:48.227399+00:00",
+  "purpose": "记录选题时本项目源码指纹，正式评测开始前比对；未执行评测，也未锁定外部 API 模型权重。",
+  "sha256": {
+    "src/rag_pipeline/generation.py": "a461c8189efc20caf9681c0962df74fc05b1a8180ffadce8e6a3e93d58efbfc4",
+    "src/rag_pipeline/citation.py": "4bdc91ecebb62f33c0e152563d66779a25845d23312f6090d90ad3bbf9c266ab",
+    "src/rag_pipeline/confidence.py": "7f9f5cf71f85217d6bccd1c9ca9496b3e657ff84c8402cd55098110526d76c60",
+    "src/rag_pipeline/unknown.py": "502e4e46ed6291fe8015e90dfa5d432bcb69b65f9202efc88e0373dd9097339f",
+    "src/rag_pipeline/fusion.py": "9935e3e2ef37568ea5cfceb4f39d2c03d1aba83d84fcf9f84d5e55687e28792c",
+    "src/rag_pipeline/reranker.py": "85213d91ef6843b17fd9a21388595530a3712df1cab14dbf7e4395d106d070d1",
+    "src/rag_pipeline/embedding.py": "b03e1eb22edab75782799eb76a6eb42f6bd487f016bba2f97a115aa245b3301d",
+    "src/rag_pipeline/ingestion.py": "8f8fcc3c63a26a4766a41484352b479f81c7185ad5877c2e96944fab9e662484",
+    "src/rag_pipeline/bm25_index.py": "645f6a5a811c61b2e71f6ad499c3c9bf883aa26989b2ac22f6e1d8c762617672"
+  }
+}

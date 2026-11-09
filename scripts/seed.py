@@ -64,69 +64,69 @@ def seed_file(
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
-        description="Upload a sample documentation corpus to the RAG API."
+        description="将样例文档导入 RAG 服务。"
     )
     parser.add_argument(
         "--api",
         default=os.environ.get("API_BASE_URL", "http://localhost:8000"),
-        help="API base URL (default: $API_BASE_URL or http://localhost:8000)",
+        help="后端地址（默认使用 API_BASE_URL 或 http://localhost:8000）",
     )
     parser.add_argument(
         "--corpus-dir",
         default="data/raw/fastapi_docs",
-        help="Directory scanned for supported corpus files (default: data/raw/fastapi_docs)",
+        help="扫描文档的目录（默认：data/raw/fastapi_docs）",
     )
     parser.add_argument(
         "--files",
         nargs="+",
-        help="Explicit file paths; overrides corpus-dir discovery",
+        help="指定文件路径，替代目录扫描",
     )
     parser.add_argument("--dry-run", action="store_true",
-                        help="List files that would be uploaded without uploading")
+                        help="仅列出文件，不执行上传")
     parser.add_argument("--timeout", type=int, default=120,
-                        help="Per-upload timeout in seconds (default: 120)")
+                        help="单个文件上传的等待时间，单位为秒（默认：120）")
     parser.add_argument("--quiet", action="store_true",
-                        help="Only print failures and the final summary")
+                        help="仅输出失败信息和最终汇总")
     parser.add_argument("--reset", action="store_true",
-                        help="Wipe the API index (dense + sparse) before seeding")
+                        help="导入前清空向量与关键词索引")
     args = parser.parse_args(argv)
 
     if args.reset and args.dry_run:
-        parser.error("--reset cannot be combined with --dry-run")
+        parser.error("--reset 与 --dry-run 不能同时使用")
 
     if args.reset:
         try:
             resp = requests.post(f"{args.api}/v1/reset", timeout=args.timeout)
         except requests.RequestException as exc:
-            print(f"FAIL reset: {exc}", file=sys.stderr)
+            print(f"清空索引失败： {exc}", file=sys.stderr)
             return 1
         if resp.status_code != 200:
             print(
-                f"FAIL reset: HTTP {resp.status_code} {resp.text[:200]}",
+                f"清空索引失败： HTTP {resp.status_code} {resp.text[:200]}",
                 file=sys.stderr,
             )
             return 1
         if not args.quiet:
-            print("Reset complete (dense + sparse indexes wiped).")
+            print("向量与关键词索引已清空。")
 
     sharp = not args.quiet
     if sharp:
-        print(f"Embedding service: {describe_embedding_service()}")
+        print(f"向量模型： {describe_embedding_service()}")
 
     files = discover(args.corpus_dir, args.files)
     if not files:
-        print(f"No supported corpus files found in '{args.corpus_dir}'.", file=sys.stderr)
+        print(f"在 '{args.corpus_dir}' 中没有找到支持的文档。", file=sys.stderr)
         return 2
 
     if args.dry_run:
         for f in files:
             print(f"- {f}")
-        print(f"[dry-run] {len(files)} file(s) would be seeded to {args.api}")
+        print(f"[预览] 将向 {args.api} 导入 {len(files)} 个文件")
         return 0
 
     if not args.quiet:
-        print(f"Found {len(files)} documents to index from {args.corpus_dir}/")
-        print(f"Seeding {len(files)} file(s) to {args.api} ...")
+        print(f"在 {args.corpus_dir}/ 找到 {len(files)} 份待索引文档")
+        print(f"正在向 {args.api} 导入 {len(files)} 个文件……")
 
     failed = 0
     seeded_doc_ids = []
@@ -137,21 +137,21 @@ def main(argv=None) -> int:
                 data = resp.json()
                 seeded_doc_ids.append(data.get("doc_id"))
                 print(
-                    f"OK   {path.name}: +{data.get('chunks_added_dense', 0)} chunks, "
-                    f"{data.get('duplicates', 0)} dup(s)  doc_id={data.get('doc_id')}"
+                    f"成功 {path.name}：新增 {data.get('chunks_added_dense', 0)} 个片段，"
+                    f"{data.get('duplicates', 0)} 个重复片段，文档编号={data.get('doc_id')}"
                 )
             else:
                 failed += 1
-                print(f"FAIL {path.name}: HTTP {resp.status_code} {resp.text[:200]}")
+                print(f"失败 {path.name}： HTTP {resp.status_code} {resp.text[:200]}")
         except requests.RequestException as exc:
             failed += 1
-            print(f"FAIL {path.name}: {exc}")
+            print(f"失败 {path.name}： {exc}")
 
     if failed:
-        print(f"Done: {len(files) - failed}/{len(files)} seeded successfully.")
+        print(f"导入结束：{len(files) - failed}/{len(files)} 个文件成功。")
         return 1
 
-    print(f"Done: all {len(files)} file(s) indexed. doc_ids: {', '.join(seeded_doc_ids)}")
+    print(f"导入完成：全部 {len(files)} 个文件已处理。文档编号：{', '.join(seeded_doc_ids)}")
     return 0
 
 

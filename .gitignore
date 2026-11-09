@@ -47,3 +47,10 @@ Thumbs.db
 *.swp
 *~
 src/data/
+
+# 本地运行时生成的模型缓存与验证记录。
+.cache/
+.local/
+
+# 发布后本机生成的评测输出。
+data/benchmarks/*/evaluation/

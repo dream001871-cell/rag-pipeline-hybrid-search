@@ -1,0 +1,296 @@
+{
+  "dataset": {
+    "name": "CRUD-RAG 中文问答学习测试集（20 题）",
+    "version": "1.0",
+    "language": "zh-CN",
+    "source_repository": "https://github.com/IAAR-Shanghai/CRUD_RAG",
+    "source_url": "https://raw.githubusercontent.com/IAAR-Shanghai/CRUD_RAG/main/data/crud_split/split_merged.json",
+    "source_sha256": "b199fb281ac526c1c8da7364cad7ea22b7f6fe1d4167e511edbdda8ad3bd943a",
+    "selected_on": "2026-11-05",
+    "question_count": 20,
+    "document_count": 34,
+    "official_task_counts": {
+      "questanswer_1doc": 10,
+      "questanswer_2docs": 6,
+      "questanswer_3docs": 4
+    },
+    "selection_method": "固定种子 20261105 生成候选，人工阅读筛选并替换明显表述或证据问题；最终索引见 manifest.json。不是纯随机抽样。",
+    "corpus_directory": "corpus",
+    "category_mapping": {
+      "questanswer_1doc": "lookup",
+      "questanswer_2docs": "multi_hop",
+      "questanswer_3docs": "multi_hop"
+    },
+    "limitations": [
+      "仅为学习和流程验证用的 20 题子集，不是完整 CRUD-RAG 基准。",
+      "多文档标签表示官方提供的文档数量，不保证每题必须用齐所有文档，也不等同于严格多跳推理。",
+      "配套 34 篇原文仅构成小型检索语料，未包含官方约 8 万篇完整语料，分数不能与完整基准比较。",
+      "保留原始新闻文本，包括可能存在的重复、广告及抓取噪声；没有重写官方题目或参考答案。",
+      "未包含无答案或歧义问题，不能用于评价拒答能力。"
+    ]
+  },
+  "source_indices_are_zero_based": true,
+  "selected": [
+    {
+      "id": "crud_qa_001",
+      "source_group": "questanswer_1doc",
+      "source_index": 627,
+      "source_id": "64fa9b32b82641eb8ecc0b41",
+      "question_sha256": "a0ff06fd0ba89a6c89f5ce7f7f897152165aa0d93fb5dc3907342cc1f02bcd22",
+      "answer_sha256": "a59426a6d96bd2edaf783fce9995c99035ffb9274ad0c81dcdf866f0fb16e5fc",
+      "documents": [
+        "crud_qa_001_news1.md"
+      ]
+    },
+    {
+      "id": "crud_qa_002",
+      "source_group": "questanswer_1doc",
+      "source_index": 285,
+      "source_id": "64fa9b2db82641eb8ecbf5bd",
+      "question_sha256": "28df51963db162a93f5328b0d7fcd94ff3a27475228a1d473378d37b67358721",
+      "answer_sha256": "cb0a074dcc3d78b68cd1b9d255fb4c88e03584410afb1ab701c9d7aa7963402a",
+      "documents": [
+        "crud_qa_002_news1.md"
+      ]
+    },
+    {
+      "id": "crud_qa_003",
+      "source_group": "questanswer_1doc",
+      "source_index": 654,
+      "source_id": "64fa9b32b82641eb8ecc0d17",
+      "question_sha256": "255bdd0165d5c260b0ef58603994be8137fd75084fc7c18cf4a489b578149400",
+      "answer_sha256": "b3bf8c8b5a6e5d1281453e8c2b696831ab987bf6efae1d234c8c196b9652e084",
+      "documents": [
+        "crud_qa_003_news1.md"
+      ]
+    },
+    {
+      "id": "crud_qa_004",
+      "source_group": "questanswer_1doc",
+      "source_index": 277,
+      "source_id": "64fa9b2db82641eb8ecbf52d",
+      "question_sha256": "cd453e694d0de1bbc5dc294e1e256377390920a1380b040ecd96e201f8ad53fb",
+      "answer_sha256": "d140c1301edb6fe900dbf593ed5289a3a68d0b74efb50ebc222ad9e8e2f31de1",
+      "documents": [
+        "crud_qa_004_news1.md"
+      ]
+    },
+    {
+      "id": "crud_qa_005",
+      "source_group": "questanswer_1doc",
+      "source_index": 326,
+      "source_id": "64fa9b2db82641eb8ecbf834",
+      "question_sha256": "36260b53fc400561d042d842bc4262159f5b7fc3fcb4d173746cf1b603eb59c4",
+      "answer_sha256": "dc03c27d8a8834d2f316de29eaf2ae63439dd1359339d1726d0b35832bab147f",
+      "documents": [
+        "crud_qa_005_news1.md"
+      ]
+    },
+    {
+      "id": "crud_qa_006",
+      "source_group": "questanswer_1doc",
+      "source_index": 308,
+      "source_id": "64fa9b2db82641eb8ecbf6d9",
+      "question_sha256": "db93ede7236eca0c44d6fe1089674cf9e1d087e35ed7337875ee8659816373a8",
+      "answer_sha256": "48a9e77e6ef3600a7e6836568e2d8afc7bf448569a9fc95e6c7fad07014f6b05",
+      "documents": [
+        "crud_qa_006_news1.md"
+      ]
+    },
+    {
+      "id": "crud_qa_007",
+      "source_group": "questanswer_1doc",
+      "source_index": 578,
+      "source_id": "64fa9b32b82641eb8ecc08e1",
+      "question_sha256": "8da4f9db75b33966b3739b4bee466bd4c90e2e028db62fac1d9293e8fb31a410",
+      "answer_sha256": "8e4a26560ddcb4ce67e70bf6521ab93a61a9812c0c2f77a8156f42e659fed3e5",
+      "documents": [
+        "crud_qa_007_news1.md"
+      ]
+    },
+    {
+      "id": "crud_qa_008",
+      "source_group": "questanswer_1doc",
+      "source_index": 336,
+      "source_id": "64fa9b2db82641eb8ecbf8f6",
+      "question_sha256": "2ef33d63caf4884fd271eb843b00694d9108eac3f6ae6c3710a4c75e87b7b917",
+      "answer_sha256": "70f8db66598bc95634e134ce98cc6411017b32875621bbc1bbf9720b4ac4501d",
+      "documents": [
+        "crud_qa_008_news1.md"
+      ]
+    },
+    {
+      "id": "crud_qa_009",
+      "source_group": "questanswer_1doc",
+      "source_index": 439,
+      "source_id": "64fa9b2fb82641eb8ecc0082",
+      "question_sha256": "24b59bc5ab2f835970987ca68d91258e0066aee8e9e7a939542fa4956136dbaa",
+      "answer_sha256": "ff9a0a409ed909c982f791cbcb5654929b0967f928f4dcf86d5932c191ca447a",
+      "documents": [
+        "crud_qa_009_news1.md"
+      ]
+    },
+    {
+      "id": "crud_qa_010",
+      "source_group": "questanswer_1doc",
+      "source_index": 305,
+      "source_id": "64fa9b2db82641eb8ecbf6bf",
+      "question_sha256": "9b2361abc23ffc08100d52503e46e9fe21324e12f18ea1343d0ae80e5c811b83",
+      "answer_sha256": "5db4f4a1432ce584a2b91ad81e977072ce3d00dea4e4a2534ac456fd11bda098",
+      "documents": [
+        "crud_qa_010_news1.md"
+      ]
+    },
+    {
+      "id": "crud_qa_011",
+      "source_group": "questanswer_2docs",
+      "source_index": 782,
+      "source_id": "64fa9b33b82641eb8ecc153f",
+      "question_sha256": "156d826484459845d25aa486ae1ce7bc36d283efd351ede10c733c0b94ff4c38",
+      "answer_sha256": "d9e1381c4dfb1e478e07db8557811d3f6ea7036692b4c3a97692a685c48fc1d0",
+      "documents": [
+        "crud_qa_011_news1.md",
+        "crud_qa_011_news2.md"
+      ]
+    },
+    {
+      "id": "crud_qa_012",
+      "source_group": "questanswer_2docs",
+      "source_index": 64,
+      "source_id": "64fa9b28b82641eb8ecbe7a0",
+      "question_sha256": "6df8cc4e99b59d989f7a59b2d0958329bddf8d4f9121bdec5dc10fb14739754f",
+      "answer_sha256": "c4729befbf3be0bca3598fe3354ed67973689f2a7550419e6d423322ffa10dfe",
+      "documents": [
+        "crud_qa_012_news1.md",
+        "crud_qa_012_news2.md"
+      ]
+    },
+    {
+      "id": "crud_qa_013",
+      "source_group": "questanswer_2docs",
+      "source_index": 477,
+      "source_id": "64fa9b2fb82641eb8ecc0230",
+      "question_sha256": "ea0611688967e3df94a74944ba6c459457a647a7a212e389792d19226a203c44",
+      "answer_sha256": "9a48af16b5628308525e1f1812d004215652f557fce1439bdc547fc42ac7975d",
+      "documents": [
+        "crud_qa_013_news1.md",
+        "crud_qa_013_news2.md"
+      ]
+    },
+    {
+      "id": "crud_qa_014",
+      "source_group": "questanswer_2docs",
+      "source_index": 328,
+      "source_id": "64fa9b2db82641eb8ecbf867",
+      "question_sha256": "b195ce19e2b637449695d0d7e996ab26faca65f91f30ace64694688c5c27b24c",
+      "answer_sha256": "cab26fa486a92d152982b51b4d9dded7d4f22e5bd2b32e3c7b11b38ee61bc2d3",
+      "documents": [
+        "crud_qa_014_news1.md",
+        "crud_qa_014_news2.md"
+      ]
+    },
+    {
+      "id": "crud_qa_015",
+      "source_group": "questanswer_2docs",
+      "source_index": 457,
+      "source_id": "64fa9b2fb82641eb8ecc0133",
+      "question_sha256": "3ed5abfc22af183642986b58c524c4a13a97819a7210a7f40bfcff9645f7b0a7",
+      "answer_sha256": "4465184979519c9a9b8faf2dd1b74b3da7a9919b2280e3c662cba6372e57c6c6",
+      "documents": [
+        "crud_qa_015_news1.md",
+        "crud_qa_015_news2.md"
+      ]
+    },
+    {
+      "id": "crud_qa_016",
+      "source_group": "questanswer_2docs",
+      "source_index": 664,
+      "source_id": "64fa9b32b82641eb8ecc0da2",
+      "question_sha256": "4807f30e5563b32323a29079c5677dddeeefbae891b406aff3ee48d0b45ac234",
+      "answer_sha256": "d7167daa97da407571593dd24bbdd9edbecf8c8d5423dcad1bc3945e65273e45",
+      "documents": [
+        "crud_qa_016_news1.md",
+        "crud_qa_016_news2.md"
+      ]
+    },
+    {
+      "id": "crud_qa_017",
+      "source_group": "questanswer_3docs",
+      "source_index": 407,
+      "source_id": "64fa9b2fb82641eb8ecbfe92",
+      "question_sha256": "65f085b97c2cec15c939bc19c6b0a63798836a7910b60aeff4dcbc163e618c54",
+      "answer_sha256": "b4de7628d9c3dc54c3c059b494f4987dff166694cda4aad410d9fc903e4b356f",
+      "documents": [
+        "crud_qa_017_news1.md",
+        "crud_qa_017_news2.md",
+        "crud_qa_017_news3.md"
+      ]
+    },
+    {
+      "id": "crud_qa_018",
+      "source_group": "questanswer_3docs",
+      "source_index": 764,
+      "source_id": "64fa9b33b82641eb8ecc1496",
+      "question_sha256": "a026289d23cc66a16abe7e2418bf62b15d115487f70fbc28efda8f0d065d6afe",
+      "answer_sha256": "7599f9460ed4e2999084ab219cd727ea4ef3e3b9fa560fc88abdfd912b9b47bb",
+      "documents": [
+        "crud_qa_018_news1.md",
+        "crud_qa_018_news2.md",
+        "crud_qa_018_news3.md"
+      ]
+    },
+    {
+      "id": "crud_qa_019",
+      "source_group": "questanswer_3docs",
+      "source_index": 197,
+      "source_id": "64fa9b2cb82641eb8ecbf00a",
+      "question_sha256": "544e4840829057d6e3fa6f445f1132310f749c9a42d49bbdc7d2db2255b37093",
+      "answer_sha256": "cd494381f2822ab3063e41c723c0e96703c5375ec0bf8d91122e91a8304c47f4",
+      "documents": [
+        "crud_qa_019_news1.md",
+        "crud_qa_019_news2.md",
+        "crud_qa_019_news3.md"
+      ]
+    },
+    {
+      "id": "crud_qa_020",
+      "source_group": "questanswer_3docs",
+      "source_index": 237,
+      "source_id": "64fa9b2cb82641eb8ecbf261",
+      "question_sha256": "329a74423e8e340d7dbdb395ddc573ae7005d2549b69b5177b3635e3299928d8",
+      "answer_sha256": "a81c607e5cd3b608fde71ed39e222252a15cf1c210000068ba5030e497488297",
+      "documents": [
+        "crud_qa_020_news1.md",
+        "crud_qa_020_news2.md",
+        "crud_qa_020_news3.md"
+      ]
+    }
+  ],
+  "excluded_candidates": [
+    {
+      "source_group": "questanswer_2docs",
+      "source_index": 542,
+      "reason": "问题要求对比台风登陆前后，但两篇给定原文均为登陆前信息。"
+    },
+    {
+      "source_group": "questanswer_2docs",
+      "source_index": 619,
+      "reason": "答案将物流、黄金需求与外汇储备建立因果关联，原文支持不足。"
+    },
+    {
+      "source_group": "questanswer_3docs",
+      "source_index": 392,
+      "reason": "问题存在重复用词，原文混合不同年份的建军周年报道。"
+    },
+    {
+      "source_group": "questanswer_3docs",
+      "source_index": 372,
+      "reason": "参考答案对独立董事职责的概括不够明确，首轮小样本优先选择较易核对的题目。"
+    },
+    {
+      "source_group": "questanswer_3docs",
+      "source_index": 190,
+      "reason": "参考答案将原文中的孝感健身展演归为荆州，存在地点归属问题。"
+    }
+  ]
+}

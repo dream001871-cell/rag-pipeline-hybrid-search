@@ -306,11 +306,11 @@ class DocumentLoader:
     def load_file(self, file_path: str) -> Document:
         path = Path(file_path)
         if not path.exists():
-            raise FileNotFoundError(f"File not found: {file_path}")
+            raise FileNotFoundError(f"文件不存在： {file_path}")
 
         ext = path.suffix.lower()
         if ext not in self.EXTENSION_MAP:
-            raise ValueError(f"Unsupported file format: {ext}")
+            raise ValueError(f"不支持的文件格式： {ext}")
 
         loader = self.EXTENSION_MAP[ext]()
         return loader.load(path)
@@ -324,7 +324,7 @@ class DocumentLoader:
                     doc = self.load_file(str(file_path))
                     documents.append(doc)
                 except Exception as e:
-                    print(f"Error loading {file_path}: {e}")
+                    print(f"加载 {file_path} 失败： {e}")
         return documents
 
     def save_raw(self, document: Document) -> str:
@@ -386,7 +386,7 @@ class DocumentLoader:
 
 if __name__ == "__main__":
     loader = DocumentLoader()
-    print("Document loader initialized. Ready to process files.")
-    print(f"Raw directory: {loader.raw_dir}")
-    print(f"Processed directory: {loader.processed_dir}")
-    print(f"Supported formats: {list(DocumentLoader.EXTENSION_MAP.keys())}")
+    print("文档加载器已初始化，可以开始处理文件。")
+    print(f"原始文档目录： {loader.raw_dir}")
+    print(f"处理结果目录： {loader.processed_dir}")
+    print(f"支持的格式： {list(DocumentLoader.EXTENSION_MAP.keys())}")

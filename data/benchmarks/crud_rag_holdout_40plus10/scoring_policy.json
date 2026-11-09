@@ -1,0 +1,13 @@
+{
+  "scope": "所有题目只能依据本目录corpus内固定资料回答。证据不足时明确说明缺失信息，不调用外部检索，不依据常识补写未提供的具体事实。",
+  "answerable_correct_rate": "40道可答题中答案语义正确且有依据的题数 / 40。",
+  "unanswerable_refusal_rate": "10道应拒答题中，明确指出缺少所问信息且未编造答案的题数 / 10。",
+  "false_refusal_rate": "40道可答题中系统拒答的题数 / 40。",
+  "no_answer_hallucination_rate": "10道应拒答题中编造或套用无依据具体答案的题数 / 10。",
+  "overall_accuracy": "(可答题答对数 + 应拒答题正确拒答数) / 50。",
+  "balanced_accuracy": "(answerable_correct_rate + unanswerable_refusal_rate) / 2。",
+  "refusal_matching": "依据语义与证据边界判断，不要求固定措辞；不能仅用exact-match或chrF评价拒答。",
+  "error_handling": "接口超时、空输出、判分解析失败应单列错误，不直接计为正确拒答。",
+  "allow_partial_known_facts": "可陈述确有依据的背景，但必须明确拒绝给出所问缺失字段；带猜测的具体答案仍不通过。",
+  "label_handling": "只把input.text送给待测RAG，reference和metadata仅供评审，不能作为生成输入或入库资料。"
+}

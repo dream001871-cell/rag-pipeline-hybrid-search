@@ -7,6 +7,8 @@ from rag_evaluation.golden_dataset import GoldenDataset
 from rag_evaluation.eval_metrics import EvalRunner, EvalReport, EvalQuestionResult
 from rag_pipeline.citation import CitationVerifier
 from rag_pipeline.retrieval import RetrievalResult
+from rag_pipeline.fusion import DEFAULT_TOP_K
+from rag_pipeline.generation import select_context
 
 METRICS = ["correctness", "faithfulness", "retrieval_relevance", "citation_accuracy"]
 
@@ -197,7 +199,7 @@ class ChunkingComparison:
             pipeline = self.pipeline_factory(strat)
 
             def make_retrieve(pipeline=pipeline):
-                return lambda q: pipeline.retrieve(q, top_k=10)
+                return lambda q: select_context(pipeline.retrieve(q, top_k=DEFAULT_TOP_K))
 
             runner = EvalRunner(
                 dataset=self.dataset,

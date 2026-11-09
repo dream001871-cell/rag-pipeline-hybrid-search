@@ -8,7 +8,8 @@ from dataclasses import dataclass, field
 
 from rag_pipeline.retrieval import RetrievalResult
 from rag_pipeline.embedding import EmbeddingService, MockEmbeddingService
-from rag_pipeline.generation import Generator, GroundedPrompt
+from rag_pipeline.generation import Generator, GroundedPrompt, select_context
+from rag_pipeline.fusion import DEFAULT_TOP_K
 from rag_pipeline.citation import CitationReport, CitationParser, CitationVerifier
 from rag_pipeline.confidence import ConfidenceScorer, ConfidenceReport
 from rag_evaluation.golden_dataset import GoldenDataset, GoldenQuestion
@@ -519,15 +520,15 @@ class EvalRunner:
         hybrid_retriever: HybridRetriever instance with retrieve() method.
         """
         ingest_fn()
+        generator = judge or Generator()
 
         def retrieve_fn(question: str) -> List[RetrievalResult]:
-            return hybrid_retriever.retrieve(question, top_k=10)
+            return select_context(hybrid_retriever.retrieve(question, top_k=DEFAULT_TOP_K))
 
         def generate_fn(
             question: str, chunks: List[RetrievalResult]
         ) -> dict:
-            gen = Generator(judge=judge or Generator())
-            return gen.generate(question, chunks)
+            return generator.generate(question, chunks)
 
         verifier = None
         if citation_judge:
@@ -552,26 +553,33 @@ def resolve_eval_mode(
     force_real: bool = False,
     force_mock: bool = False,
 ) -> Dict[str, Any]:
-    """Resolve real vs mock evaluation configuration.
-
-    Real mode needs a chat API key (OPENROUTER_API_KEY or OPENAI_API_KEY) and
-    uses text-embedding-3-small embeddings plus gpt-4o-mini as the LLM judge.
-    Mock mode uses MockEmbeddingService and the deterministic scorers, printing
-    a warning that the numbers are not meaningful for reporting.
-    """
+    """选择真实或模拟评估；DeepSeek 配合本地向量，其余服务保留原有配置。"""
     if force_real and force_mock:
         raise ValueError("force_real and force_mock are mutually exclusive")
     has_key = bool(
-        os.environ.get("OPENROUTER_API_KEY") or os.environ.get("OPENAI_API_KEY")
+        os.environ.get("DEEPSEEK_API_KEY", "").strip()
+        or os.environ.get("OPENROUTER_API_KEY") or os.environ.get("OPENAI_API_KEY")
     )
     if force_real and not has_key:
         raise RuntimeError(
             "No LLM API key set; cannot run in real mode. "
-            "Set OPENROUTER_API_KEY or OPENAI_API_KEY, drop --real, "
+            "Set DEEPSEEK_API_KEY, OPENROUTER_API_KEY or OPENAI_API_KEY, drop --real, "
             "or use --mock explicitly."
         )
 
     if has_key and not force_mock:
+        if os.environ.get("DEEPSEEK_API_KEY", "").strip():
+            from rag_pipeline.embedding import create_embedding_service
+
+            embedding_service = create_embedding_service()
+            judge = Generator()
+            return {
+                "mode": "real",
+                "embedding_model": embedding_service.model,
+                "judge_model": judge.model,
+                "embedding_service": embedding_service,
+                "judge": judge,
+            }
         return {
             "mode": "real",
             "embedding_model": REAL_EMBEDDING_MODEL,

@@ -1,3 +1,5 @@
+import pytest
+
 from rag_pipeline.retrieval import RetrievalResult
 from rag_pipeline.generation import Generator
 from rag_pipeline.citation import (
@@ -52,7 +54,17 @@ def test_verifier_flags_out_of_range_citation():
     c1 = next(c for c in report.citations if c.number == 1)
     c9 = next(c for c in report.citations if c.number == 9)
     assert c9.supported is False
-    assert "not provided" in c9.reason
+    assert "未提供" in c9.reason
+
+
+def test_parser_keeps_chinese_claims_with_their_own_citations():
+    answer = "接口需要令牌 [1]。系统支持限流 [2]！需要重试吗 [3]？"
+    cites = CitationParser().parse(answer)
+    assert [(c.number, c.claim) for c in cites] == [
+        (1, "接口需要令牌 [1]。"),
+        (2, "系统支持限流 [2]！"),
+        (3, "需要重试吗 [3]？"),
+    ]
 
 
 def test_verifier_uses_judge_for_supported_and_unsupported():
@@ -80,8 +92,34 @@ def test_verifier_uses_judge_for_supported_and_unsupported():
     assert report.total == 2
     c1 = next(c for c in report.citations if c.number == 1)
     c2 = next(c for c in report.citations if c.number == 2)
-    assert c1.supported in (True, False)
-    assert c2.supported in (True, False)
+    assert c1.supported is True
+    assert c2.supported is False
+
+
+@pytest.mark.parametrize("reply, expected", [
+    ("SUPPORTED", True),
+    (" supported \n", True),
+    ("UNSUPPORTED", False),
+    ('{"supported": false}', False),
+    ('{"supported": true}', True),
+    ("", None),
+    ("It may be SUPPORTED or UNSUPPORTED", None),
+    ('{"supported": "false"}', None),
+    ("{}", None),
+])
+def test_verdict_parser_never_confuses_supported_with_unsupported(reply, expected):
+    verifier = CitationVerifier(judge=Generator(respond=lambda messages: reply))
+    report = verifier.verify("默认返回十条 [1]。", [chunk("a", "默认返回十条。")])
+    assert report.citations[0].supported is expected
+
+
+def test_judge_failure_is_unknown():
+    def timeout(messages):
+        raise TimeoutError("test")
+
+    verifier = CitationVerifier(judge=Generator(respond=timeout))
+    report = verifier.verify("默认返回十条 [1]。", [chunk("a", "默认返回十条。")])
+    assert report.citations[0].supported is None
 
 
 def test_report_accuracy():

@@ -48,7 +48,7 @@ class EmbeddingService:
         """Embed a list of texts, honoring the configured batch size."""
         if not self.is_configured:
             raise RuntimeError(
-                "OpenAI API key not configured. Set OPENAI_API_KEY or pass api_key."
+                "尚未配置向量服务密钥。请设置 OPENAI_API_KEY 或传入 api_key。"
             )
         if not texts:
             return []
@@ -99,8 +99,8 @@ class LocalEmbeddingService(EmbeddingService):
             from sentence_transformers import SentenceTransformer
         except ImportError as exc:
             raise RuntimeError(
-                "sentence-transformers not installed. "
-                "Run: pip install sentence-transformers"
+                "未安装 sentence-transformers。"
+                "请执行：pip install sentence-transformers"
             ) from exc
         self.model = model_name
         self.model_name = model_name
@@ -110,7 +110,7 @@ class LocalEmbeddingService(EmbeddingService):
         self._encoder = SentenceTransformer(model_name)
         self.dimensions = int(self._encoder.get_sentence_embedding_dimension())
         logger.info(
-            "Embedding service: Local %s (dim %d)", model_name, self.dimensions
+            "本地向量模型：%s（%d 维）", model_name, self.dimensions
         )
 
     @property
@@ -173,6 +173,9 @@ def _local_embeddings_enabled() -> bool:
 
 
 def _has_real_openai_key() -> bool:
+    # DeepSeek 负责文本生成，向量保持本地计算，避免请求不存在的向量接口或切换索引维度。
+    if os.environ.get("DEEPSEEK_API_KEY", "").strip():
+        return False
     key = os.environ.get("OPENAI_API_KEY", "")
     return bool(key) and not key.startswith(OPENROUTER_KEY_PREFIX)
 
@@ -180,18 +183,7 @@ def _has_real_openai_key() -> bool:
 def create_embedding_service(
     model: str = "text-embedding-3-small", use_mock: Optional[bool] = None
 ) -> EmbeddingService:
-    """Factory: pick the embedding backend by priority.
-
-    Priority order:
-
-    1. A real OpenAI key (``OPENAI_API_KEY`` not starting with ``sk-or-``)
-       -> OpenAIEmbeddingService.
-    2. ``OPENROUTER_API_KEY`` but no real OpenAI key -> LocalEmbeddingService
-       (warning logged).
-    3. No keys at all -> LocalEmbeddingService.
-    4. MockEmbeddingService only when ``use_mock`` is True or
-       ``LOCAL_EMBEDDINGS=false`` is set explicitly (CI/tests).
-    """
+    """显式模拟配置优先；DeepSeek 使用本地向量，其余服务保留原有选择规则。"""
     if use_mock is None:
         use_mock = not _local_embeddings_enabled()
     if use_mock:
@@ -202,8 +194,8 @@ def create_embedding_service(
 
     if os.environ.get("OPENROUTER_API_KEY"):
         logger.warning(
-            "OPENROUTER_API_KEY is set but no OpenAI embeddings key was found; "
-            "using local sentence-transformers embeddings (%s).",
+            "已配置 OpenRouter，但没有 OpenAI 向量服务密钥；"
+            "使用本地向量模型（%s）。",
             LOCAL_EMBEDDING_MODEL,
         )
     return LocalEmbeddingService(model_name=LOCAL_EMBEDDING_MODEL)
@@ -215,10 +207,10 @@ def describe_embedding_service(
     """Return a human-readable label for the active embedding backend without
     loading the model."""
     if not _local_embeddings_enabled():
-        return "Mock (CI mode)"
+        return "模拟向量（测试模式）"
     if _has_real_openai_key():
         return f"OpenAI {model}"
-    return f"Local {LOCAL_EMBEDDING_MODEL}"
+    return f"本地模型 {LOCAL_EMBEDDING_MODEL}"
 
 
 class EmbeddingFactory:

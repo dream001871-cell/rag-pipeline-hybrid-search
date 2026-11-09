@@ -25,6 +25,12 @@ def _no_api_keys(monkeypatch):
     """
     monkeypatch.setenv("OPENROUTER_API_KEY", "")
     monkeypatch.setenv("OPENAI_API_KEY", "")
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "")
+    monkeypatch.setenv("RAG_TRACE_ENDPOINT", "")
+    # 单元测试不下载模型；真实模型检索由本机 HTTP 验证脚本单独检查。
+    monkeypatch.setenv("LOCAL_EMBEDDINGS", "false")
+    monkeypatch.setenv("HF_HUB_OFFLINE", "1")
+    monkeypatch.setenv("TRANSFORMERS_OFFLINE", "1")
 
 
 @pytest.fixture

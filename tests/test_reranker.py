@@ -231,3 +231,20 @@ def test_create_reranker_remains_compatible():
     r = create_reranker("lexical")
     assert isinstance(r, LexicalReranker)
     assert isinstance(create_reranker(), Reranker)
+
+
+def test_factory_uses_configured_model(monkeypatch):
+    monkeypatch.setenv("RAG_RERANKER_MODEL", "local/chinese-reranker")
+    assert RerankerFactory().model_name == "local/chinese-reranker"
+
+
+def test_explicit_model_takes_precedence_over_environment(monkeypatch):
+    monkeypatch.setenv("RAG_RERANKER_MODEL", "local/chinese-reranker")
+    assert RerankerFactory(model_name="explicit/model").model_name == "explicit/model"
+
+
+def test_blank_model_setting_uses_default_model(monkeypatch):
+    from rag_pipeline.reranker import DEFAULT_CROSS_ENCODER_MODEL
+
+    monkeypatch.setenv("RAG_RERANKER_MODEL", "  ")
+    assert RerankerFactory().model_name == DEFAULT_CROSS_ENCODER_MODEL

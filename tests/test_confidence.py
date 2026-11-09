@@ -69,6 +69,27 @@ def test_completeness_idk_low():
     assert score <= 0.1
 
 
+def test_chinese_refusal_is_not_scored_as_a_complete_answer():
+    scorer = ConfidenceScorer()
+    for answer in (
+        "上下文信息不足，无法回答这个问题。",
+        "在提供的文档中找不到相关信息。",
+    ):
+        assert scorer._lexical_completeness("退款规则是什么？", answer) <= 0.1
+
+
+def test_unrecognized_question_does_not_receive_full_completeness():
+    assert ConfidenceScorer()._lexical_completeness("几点关门？", "地址在人民路。") == 0.0
+
+
+def test_failed_completeness_judge_is_not_a_passing_score():
+    def timeout(messages):
+        raise TimeoutError("test")
+
+    scorer = ConfidenceScorer(judge=Generator(respond=timeout))
+    assert scorer._judge_completeness("几点关门？", "晚上九点。") == 0.0
+
+
 def test_composite_uses_weights():
     scorer = ConfidenceScorer(weights={"retrieval": 0.5, "citation": 0.3, "completeness": 0.2})
     report = ConfidenceReport(

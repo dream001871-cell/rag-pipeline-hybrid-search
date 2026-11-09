@@ -1,397 +1,102 @@
-<div align="center">
+# 中文 RAG 混合检索与文档问答
 
-# 🔍 Hybrid-Search RAG Pipeline
+基于 [mohammadyakub-ai/rag-pipeline-hybrid-search](https://github.com/mohammadyakub-ai/rag-pipeline-hybrid-search) 的中文实践项目，提供混合检索、中文重排、带引用问答、裁判校验、拒答和执行追踪。保留上游提交历史及 MIT 许可证。
 
-**A production-oriented retrieval-augmented generation pipeline over internal documentation with automated evaluation — catch retrieval and generation regressions before they ship.**
+## 已实现的功能
 
-![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)
-![ChromaDB](https://img.shields.io/badge/Vector_Store-ChromaDB-2ea44f)
-![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)
-![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B?logo=streamlit&logoColor=white)
-![OpenRouter](https://img.shields.io/badge/LLM-OpenRouter%2FOpenAI-FF6600)
-![License MIT](https://img.shields.io/badge/License-MIT-green)
-![Status Active](https://img.shields.io/badge/Status-Active-brightgreen)
-![Tests 142 passing](https://img.shields.io/badge/Tests-142%20passing-brightgreen)
-![Faithfulness 88%](https://img.shields.io/badge/Faithfulness-88%25-blue)
+- Markdown、文本、HTML、PDF 加载与固定、递归、语义切分。
+- 本地向量模型与 ChromaDB，结合支持中文分词的 BM25。
+- 向量与关键词各召回 60 段，通过 RRF 融合，重排后最多使用 20 段、12000 字符上下文。
+- 支持中文的多语言 Cross-Encoder 重排，可通过 `RAG_RERANKER_MODEL` 选择模型。
+- DeepSeek、OpenRouter 或 OpenAI 兼容聊天服务，生成带 `[N]` 引用的中文答案。
+- 独立裁判提示及严格 JSON 解析，校验引用、完整度与置信度后决定回答或拒答。
+- FastAPI 接口、Streamlit 中文界面及 OTLP/HTTP 执行追踪。
+- 20 题历史回归集，以及「rag基线」50 题集合，后者包含 40 道可答题、10 道自拟应拒答题和 68 篇配套原文。
 
-[Why](#-why-this-project-exists) • [Features](#-features) • [Architecture](#-architecture) • [Quickstart](#-quickstart) • [API](#-api) • [Evaluation](#-evaluation-results) • [Structure](#-project-structure) • [Testing](#-testing) • [Design Decisions](#-design-decisions) • [Golden Dataset](#-golden-dataset-contribution-rules) • [Limitations](#-known-limitations--tuning-opportunities) • [Config](#-configuration)
+## 安装与启动
 
-</div>
+需要 Python 3.12。以下命令在 Windows PowerShell 中执行。
 
----
-
-## 🧐 Why This Project Exists
-
-Most RAG systems are judged by vibes — "seems good in the demo." There is no automated way to know whether a chunking tweak, a prompt rewording, or a retrieval change quietly tanked answer quality.
-
-This project treats the RAG pipeline like source code: benchmarked against a fixed golden bar, diffed across chunking strategies, and swappable under a typed interface. The evaluation harness is fully decoupled from the pipeline through adapter functions, so any retrieval + generation stack that satisfies the contract can be dropped in with zero harness changes.
-
----
-
-## ✨ Features
-
-| | Feature | Description |
-|---|---|---|
-| 🔀 | **Hybrid Retrieval** | Dense ChromaDB cosine similarity + BM25 sparse search fused with Reciprocal Rank Fusion (dense weight 0.7 / sparse 0.3), then cross-encoder reranking (cross-encoder/ms-marco-MiniLM-L-6-v2) into one ranked list. |
-| 📎 | **Grounded Generation** | System-prompt-grounded answers with mandatory inline `[N]` citations pointing at retrieved chunks. The LLM is instructed to never make a factual claim without a citation. |
-| ✅ | **Citation Verification** | An LLM judge checks each `[N]` citation against the retrieved chunk and returns `SUPPORTED` or `UNSUPPORTED` per claim. Citation accuracy is a real measured metric, not a constant. |
-| 🚦 | **Confidence Gating** | Composite score across retrieval quality, citation coverage, and answer completeness. Below `RAG_CONFIDENCE_THRESHOLD` the system returns a structured "I don't know" response instead of hallucinating. |
-| ✂️ | **Three Chunking Strategies** | Fixed-size with overlap (baseline), recursive by section headers (structure-aware), semantic by topic boundaries (embedding-similarity). All three are switchable per ingest and benchmarked head-to-head. |
-| 🧹 | **Deduplication** | Hash + embedding-similarity checks (cosine > 0.95) before inserting any chunk. Re-seeding is idempotent — already-indexed chunks are skipped automatically. |
-| 📊 | **Evaluation Harness** | 52-question golden dataset covering four question types (lookup, multi-hop, no-answer, ambiguous). Four automated metrics judged by GPT-4o-mini. Chunking strategy comparison runner with progress logging. Exit code is the contract for CI. |
-| 🌐 | **API Endpoints** | Full FastAPI service — ask, retrieve, ingest, list documents, health check, reset — with auto OpenAPI docs at `/docs`. |
-| 📈 | **Streamlit Dashboard** | Ask questions and see: generated answer with clickable `[N]` citations, retrieved chunks ranked by relevance, confidence scores broken down by dimension, toggle to compare hybrid vs dense-only retrieval side by side. |
-| 🔌 | **Fully Offline Without LLM** | Mock embeddings + mock judge keep the entire pipeline testable in CI with zero API spend. Real embeddings + real judges activate with one environment variable. |
-
-<div align="center">
-
-![Query Dashboard](assets/dashboard.png)
-
-*Streamlit dashboard — answer, citations, confidence breakdown, and hybrid vs. dense-only comparison.*
-
-</div>
-
----
-
-## 🏗️ Architecture
-
-```mermaid
-flowchart TD
-    A[Document Loader] --> B[Chunker<br/>fixed / recursive / semantic]
-    B --> C[Deduplication<br/>hash + cosine > 0.95]
-    C --> D[(ChromaDB<br/>dense index)]
-    C --> E[(BM25<br/>sparse index)]
-
-    Q[User Question] --> F[Dense Retriever]
-    Q --> G[Sparse Retriever]
-    D --> F
-    E --> G
-    F --> H[RRF Fusion<br/>0.7 dense / 0.3 sparse]
-    G --> H
-    H --> I[Cross-Encoder Reranker<br/>ms-marco-MiniLM-L-6-v2]
-    I --> J[Grounded Generation<br/>gpt-4o]
-    J --> K[Citation Verifier<br/>LLM judge]
-    K --> L[Confidence Gate]
-    L -->|above threshold| M[Answer + Citations]
-    L -->|below threshold| N["I don't know" response]
-```
-
----
-
-## 🎬 Demo
-
-<div align="center">
-
-![Demo](assets/demo.gif)
-
-📺 **[Watch the full video here](https://drive.google.com/file/d/1g7b-DyIWULrTAlk9T3Xe7PRY1MsGjnHK/view?usp=sharing)**
-
-</div>
-
----
-
-## 🚀 Quickstart
-
-### Docker (recommended)
-
-```bash
-git clone https://github.com/mohammadyakub-ai/rag-pipeline-hybrid-search.git
+```powershell
+git clone https://github.com/dream001871-cell/rag-pipeline-hybrid-search.git
 cd rag-pipeline-hybrid-search
-cp .env.example .env          # add OPENROUTER_API_KEY
-docker compose up --build
-```
-
-The `seed` service indexes 155 docs automatically once the API is healthy.
-
-| Service | URL |
-|---|---|
-| API | http://localhost:8000 (`/docs` for OpenAPI) |
-| Dashboard | http://localhost:8501 |
-| ChromaDB debug | http://localhost:8001 |
-
-### Local development
-
-```bash
 python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env          # add OPENROUTER_API_KEY
-
-# index the corpus
-uvicorn rag_pipeline.api:create_app --factory --app-dir src &
-python3 scripts/seed.py --reset
-
-# dashboard
-streamlit run dashboards/query_dashboard.py
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+Copy-Item .env.example .env
 ```
 
-### Re-seed (idempotent)
+在 `.env` 填写 `DEEPSEEK_API_KEY` 可启用真实问答。向量和重排在本机运行，首次启动需要下载模型。也可以配置 OpenRouter 或 OpenAI 服务，详见 [本地运行说明](LOCAL_RUN.md)。
 
-```bash
-python3 scripts/seed.py --reset
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start-local.ps1
+.\.venv\Scripts\python.exe scripts/seed.py --api http://127.0.0.1:8000 --timeout 600
 ```
 
-> **Dependencies:** `requirements.txt` pins no exact versions (`chromadb>=1.0.0`, `openai>=1.0.0`, `openrouter>=1.1.136`, `sentence-transformers>=2.7.0`, etc.). Evaluation results above were produced with: `fastapi 0.137.2`, `chromadb 1.5.9`, `sentence-transformers 6.0.1`, `openai 3.6.0`, `openrouter 1.1.136`, `uvicorn 0.49.0`, `streamlit 1.37.0`, `pydantic 2.12.5`.
+- 中文界面位于 http://127.0.0.1:8501。
+- API 文档位于 http://127.0.0.1:8000/docs。
+- 健康检查位于 http://127.0.0.1:8000/healthz。
 
----
-
-## 🌐 API
-
-| Method | Path | Description |
-|---|---|---|
-| `POST` | `/v1/ask` | Full pipeline — answer + citations + confidence |
-| `POST` | `/v1/retrieve` | Retrieval only, no LLM needed |
-| `POST` | `/v1/ingest` | Upload a document (`.pdf` `.md` `.txt` `.html`) |
-| `GET` | `/v1/documents` | List indexed documents with chunk counts |
-| `GET` | `/healthz` | Liveness + `vector_chunks` + `bm25_chunks` counts |
-| `POST` | `/v1/reset` | Wipe the index (used by `seed --reset`) |
-| `GET` | `/docs` | Auto-generated OpenAPI docs |
-
-### Example
-
-**Request**
-
-```bash
-curl -X POST http://localhost:8000/v1/ask \
-  -H "Content-Type: application/json" \
-  -d '{"question": "How does reciprocal rank fusion combine results?", "top_k": 5}'
-```
-
-**Response**
+纯检索使用 `POST /v1/retrieve`。文档上传使用 `POST /v1/ingest`。问答使用 `POST /v1/ask`。
 
 ```json
-{
-  "can_answer": true,
-  "question": "How does reciprocal rank fusion combine results?",
-  "answer": "RRF merges the dense and sparse ranked lists by rank position [1]. Each chunk receives a score based on its rank in each list, and the scores are combined [2].",
-  "citations": {
-    "total": 2, "supported": 2, "unsupported": 0, "accuracy": 1.0,
-    "citations": [
-      {"citation": "[1]", "supported": true},
-      {"citation": "[2]", "supported": true}
-    ]
-  },
-  "confidence": {
-    "composite": 0.87,
-    "retrieval_confidence": 0.90,
-    "citation_coverage": 0.75,
-    "completeness": 0.90,
-    "weights": {"retrieval": 0.4, "citation": 0.3, "completeness": 0.3}
-  },
-  "sources": [
-    {
-      "chunk_id": "abc123",
-      "source_file": "tutorial/path-params.md",
-      "section": "Path Parameters",
-      "rerank_score": 0.43,
-      "rrf_score": 0.012,
-      "content": "..."
-    }
-  ]
-}
+{"question": "What is FastAPI?", "top_k": 20, "retrieval_mode": "hybrid"}
 ```
 
----
+停止本机服务可运行 `powershell -ExecutionPolicy Bypass -File .\stop-local.ps1`。
 
-## 📚 Corpus
+## 执行追踪
 
-| | |
-|---|---|
-| **Source** | Official [FastAPI documentation](https://github.com/tiangolo/fastapi/tree/master/docs/en/docs) |
-| **License** | MIT |
-| **Files** | 155 markdown files |
-| **Words** | ~164,000 |
-| **Chunks** | 3,890 (after fixed-size chunking with deduplication) |
-| **Location** | `data/raw/fastapi_docs/` |
+设置 `RAG_TRACE_ENDPOINT` 为 OTLP/HTTP 接收地址。例如配套本地 Evals.si 服务使用 `http://127.0.0.1:8088/v1/traces`。测试中台需要单独部署，本项目提供调用与上报适配代码。
 
----
+问答响应头 `X-Trace-Id` 对应检索、生成、引用校验和最终判定各阶段。日常服务以 `rag-api-production` 上报阶段耗时、模型名和结果状态，正文留在服务端的问答响应中。追踪接收端故障会记录日志，问答接口继续返回结果。
 
-## 📊 Evaluation Results
+## 评测记录
 
-> Generated `2026-09-12` · mode `real` · judge `gpt-4o-mini` · embeddings `sentence-transformers/all-MiniLM-L6-v2` · 52 questions · [full results →](data/comparison_report.json)
+固定小型资料范围内的历史模型复评结果如下。生成及评审均使用 DeepSeek `deepseek-flash`，语义复评采用独立提示。每题单次生成，结果受模型判断影响，尚未人工逐题验收。
 
-| Strategy | Correctness | Faithfulness | Retrieval Rel. | Citation Acc. | Avg |
-|---|---|---|---|---|---|
-| fixed | 0.23 | 0.68 | 0.59 | 0.65 | 0.54 |
-| recursive | 0.28 | 0.71 | 0.54 | 0.50 | 0.51 |
-| **semantic** 🏆 | **0.30** | **0.88** | 0.52 | 0.54 | **0.56** |
+| 集合与方法 | 最终回答 | 复评正确 |
+| --- | --- | --- |
+| 20 题原基线 | 2/20 | 2/20 |
+| 20 题修复裁判提示与解析后 | 13/20 | 12/20 |
+| 20 题增加中文重排后 | 16/20 | 16/20 |
 
-**Winner: semantic chunking (avg 0.56)**
+「rag基线」50 题运行记录于 2026-11-07。
 
-#### Per-type breakdown for semantic (winner)
+| 指标 | 结果 |
+| --- | --- |
+| 可答题语义正确 | 32/40（80%） |
+| 可答题误拒答 | 8/40（20%） |
+| 应拒答题正确拒答 | 10/10（100%） |
+| 总体语义正确 | 42/50（84%） |
+| 平衡准确率 | 90% |
+| 执行追踪核对 | 50/50 |
 
-| Question type | Correctness | Faithfulness |
-|---|---|---|
-| lookup | 0.37 | 0.83 |
-| multi_hop | 0.30 | 0.83 |
-| no_answer | 0.17 | 0.92 |
-| ambiguous | 0.35 | 1.00 |
+题目和语料来自小型选集，配套语料规模与官方完整基准不同。这些数值用于本项目的诊断，不能直接与完整 CRUD-RAG 分数比较。20 题参与了调优，50 题中的拒答题为本地构造。参考答案和标签只供评审使用，建库时只导入对应 `corpus/` 中的原文。
 
-#### Key findings
+## 代码入口
 
-- Semantic chunking achieves **88% faithfulness**.
-- Ambiguous questions score **100% faithfulness** — the system is conservative when there's no pinned answer.
-- Semantic outperforms fixed by **28% faithfulness** and **31% correctness**.
-- Retrieval relevance plateaus at **~0.55** across all strategies, reflecting the local embedding model tradeoff — swapping to `text-embedding-3-small` is a one-line config change in `EmbeddingFactory`.
-- No-answer correctness of **0.17** is a known tuning opportunity via `RAG_CONFIDENCE_THRESHOLD` (currently `0.5`).
+| 文件 | 作用 |
+| --- | --- |
+| `src/rag_pipeline/api.py` | 组装检索、生成、校验与接口 |
+| `src/rag_pipeline/generation.py` | 上下文预算、普通问答和裁判消息 |
+| `src/rag_pipeline/fusion.py` | 双路候选与 RRF 融合 |
+| `src/rag_pipeline/reranker.py` | 重排模型与选择策略 |
+| `src/rag_pipeline/citation.py` | 引用解析与证据判定 |
+| `src/rag_pipeline/confidence.py` | 完整度判分与故障信息 |
+| `src/rag_pipeline/unknown.py` | 回答或拒答门禁 |
+| `src/rag_pipeline/tracing.py` | 阶段事件和 OTLP 上报 |
+| `data/benchmarks/current_dataset.json` | 当前 50 题集合入口 |
 
-#### Metric definitions
+## 验证
 
-| Metric | Definition |
-|---|---|
-| `correctness` | Answer-grounded correctness judged by LLM |
-| `faithfulness` | Answer stays within retrieved context |
-| `retrieval_relevance` | Retrieved chunks are on-topic |
-| `citation_accuracy` | `[N]` citations map to genuinely supporting chunks |
-
----
-
-## ⚙️ Configuration
-
-| Variable | Purpose | Default |
-|---|---|---|
-| `OPENROUTER_API_KEY` | LLM generation + judging (preferred) | — |
-| `OPENAI_API_KEY` | Optional: OpenAI embeddings + chat fallback. An `sk-or-v1-` key here auto-routes to OpenRouter | — |
-| `OPENAI_BASE_URL` | Any OpenAI-compatible chat endpoint | — |
-| `LOCAL_EMBEDDINGS` | Set `false` to force mock in CI | `true` |
-| `CHROMA_HOST` | Standalone ChromaDB host | — |
-| `CHROMA_PORT` | Standalone ChromaDB port | `8000` |
-| `RAG_CONFIDENCE_THRESHOLD` | Confidence gate for "I don't know" | `0.5` |
-| `API_BASE_URL` | Dashboard backend URL | `http://localhost:8000` |
-| `RAG_PERSIST_DIR` | ChromaDB persist path | `data/chroma` |
-| `RAG_BM25_DIR` | BM25 index path | `data/bm25` |
-
-**Behavior by key combination:**
-
-- **No keys** → offline mode, mock embeddings, `/v1/retrieve` works, `/v1/ask` returns `503`.
-- **`OPENROUTER_API_KEY` only** → local embeddings + real LLM answers.
-- **Both keys** → OpenAI embeddings + real LLM answers.
-
----
-
-## 📁 Project Structure
-
-```
-.
-├── data/
-│   ├── raw/fastapi_docs/          # 155-file sample corpus
-│   ├── golden_dataset.json        # 52-question eval dataset
-│   └── comparison_report.json     # chunking comparison output
-├── src/
-│   ├── rag_pipeline/
-│   │   ├── document_loader.py     # multi-format loaders
-│   │   ├── chunker.py             # fixed / recursive / semantic
-│   │   ├── embedding.py           # OpenAI + Local + Mock services
-│   │   ├── vector_store.py        # ChromaDB wrapper
-│   │   ├── bm25_index.py          # BM25 sparse index (persisted)
-│   │   ├── deduplication.py       # hash + similarity dedup
-│   │   ├── retrieval.py           # dense & sparse retrievers
-│   │   ├── fusion.py              # RRF + HybridRetriever
-│   │   ├── reranker.py            # CrossEncoderReranker + fallback
-│   │   ├── generation.py          # grounded prompt + LLM client
-│   │   ├── citation.py            # parser + LLM verifier
-│   │   ├── confidence.py          # composite scorer
-│   │   ├── unknown.py             # "I don't know" handler
-│   │   ├── llm_client.py          # OpenRouter/OpenAI adapter
-│   │   └── api.py                 # FastAPI service
-│   └── rag_evaluation/
-│       ├── golden_dataset.py      # typed models + validators
-│       ├── eval_metrics.py        # 4 metrics + runner
-│       └── chunking_comparison.py # strategy benchmark
-├── dashboards/
-│   └── query_dashboard.py         # Streamlit UI
-├── scripts/
-│   ├── seed.py                    # corpus seeder (--reset flag)
-│   └── run_strategy_comparison.py # benchmark runner (--real/--mock)
-├── docker/                        # per-service Dockerfiles
-├── tests/                         # 19 suites, 142 tests (pytest)
-├── docker-compose.yml
-├── requirements.txt
-├── .env.example
-└── pytest.ini
+```powershell
+.\.venv\Scripts\python.exe -m pytest tests/test_api.py tests/test_judge_protocol.py tests/test_answer_gates.py tests/test_generation.py tests/test_citation.py tests/test_confidence.py tests/test_retrieval_plan.py tests/test_structured_citations.py tests/test_bm25_chinese.py tests/test_deepseek.py -q
 ```
 
----
+公开前上述 124 项相关测试通过。测试使用隔离组件，实际模型评测单独执行。索引、模型缓存、密钥及本机详细调用记录在运行后生成。
 
-## 🧪 Testing
+## 来源和许可证
 
-**Framework:** pytest · **Suites:** 19 (one per module) · **Tests:** 142 passing
+代码沿用上游 [MIT 许可证](LICENSE)，保留 `Copyright (c) 2026 Yakub`。中文化、中文检索、裁判校验改进和执行追踪在上游代码基础上实现。
 
-```bash
-pytest tests/                        # full suite
-pytest tests/ --tb=short             # with failure detail
-pytest tests/ -k "test_reranker"     # single suite by name
-```
-
-**CI-safe eval (no API keys needed):**
-
-```bash
-python3 scripts/run_strategy_comparison.py --mock
-```
-
-**Real eval:**
-
-```bash
-python3 scripts/run_strategy_comparison.py --real
-```
-
-Exit code `0` = pass, `1` = failure — wire directly into CI.
-
----
-
-## 🧠 Design Decisions
-
-| Decision | Rationale |
-|---|---|
-| Evaluation decoupled from the pipeline | The harness calls a `generate_fn`/`pipeline_factory` contract rather than importing the pipeline directly. The eval engine can outlive its first feature. |
-| Golden answers traceable to verbatim text | Every lookup and multi-hop ground truth is a real quote from the corpus — correctness is checkable, not vibes. |
-| Hybrid dense + sparse retrieval | BM25 captures exact identifiers and config keys; dense captures semantics; RRF fuses them by rank position rather than interpolating scores. |
-| Mandatory `[N]` citations | Every factual sentence must cite its chunk. Citations make every claim auditable and enable the citation verifier to produce a real signal. |
-| LLM judge verifies citations per claim | Strict `SUPPORTED`/`UNSUPPORTED` verdicts per `[N]` reference — citation accuracy is a real measured metric. |
-| Composite confidence gate | One score (retrieval + citation coverage + completeness) drives the "I don't know" path. The model declines instead of fabricating when confidence is low. |
-| Chunking strategies are first-class | Different content shapes suit different chunkers. The benchmark decides empirically, per corpus. |
-| Deduplicated idempotent ingestion | Hash + embedding-similarity checks make re-seeding safe and CI re-runs repeatable. |
-| Mock everything for CI | Deterministic embeddings + deterministic scorers mean the full suite runs offline with zero spend. |
-| Failures degrade gracefully, never crash | A judge failure drops to `None`. A missing key returns a clean `503`. Retrieval-only endpoints keep working regardless of LLM availability. |
-| Runtime configuration over code changes | Thresholds (confidence gate, RRF weights, chunk size) are config objects — tuning never requires a code deploy. |
-| CrossEncoderReranker with automatic fallback | ms-marco-MiniLM-L-6-v2 scores query-chunk pairs jointly for genuine relevance reranking. If sentence-transformers is unavailable, LexicalReranker activates automatically. |
-
----
-
-## 🗂️ Golden Dataset Contribution Rules
-
-| Category | Rule |
-|---|---|
-| `lookup` | Single fact, single document, verbatim from corpus. Must list `source_documents` + `source_sections`. |
-| `multi_hop` | Requires combining facts across 2+ documents. Must list all `source_documents` + `source_sections`. |
-| `no_answer` | Plausible-but-absent — docs do not cover the topic. Must list no sources. |
-| `ambiguous` | No pinned correct answer, judged by faithfulness only. |
-
-**General rules:**
-
-- Write questions against verbatim doc text.
-- Never generate questions with an LLM.
-- When a production query fails, add it as a case with a `notes` field describing the real incident.
-- Minimum 50 questions, all four categories represented.
-- Unique IDs, non-empty question and answer fields.
-
----
-
-## ⚠️ Known Limitations & Tuning Opportunities
-
-1. **No-answer correctness is 0.17.** The confidence threshold (`RAG_CONFIDENCE_THRESHOLD=0.5`) sometimes lets the system attempt answers it should refuse. Raising the threshold makes the system more conservative — this is a config change, not a code change.
-2. **Retrieval relevance plateaus at ~0.55.** This is the ceiling of `all-MiniLM-L6-v2` on technical docs. Swapping to `text-embedding-3-small` is a one-line change in `EmbeddingFactory`. Local embeddings were chosen deliberately for offline capability.
-3. **Eval takes 45+ minutes with real judges.** 52 questions × 3 strategies × 4 LLM calls = ~624 API calls. Use `--mock` for fast CI runs; use `--real` before reporting numbers.
-
----
-
-<div align="center">
-
-## ⭐ Support
-
-Built by **[Yakub Mohammad](https://github.com/mohammadyakub-ai)** · Licensed under **MIT**
-
-If this project helped you, consider giving it a star!
-
-</div>
+中文题目来源为 [IAAR-Shanghai/CRUD_RAG](https://github.com/IAAR-Shanghai/CRUD_RAG)，题目出处、原始编号及选题记录保存在各集合目录。10 道应拒答题为本地自拟，标签适用于固定资料范围。所附新闻及第三方 FastAPI 文档的权利归各自权利人，代码 MIT 许可证不改变这些第三方材料的权利。上游原始说明保存在 [README.en.md](README.en.md)。

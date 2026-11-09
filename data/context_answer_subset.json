@@ -1,0 +1,64 @@
+{
+  "name": "A_C_context_diagnostic_subset_v1",
+  "variant_status": {"A": "default", "C": "pending"},
+  "description": "在生成答案前按上下文缺口选择的小样本诊断集，不用于估计全部问题的准确率。",
+  "selection_basis": "复用已有检索结果，不重跑检索；覆盖截断、信息分散、证据充分及目标文档未召回的情况。",
+  "scoring": {
+    "full_correct": "全部必需答案要点正确，且没有实质性错误，记为 1；部分回答、拒答或错误记为 0。",
+    "fact_coverage": "由评阅者按语义核对下列必需要点，不以关键词出现次数判分。",
+    "grounded": "独立核对关键结论是否得到该组提供的原文支持，引用编号有效但不支持结论时不得算有依据。",
+    "reviewer": "由助手逐题核查并保存理由；不另行调用模型裁判。",
+    "limitations": "非随机选题、每组每题仅生成一次；结果只适用于本诊断集，不代表整体或稳定收益。"
+  },
+  "questions": [
+    {
+      "id": "q002",
+      "role": "上下文缺口",
+      "reason": "A 命中片段缺少 Defaults 的开头说明，C 补回明确默认值；检查 A 是否已能从 URL 推断。",
+      "required_facts": ["skip 默认值为 0", "limit 默认值为 10"]
+    },
+    {
+      "id": "q011",
+      "role": "上下文缺口",
+      "reason": "A 只有 min_length，C 补回 max_length，但两组均没有 pattern 的直接原文；检查补全和缺证据边界。",
+      "required_facts": ["min_length", "max_length", "pattern"]
+    },
+    {
+      "id": "q024",
+      "role": "上下文缺口",
+      "reason": "操作步骤分散，A 有 TestClient 与测试函数说明，检查 C 是否补回安装和运行 pytest 的步骤。",
+      "required_facts": ["创建 TestClient 并传入 FastAPI app", "测试函数名以 test_ 开头", "使用 assert 断言", "安装 pytest 并运行 pytest 命令"]
+    },
+    {
+      "id": "q026",
+      "role": "上下文缺口",
+      "reason": "A 与 C 均缺少字符串验证的目标文档，C 补回部分数值比较参数；检查部分改善能否构成完整正确答案。",
+      "required_facts": ["字符串查询参数使用 Query", "字符串最短长度 min_length", "字符串最长长度 max_length", "字符串模式 pattern", "数值路径参数使用 Path", "gt 表示大于", "ge 表示大于等于", "lt 表示小于", "le 表示小于等于"]
+    },
+    {
+      "id": "q007",
+      "role": "证据充分对照",
+      "reason": "A 已完整定义 middleware，检查增加上下文后能否保持正确。",
+      "required_facts": ["在具体路径操作处理请求之前处理每个请求", "在返回响应之前处理每个响应"]
+    },
+    {
+      "id": "q009",
+      "role": "证据充分对照",
+      "reason": "A 的首片段被截断，但第二片段已有完整类型和单位，检查模型能否整合现有证据。",
+      "required_facts": ["该类型为 datetime.timedelta"]
+    },
+    {
+      "id": "q030",
+      "role": "证据充分对照",
+      "reason": "A 已有 PATCH、exclude_unset 和 404 的证据，检查 C 是否保持正确或引入额外错误。",
+      "required_facts": ["使用 PATCH 做部分更新", "用 model_dump(exclude_unset=True) 只更新明确提供的字段", "项目不存在时 raise HTTPException 并指定 404"]
+    },
+    {
+      "id": "q004",
+      "role": "目标文档未召回对照",
+      "reason": "两组未检索到 first-steps 文档；其他路由有 Hello World，检查是否混淆路由或依赖模型记忆。",
+      "required_facts": ["响应 JSON 为 {\"message\": \"Hello World\"}"],
+      "grounding_note": "必须区分 /some/url 示例与题目中的 /；答案恰好符合标准答案并不表示该上下文支持目标路由。"
+    }
+  ]
+}

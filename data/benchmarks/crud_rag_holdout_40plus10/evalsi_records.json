@@ -1,0 +1,1040 @@
+[
+  {
+    "id": "crud_holdout_002",
+    "input": {
+      "text": "悠家民宿因其独特设计吸引了投资者，提供了哪种服务使得房东可以轻松享受收益，并且悠家民宿的入住率和回头客概率分别超过了多少？"
+    },
+    "reference": {
+      "text": "悠家民宿提供的是一站式全托管服务，使得房东可以轻松享受收益。悠家民宿的入住率超过了85%，回头客概率远超40%。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_002_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_003",
+    "input": {
+      "text": "在2023年7月22日举行的“停战70年朝鲜半岛和平行动”反战游行中，组织者发表的声明中提到了哪些主要的呼吁和建议？"
+    },
+    "reference": {
+      "text": "在“停战70年朝鲜半岛和平行动”的声明中，组织者主要呼吁停止制造半岛军事紧张，提倡和平共存、合作共赢的亚洲，通过对话合作而非制裁和军事威胁解决半岛问题，停止半岛及亚洲地区的军备竞赛，构建没有核威胁的朝鲜半岛，并且必须停止韩美联合军演，反对将半岛推向地区纷争的中心。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_003_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_005",
+    "input": {
+      "text": "长江科学院的科考队员在长江源区查旦湿地开展的湿地碳储量估算科研项目，是为了填补哪个领域的科研空白？"
+    },
+    "reference": {
+      "text": "长江源区湿地碳储量科研空白。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_005_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_006",
+    "input": {
+      "text": "安徽省网信办在整治网络“自媒体”乱象中共清理了多少条违规信息，并依法处置了多少个违法违规“自媒体”账号？"
+    },
+    "reference": {
+      "text": "安徽省网信办共清理了4万余条违规信息，并依法处置了2.7万余个违法违规“自媒体”账号。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_006_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_007",
+    "input": {
+      "text": "国家卫生健康委办公厅印发的通知中提到的2023年世界母乳喂养周的主题是什么？"
+    },
+    "reference": {
+      "text": "2023年世界母乳喂养周的主题是“助力职场家庭促进母乳喂养”。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_007_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_008",
+    "input": {
+      "text": "美国白宫发言人让-皮埃尔在回应乌克兰对俄罗斯境内发动袭击的立场时，提到了哪个地区属于乌克兰？"
+    },
+    "reference": {
+      "text": "让-皮埃尔提到克里米亚属于乌克兰。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_008_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_009",
+    "input": {
+      "text": "哪些部门联合印发了《氢能产业标准体系建设指南（2023版）》，并且这是国家层面首个针对哪个领域的全产业链标准体系建设指南？"
+    },
+    "reference": {
+      "text": "国家标准委与国家发展改革委、工业和信息化部、生态环境部、应急管理部、国家能源局等部门联合印发了《氢能产业标准体系建设指南（2023版）》，这是国家层面首个针对氢能全产业链的标准体系建设指南。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_009_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_010",
+    "input": {
+      "text": "武汉地铁19号线全线轨道铺设完成的日期是什么时候？"
+    },
+    "reference": {
+      "text": "武汉地铁19号线全线轨道铺设完成的日期是2023年7月28日。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_010_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_011",
+    "input": {
+      "text": "伊朗伊斯兰革命卫队为其海军配备了哪些新型武器装备，以增强在霍尔木兹海峡的作战能力？"
+    },
+    "reference": {
+      "text": "伊朗伊斯兰革命卫队为其海军配备了新型无人机、导弹、侦察和战斗无人机、弹道导弹、射程300至1000公里的巡航导弹、导弹发射车以及雷达和指挥系统等多种国产武器。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_011_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_012",
+    "input": {
+      "text": "根据朝阳永续发布的今年前7个月国内证券私募行业业绩监测月报，百亿级证券私募中有多少家实现了正收益，占监测到的百亿私募总数的百分比是多少？"
+    },
+    "reference": {
+      "text": "68家百亿级证券私募在今年前7个月实现了正收益，占监测到的91家百亿私募总数的74.73%。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_012_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_013",
+    "input": {
+      "text": "在韩国蔚山市的残疾人福利设施收到可疑国际邮包后，有多少人出现了身体不适的症状？这些人目前的状态如何？"
+    },
+    "reference": {
+      "text": "在韩国蔚山市的残疾人福利设施收到可疑国际邮包后，有3名负责人出现了头晕和呼吸困难的症状，目前这些人已经出院。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_013_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_014",
+    "input": {
+      "text": "2023年春运期间，湖北省共发送旅客多少万人次，与2019年相比恢复到了多少百分比？"
+    },
+    "reference": {
+      "text": "2023年春运期间，湖北省共发送旅客3465.028万人次，同比增长28.08%，恢复到2019年的53.4%。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_014_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_016",
+    "input": {
+      "text": "习近平总书记在给“科学与中国”院士专家代表的回信中提出了哪些期望，并希望通过什么方式激发青少年的兴趣？"
+    },
+    "reference": {
+      "text": "习近平总书记在回信中提出了对科技工作者支持和参与科普事业的殷切期望，并希望他们以优质丰富的内容和喜闻乐见的形式激发青少年崇尚科学、探索未知的兴趣。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_016_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_017",
+    "input": {
+      "text": "截至2023年7月，大连市共成立了多少家商标品牌指导站，并且大连金普新区北方国家版权交易中心商标品牌指导站在哪个月份正式启动了线上预审服务？"
+    },
+    "reference": {
+      "text": "大连市共成立了31家商标品牌指导站，大连金普新区北方国家版权交易中心商标品牌指导站在2023年7月份正式启动了线上预审服务。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_017_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_018",
+    "input": {
+      "text": "海兰新上市的海兰GL40电脑一体机搭载了哪一代的INTEL处理器，以及哪款显卡？"
+    },
+    "reference": {
+      "text": "海兰GL40电脑一体机搭载的是INTEL第十二代酷睿i3 12100台式标压处理器，配备的显卡是GTX1050TI-4G MXM独显。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_018_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_019",
+    "input": {
+      "text": "在2023年8月2日至3日的河北省涿州市刁窝村救援行动中，宜昌市最美退役军人吴林宝带领的救援队共转移了多少老年人和小孩？"
+    },
+    "reference": {
+      "text": "吴林宝带领的救援队在河北省涿州市刁窝村的行动中共转移了20名老年人和小孩。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_019_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_020",
+    "input": {
+      "text": "根据欧盟委员会的5G观察报告，哪个欧盟国家在5G网络人口覆盖率上位列所有27个国家的最后，并且该国的覆盖率大约是多少？"
+    },
+    "reference": {
+      "text": "瑞典在5G网络人口覆盖率上位列所有27个欧盟国家的最后，其覆盖率略高于20%。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_020_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_022",
+    "input": {
+      "text": "截至2023年6月末，上海市本外币贷款余额同比增长了多少百分比？上海市企业贷款加权平均利率相比上年同期下降了多少个基点？"
+    },
+    "reference": {
+      "text": "截至2023年6月末，上海市本外币贷款余额同比增长了7.7%，企业贷款加权平均利率相比上年同期下降了15个基点。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_022_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_023",
+    "input": {
+      "text": "UDE2023第四届国际半导体显示博览会在深圳召开时，有多少家展商参与，并且这些展商主要展示了哪些新型显示技术？"
+    },
+    "reference": {
+      "text": "近千家展商参与了UDE2023第四届国际半导体显示博览会，并主要展示了Mini/Micro LED、OLED、激光显示、微显示等新型显示技术。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_023_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_025",
+    "input": {
+      "text": "商洛市商州区税务局为了改善税收营商环境，打造了哪个服务品牌，并且通过哪些措施来提升纳税服务质效？"
+    },
+    "reference": {
+      "text": "商洛市商州区税务局打造了“五心”服务品牌来改善税收营商环境，并通过整合大厅资源、规范服务标准、强化业务素质、创新服务方式和优化办税流程等措施来提升纳税服务质效。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "lookup",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_025_news1.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_026",
+    "input": {
+      "text": "结合深海深渊区域的生物多样性研究和我国近海区域的环境变化研究，如何概述海洋生态系统在不同深度和地理位置的研究进展？"
+    },
+    "reference": {
+      "text": "深海深渊区域的研究揭示了存在两个截然不同的生物群落，分别位于3800米至4300米和4800米至5300米深度，显示生物多样性并不随深度增加而减少。而我国近海区域的研究则表明，受气候变化影响，近海生态系统正在发生物理、化学和生物过程的协同演变，其中表面温度自1950年以来平均每十年上升0.10-0.17℃。这些研究进展不仅增进了我们对深海和近海生态系统多样性和变化的理解，也为未来海洋环境保护和管理提供了科学依据。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_026_news1.md",
+        "crud_holdout_026_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_028",
+    "input": {
+      "text": "新兴市场国家和发展中国家职业教育发展论坛的主办方、协办方以及论坛的主题分别是什么？"
+    },
+    "reference": {
+      "text": "新兴市场国家和发展中国家职业教育发展论坛的主办方是新华网，协办方包括中公教育和现代职业教育研究院，论坛的主题是“共建、共享、共融、共赢”。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_028_news1.md",
+        "crud_holdout_028_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_029",
+    "input": {
+      "text": "在RCEP框架下，重庆和黑龙江的企业如何享受关税减让，以及当地海关部门是如何支持这些企业的？"
+    },
+    "reference": {
+      "text": "在RCEP框架下，重庆的企业通过获取RCEP原产地证书和声明享受到关税减让，其中出口至泰国的电镀锡板协定税率已从5%降至4.8%，并将逐年递减至0。重庆海关为了支持企业，建立了重点企业和产品的享惠清单，并通过多种渠道让企业了解原产地规则和关税减让政策。而黑龙江省的企业在1-7月期间共享受了超过1.1亿元的关税减让，哈尔滨海关签发了大量原产地证书以帮助企业在目的国享受关税优惠。哈尔滨海关还通过宣讲等方式向企业普及RCEP惠企政策，帮助他们利用这些优惠。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_029_news1.md",
+        "crud_holdout_029_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_030",
+    "input": {
+      "text": "赵继宗院士及其专家团队在西藏自治区第二人民医院的支持活动包括哪些方面，并且他们是如何通过技术指导中心持续提升当地医疗水平的？"
+    },
+    "reference": {
+      "text": "赵继宗院士及其专家团队在西藏自治区第二人民医院进行了查房、手术教学、专业座谈会、学术讲座及义诊活动。自建立“赵继宗院士西藏神经外科技术指导中心”以来，专家团队定期进藏指导一线临床工作，提高临床救治能力，进行学术交流，帮助提升学科建设，并通过座谈会、远程诊疗、义诊、进藏开展手术等方式培养本地人才，让高原群众享受更优质的医疗资源。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_030_news1.md",
+        "crud_holdout_030_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_031",
+    "input": {
+      "text": "结合西共体对尼日尔政变的制裁措施和最后通牒的时间点，描述西共体如何回应尼日尔政变事件。"
+    },
+    "reference": {
+      "text": "西共体对尼日尔政变的回应包括关闭成员国与尼日尔的陆地边境，暂停所有商业航班和商业金融交易，冻结服务交易，包括能源交易，并在7月30日的特别峰会上向尼日尔军方发出为期7天的最后通牒，要求恢复宪法秩序并恢复巴祖姆的总统职务。此外，非洲联盟也宣布支持西共体的回应措施。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_031_news1.md",
+        "crud_holdout_031_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_032",
+    "input": {
+      "text": "结合教育部的全国性就业促进措施和安徽省教育厅在合肥学院实施的具体做法，描述这些措施是如何帮助高校毕业生提高就业率的？"
+    },
+    "reference": {
+      "text": "教育部部署了高校毕业生就业“百日冲刺”系列活动，包括“访企拓岗”行动和“万企进校园”活动，以及推动高校与用人单位合作共建就业实习实践基地，旨在为毕业生开拓有效岗位资源并促进顺利就业。安徽省教育厅则通过升级大学生就业服务平台，提供线上求职和网上签约功能，减少了学校、企业和学生之间的时间成本，并确保了招聘信息的可靠性。合肥学院通过该平台和线下招聘会，帮助毕业生与企业签约，有效提高了就业率。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_032_news1.md",
+        "crud_holdout_032_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_033",
+    "input": {
+      "text": "最新的“超级百万”彩票头奖的中奖彩票是在哪里售出的，中奖者的领奖选项包括什么，以及这次头奖在美国彩票历史上的排名情况如何？"
+    },
+    "reference": {
+      "text": "最新的“超级百万”彩票头奖的中奖彩票是在佛罗里达州内普丘恩比奇的一家超市售出的，中奖者可以选择在中奖后的29年内逐年分期领取全部奖金，或者选择一次性领取约半数奖金。这次头奖在美国彩票历史上排名第三高，仅次于两次“强力球”彩票的20.4亿美元和15.86亿美元的头奖。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_033_news1.md",
+        "crud_holdout_033_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_034",
+    "input": {
+      "text": "在面对美国教育部对其招生政策的调查时，哈佛大学和地方民权组织各自表达了怎样的立场或行动？"
+    },
+    "reference": {
+      "text": "哈佛大学在声明中表示正在审查招生政策，以确保能够继续录取多元化的学生群体，并强调学校正在加倍努力鼓励来自不同背景的学生申请入学。而地方民权组织，如“奇卡项目”的主管扎伊达·伊斯马图尔·奥利瓦，批评哈佛大学的“自动录取”政策不公平，排除了有色人种的年轻人，民权律师委员会也表示哈佛尚未回应投诉或与他们联系。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_034_news1.md",
+        "crud_holdout_034_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_035",
+    "input": {
+      "text": "在土耳其总统埃尔多安与中国外交部长王毅的会晤中，双方如何表达对未来双边关系和合作的展望？"
+    },
+    "reference": {
+      "text": "在会晤中，土耳其总统埃尔多安表达了加强与中国的合作，特别是在“中间走廊”计划与“一带一路”倡议的对接、贸易、能源、旅游等领域，并欢迎中国企业扩大对土投资。同时，土方不支持北约在亚太地区加强活动，并愿就国际和地区问题与中国保持沟通协调。中国外交部长王毅则表示，中国高度重视与土耳其的关系，愿在各自民族振兴道路上相互支持，在核心利益问题上相互照顾，并推动双方战略合作迈上新台阶，通过两国政府间合作委员会机制全面重启务实合作，共同推进“一带一路”建设，实现更高水平的互利共赢。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_035_news1.md",
+        "crud_holdout_035_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_036",
+    "input": {
+      "text": "在最近的两场文化交流活动中，外国留学生和师生分别体验了哪些中华文化艺术形式？"
+    },
+    "reference": {
+      "text": "在重庆大学举办的非遗文化体验活动中，外国留学生体验了川剧变脸和中国传统剪纸文化。而在内蒙古艺术剧院举办的国际青少年友好交流营中，中外师生感受了民族文化艺术，包括观看杂技演员排练、学习弹奏火布思、聆听马头琴演奏等。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_036_news1.md",
+        "crud_holdout_036_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_038",
+    "input": {
+      "text": "惠誉下调美国信用评级的原因及美国政府官员和市场的反应是什么？"
+    },
+    "reference": {
+      "text": "惠誉下调美国信用评级的原因包括美国政府未来三年内财政状况预期恶化、整体债务负担增加，以及债务上限政治僵局所体现的治理恶化。美国政府官员对此表示不满，财长耶伦批驳惠誉的决定，称其“武断且完全没有理由”，并指出惠誉的评级模型基于过时数据。市场方面，尽管有些分析师和策略师对评级下调表示“不屑一顾”，认为它不会对金融市场产生直接影响，因为不太可能有美国国债的主要持有者因为评级下调而被迫抛售，但这一事件仍引起了广泛关注。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_038_news1.md",
+        "crud_holdout_038_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_040",
+    "input": {
+      "text": "湖北交投集团实施的差异化收费政策具体是如何规定的，自何时开始实施，以及实施后货车司机每趟行驶南漳至尧治河区间能节省多少费用？"
+    },
+    "reference": {
+      "text": "湖北交投集团对安装并正常使用ETC的6类货车（总轴数6轴，不含专项作业车）在麻安高速南漳站至长坪站、南漳站至保康站、南漳站至保神高速五道峡站、南漳站至保神高速尧治河站4个区间单程单向路段实施差异化收费政策，先给予应交通行费5%的基本优惠再按基本优惠后应交通行费金额给予45%的差异化优惠。该政策自2023年8月1日起实施，实施期暂定1年。实施后，货车司机每趟行驶南漳至尧治河区间能节省的费用约为185元，从原来的375元降至190元。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_040_news1.md",
+        "crud_holdout_040_news2.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_041",
+    "input": {
+      "text": "在百度与软通动力的合作中，双方共同推进的大模型技术应用场景有哪些，且软通动力独立推出的AI产品和解决方案包括哪些？"
+    },
+    "reference": {
+      "text": "百度与软通动力的合作中，双方共同推进的大模型技术应用场景包括人员招聘、智能创作、企业法务和金融保险等领域。软通动力独立推出的AI产品和解决方案包括软通智核平台（AI Powerforce）、基于昇思MindSpore人工智能框架打造的软通天璇2.0 MaaS平台、携手昇腾AI推出的软通训推一体化平台，以及软通动力数字人等。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_041_news1.md",
+        "crud_holdout_041_news2.md",
+        "crud_holdout_041_news3.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_042",
+    "input": {
+      "text": "在中俄青年企业家交流合作中，黑龙江省发挥了哪些作用，并在最近的大会上取得了哪些具体成果？"
+    },
+    "reference": {
+      "text": "黑龙江省充分利用其地缘优势，推动了中俄青年企业家在农业、能源、文旅、数字经济等领域的合作，并通过各级团组织和青联组织与俄罗斯青年组织开展了多种形式的交流活动。在最近的中俄青年企业家大会上，成功签约了12个项目，总金额达到38.6亿元人民币，这些项目涉及装备制造、数字经济、农业产品、交通物流等多个领域。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_042_news1.md",
+        "crud_holdout_042_news2.md",
+        "crud_holdout_042_news3.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_044",
+    "input": {
+      "text": "防东铁路的设计时速和铺轨施工中采用的技术是什么，以及这条铁路预计如何改变东兴市的交通和经济？"
+    },
+    "reference": {
+      "text": "防东铁路的设计时速为200公里，基础设施预留时速250公里条件。在铺轨施工中，采用了先进的履带式钢轨牵引车拖拉500米长钢轨进行铺设的技术，这种方法具有安全性好、工序少、效率高、施工范围广等特点。开通后，防城港至东兴的通行时间将从目前公路运输的约60分钟缩短至铁路运输约20分钟，这将促进东兴国家重点开发开放试验区建设，推进边境旅游和贸易往来，为广西构建面向东盟的国际大通道提供有力交通支撑，从而改变东兴市的交通和经济状况。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_044_news1.md",
+        "crud_holdout_044_news2.md",
+        "crud_holdout_044_news3.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_045",
+    "input": {
+      "text": "2023年国内成品油价格经历了哪些调整，并且这些调整是如何受到国际油价变动和国内政策的影响？"
+    },
+    "reference": {
+      "text": "2023年国内成品油价格经历了“八涨六跌两搁浅”的调整，其中包括8月9日的上调和7月26日的上调。这些调整受到了国际油价变动的影响，例如沙特决定延长自愿减产石油措施至9月底，以及俄罗斯减少石油出口的决策，这些因素导致供应偏紧预期升温，从而支撑油价上涨。同时，国内政策如国家发改委根据国际市场油价变化情况进行的成品油价格调整，也是影响国内油价的重要因素。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_045_news1.md",
+        "crud_holdout_045_news2.md",
+        "crud_holdout_045_news3.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_046",
+    "input": {
+      "text": "北约在亚洲扩张计划的推迟是否与成员国对中国态度的分歧有关，以及中国如何回应北约的指责？"
+    },
+    "reference": {
+      "text": "北约在亚洲扩张计划的推迟与成员国内部对所谓“中国威胁”的认识有差别有关，其中法国等部分成员国重视与中国的经济关系，不愿刺激中国，这导致了北约在日本东京开设联络处的方案被推迟。对于北约峰会公报中对中国的指责，中国方面坚决反对，认为公报内容混淆是非、颠倒黑白，充满冷战思维和意识形态偏见，并敦促北约放弃冷战思维、零和博弈的过时理念，不要为自身继续扩张寻找借口，而应为世界和平稳定发挥建设性作用。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_046_news1.md",
+        "crud_holdout_046_news2.md",
+        "crud_holdout_046_news3.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_047",
+    "input": {
+      "text": "在沪渝蓉高铁和成渝中线高铁的建设进展中，分别有哪些关键工程的突破，并且这两条线路建成后将如何影响相关城市群的连接？"
+    },
+    "reference": {
+      "text": "沪渝蓉高铁武宜段的建设中，钟祥汉江特大桥和跨焦柳线特大桥的施工是关键工程的重要突破，其中钟祥汉江特大桥进入主梁施工阶段，而跨焦柳线特大桥成功完成转体。成渝中线高铁的建设进展中，千秋堰双线特大桥首墩的浇筑完成是一个新的突破。沪渝蓉高铁建成后将连接上海、江苏、安徽、湖北、重庆、四川等六省市，而成渝中线高铁的建成将进一步疏解成渝地区双城经济圈间和成都都市圈内部的交通压力，加强成都与外界的交通通达度。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_047_news1.md",
+        "crud_holdout_047_news2.md",
+        "crud_holdout_047_news3.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_049",
+    "input": {
+      "text": "2023年“中国寻根之旅”夏令营中，北京语言大学营和湖北一营提供了哪些不同的文化体验活动？"
+    },
+    "reference": {
+      "text": "在2023年“中国寻根之旅”夏令营中，北京语言大学营的文化体验活动包括学习和运用中文，参加文化体验和文化参访活动，而湖北一营的文化体验活动则包括学习书法、剪纸、太极拳，欣赏民族舞蹈，体验京剧脸谱插画制作、茶道茶艺、面点制作，以及参观赤壁公园、古隆中、武当山等独具湖北特色的人文景观。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_049_news1.md",
+        "crud_holdout_049_news2.md",
+        "crud_holdout_049_news3.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_holdout_050",
+    "input": {
+      "text": "在佛罗里达州不同时间和地点发现的可卡因包裹事件中，涉及了哪些人物的发现和处理行动？"
+    },
+    "reference": {
+      "text": "在佛罗里达州发现的两起可卡因包裹事件中，第一起是坦帕市市长简·卡斯特和她的家人在钓鱼时发现了一个装有70磅可卡因的包裹，他们将包裹拖到船上并在有手机信号后通知了警察。第二起是一位渔民在伊斯拉莫拉达水域返回时发现了一个装有40磅可卡因的包裹，他在码头下发现了这个包裹并报告给了门罗县治安办公室。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "multi_hop",
+      "expected_can_answer": true,
+      "dataset_version": "2.0",
+      "source_documents": [
+        "crud_holdout_050_news1.md",
+        "crud_holdout_050_news2.md",
+        "crud_holdout_050_news3.md"
+      ],
+      "origin": "CRUD-RAG official subset"
+    }
+  },
+  {
+    "id": "crud_refusal_001",
+    "input": {
+      "text": "海兰GL40电脑一体机在 Cinebench R23 中的多核实测分数是多少？"
+    },
+    "reference": {
+      "text": "现有资料未提供Cinebench R23 多核实测分数，无法仅依据资料库确定。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "no_answer",
+      "expected_can_answer": false,
+      "dataset_version": "2.0",
+      "source_documents": [],
+      "origin": "custom_unanswerable",
+      "abstention_type": "missing_measurement",
+      "missing_information": "Cinebench R23 多核实测分数",
+      "refusal_reason": "相关报道仅给出处理器、显卡、内存等配置，没有实测跑分；不能从硬件型号推出确定跑分。"
+    }
+  },
+  {
+    "id": "crud_refusal_002",
+    "input": {
+      "text": "海兰GL41电脑一体机采用的处理器和显卡具体型号是什么？"
+    },
+    "reference": {
+      "text": "现有资料未提供海兰GL41的处理器和显卡型号，无法仅依据资料库确定。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "no_answer",
+      "expected_can_answer": false,
+      "dataset_version": "2.0",
+      "source_documents": [],
+      "origin": "custom_unanswerable",
+      "abstention_type": "entity_mismatch",
+      "missing_information": "海兰GL41的处理器和显卡型号",
+      "refusal_reason": "资料中的型号是 GL40，另提到拍摄样机 GX40，没有 GL41；不得将其他型号的配置套用。"
+    }
+  },
+  {
+    "id": "crud_refusal_003",
+    "input": {
+      "text": "防东铁路在2026年10月的全线日均客运量具体是多少人次？"
+    },
+    "reference": {
+      "text": "现有资料未提供防东铁路2026年10月的全线日均客运量，无法仅依据资料库确定。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "no_answer",
+      "expected_can_answer": false,
+      "dataset_version": "2.0",
+      "source_documents": [],
+      "origin": "custom_unanswerable",
+      "abstention_type": "missing_later_data",
+      "missing_information": "防东铁路2026年10月的全线日均客运量",
+      "refusal_reason": "配套报道是铺轨、建设与预计开通信息，不含2026年10月的实际运营统计。"
+    }
+  },
+  {
+    "id": "crud_refusal_004",
+    "input": {
+      "text": "武汉地铁19号线使用的CBTC信号系统由哪家公司供应，系统版本号是什么？"
+    },
+    "reference": {
+      "text": "现有资料未提供武汉地铁19号线CBTC信号系统的供应商和版本号，无法仅依据资料库确定。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "no_answer",
+      "expected_can_answer": false,
+      "dataset_version": "2.0",
+      "source_documents": [],
+      "origin": "custom_unanswerable",
+      "abstention_type": "missing_technical_detail",
+      "missing_information": "武汉地铁19号线CBTC信号系统的供应商和版本号",
+      "refusal_reason": "资料报道轨道贯通、线路走向和车站等建设信息，没有信号系统采购或版本资料。"
+    }
+  },
+  {
+    "id": "crud_refusal_005",
+    "input": {
+      "text": "长江源区查旦湿地最终估算得到的总碳储量是多少吨二氧化碳当量？"
+    },
+    "reference": {
+      "text": "现有资料未提供查旦湿地最终总碳储量数值，无法仅依据资料库确定。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "no_answer",
+      "expected_can_answer": false,
+      "dataset_version": "2.0",
+      "source_documents": [],
+      "origin": "custom_unanswerable",
+      "abstention_type": "unpublished_research_result",
+      "missing_information": "查旦湿地最终总碳储量数值",
+      "refusal_reason": "报道明确说样本将运到武汉检测，后续建立模型得出估算结果；已公布的是采样工作，不是最终碳储量。"
+    }
+  },
+  {
+    "id": "crud_refusal_006",
+    "input": {
+      "text": "悠家民宿在2026年10月的全国营业收入总额具体是多少万元？"
+    },
+    "reference": {
+      "text": "现有资料未提供悠家民宿2026年10月全国营业收入总额，无法仅依据资料库确定。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "no_answer",
+      "expected_can_answer": false,
+      "dataset_version": "2.0",
+      "source_documents": [],
+      "origin": "custom_unanswerable",
+      "abstention_type": "missing_later_data",
+      "missing_information": "悠家民宿2026年10月全国营业收入总额",
+      "refusal_reason": "资料只有托管服务、签约量、入住率和回头客比例，没有该月份的收入统计；入住率不能用于推算收入。"
+    }
+  },
+  {
+    "id": "crud_refusal_007",
+    "input": {
+      "text": "百度与软通动力合作的招聘大模型，在公开测试集上的准确率具体是多少，使用的是哪个测试集？"
+    },
+    "reference": {
+      "text": "现有资料未提供招聘大模型的公开测试集名称及准确率，无法仅依据资料库确定。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "no_answer",
+      "expected_can_answer": false,
+      "dataset_version": "2.0",
+      "source_documents": [],
+      "origin": "custom_unanswerable",
+      "abstention_type": "missing_quantitative_evaluation",
+      "missing_information": "招聘大模型的公开测试集名称及准确率",
+      "refusal_reason": "报道只说应用测试取得显著成效，未给出公开测试集或准确率；不能把宣传表述转换成量化成绩。"
+    }
+  },
+  {
+    "id": "crud_refusal_008",
+    "input": {
+      "text": "《氢能产业标准体系建设指南（2023版）》中的69个三级子体系，分别对应哪些GB/T或ISO标准编号？请给出完整对应表。"
+    },
+    "reference": {
+      "text": "现有资料未提供69个三级子体系与GB/T或ISO标准编号的完整对应表，无法仅依据资料库确定。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "no_answer",
+      "expected_can_answer": false,
+      "dataset_version": "2.0",
+      "source_documents": [],
+      "origin": "custom_unanswerable",
+      "abstention_type": "missing_standard_mapping",
+      "missing_information": "69个三级子体系与GB/T或ISO标准编号的完整对应表",
+      "refusal_reason": "报道只列出体系数量、五个子体系及标准建设方向，没有69项逐项名称和标准编号对应表。"
+    }
+  },
+  {
+    "id": "crud_refusal_009",
+    "input": {
+      "text": "2023年查旦湿地碳储量科考的每一个采样点，其GPS经纬度原始记录分别是多少？"
+    },
+    "reference": {
+      "text": "现有资料未提供每个采样点的GPS经纬度原始记录，无法仅依据资料库确定。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "no_answer",
+      "expected_can_answer": false,
+      "dataset_version": "2.0",
+      "source_documents": [],
+      "origin": "custom_unanswerable",
+      "abstention_type": "missing_raw_data",
+      "missing_information": "每个采样点的GPS经纬度原始记录",
+      "refusal_reason": "报道给出采样类型、样本数量和观测参数，没有采样点经纬度清单；不能用湿地整体位置代替逐点原始数据。"
+    }
+  },
+  {
+    "id": "crud_refusal_010",
+    "input": {
+      "text": "UDE2024国际半导体显示博览会的实际参展商数量是多少家？"
+    },
+    "reference": {
+      "text": "现有资料未提供UDE2024的实际参展商数量，无法仅依据资料库确定。"
+    },
+    "metadata": {
+      "language": "zh-CN",
+      "split": "held-out",
+      "category": "no_answer",
+      "expected_can_answer": false,
+      "dataset_version": "2.0",
+      "source_documents": [],
+      "origin": "custom_unanswerable",
+      "abstention_type": "entity_mismatch",
+      "missing_information": "UDE2024的实际参展商数量",
+      "refusal_reason": "库中报道的是UDE2023第四届展会，没有UDE2024统计；不能把2023年的近千家直接套用到2024年。"
+    }
+  }
+]

@@ -14,19 +14,20 @@ def chunk(cid, content, heading=None, source="guide.md"):
 
 def test_system_prompt_contains_grounding_rules():
     for rule in [
-        "must cite every factual claim",
-        "chunk number from the context below",
+        "必须为每一条事实性陈述",
+        "上下文中的片段编号",
         "[1]",
-        "does not contain the answer",
+        "上下文不包含答案",
         "[2]",
-        "cannot find this information",
+        "在提供的文档中找不到相关信息",
+        "默认使用简体中文回答",
     ]:
         assert rule.lower() in DEFAULT_SYSTEM_PROMPT.lower()
-    # Explicit "cite" mandate plus chunk-notation and I-don't-know handling
+    # 中文化后仍保留引用约束及无依据拒答规则。
     low = DEFAULT_SYSTEM_PROMPT.lower()
-    assert "cite" in low
-    assert "never write a factual sentence" in low
-    assert "not supported by the context" in low
+    assert "引用" in low
+    assert "禁止输出没有引用的事实性句子" in low
+    assert "禁止提出上下文无法支持的结论" in low
 
 
 def test_context_blocks_are_numbered_and_metadata_present():
@@ -55,20 +56,20 @@ def test_build_messages_includes_question_and_context():
 
     assert len(messages) == 2
     assert messages[0]["role"] == "system"
-    assert "grounded" in messages[0]["content"] or "context" in messages[0]["content"]
+    assert "上下文" in messages[0]["content"]
     assert messages[1]["role"] == "user"
     user = messages[1]["content"]
     assert 'id="1"' in user
     assert "How is the API authenticated?" in user
     assert "bearer token" in user
     # The answer format + question are in the user turn
-    assert "Answer format" in user
+    assert "回答格式" in user
 
 
 def test_empty_context_handled():
     prompt = GroundedPrompt()
     context = prompt.format_context([])
-    assert "No context provided" in context
+    assert "未提供上下文" in context
     messages = prompt.build_messages("any question?", [])
     assert len(messages) == 2
 

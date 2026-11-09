@@ -1,0 +1,25 @@
+{
+  "total": 50,
+  "answerable": 40,
+  "unanswerable": 10,
+  "document_files": 68,
+  "retained_questions_exactly_unchanged": true,
+  "retained_question_ids_preserved": true,
+  "removed_original_count": 10,
+  "corpus_exactly_matches_retained_questions": true,
+  "document_hashes_valid": true,
+  "custom_refusals_separate_from_official_records": true,
+  "refusal_related_documents_present": true,
+  "whole_corpus_literal_checks_reproduced": true,
+  "loader_compatible": true,
+  "full_dataset_policy_differences": [
+    "missing category: ambiguous"
+  ],
+  "model_api_called": false,
+  "superseded_dataset_removed": true,
+  "current_dataset_pointer_valid": true,
+  "platform_records_verified": 50,
+  "platform_dataset": "crud-rag-zh-holdout-50/v2",
+  "existing_retrieval_indexes_changed": false,
+  "regression_files_unchanged": 149
+}

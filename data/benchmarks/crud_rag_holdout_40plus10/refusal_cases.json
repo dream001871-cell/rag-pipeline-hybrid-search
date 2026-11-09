@@ -1,0 +1,244 @@
+{
+  "dataset_version": "2.0",
+  "corpus_scope": "corpus/",
+  "cases": [
+    {
+      "id": "crud_refusal_001",
+      "origin": "custom_unanswerable",
+      "type": "missing_measurement",
+      "related_answerable_id": "crud_holdout_018",
+      "related_documents": [
+        "crud_holdout_018_news1.md"
+      ],
+      "missing_information": "Cinebench R23 多核实测分数",
+      "abstention_reason": "相关报道仅给出处理器、显卡、内存等配置，没有实测跑分；不能从硬件型号推出确定跑分。",
+      "whole_corpus_literal_checks": {
+        "Cinebench": [],
+        "R23": [],
+        "跑分": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_002",
+      "origin": "custom_unanswerable",
+      "type": "entity_mismatch",
+      "related_answerable_id": "crud_holdout_018",
+      "related_documents": [
+        "crud_holdout_018_news1.md"
+      ],
+      "missing_information": "海兰GL41的处理器和显卡型号",
+      "abstention_reason": "资料中的型号是 GL40，另提到拍摄样机 GX40，没有 GL41；不得将其他型号的配置套用。",
+      "whole_corpus_literal_checks": {
+        "GL41": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_003",
+      "origin": "custom_unanswerable",
+      "type": "missing_later_data",
+      "related_answerable_id": "crud_holdout_044",
+      "related_documents": [
+        "crud_holdout_044_news1.md",
+        "crud_holdout_044_news2.md",
+        "crud_holdout_044_news3.md"
+      ],
+      "missing_information": "防东铁路2026年10月的全线日均客运量",
+      "abstention_reason": "配套报道是铺轨、建设与预计开通信息，不含2026年10月的实际运营统计。",
+      "whole_corpus_literal_checks": {
+        "2026": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_004",
+      "origin": "custom_unanswerable",
+      "type": "missing_technical_detail",
+      "related_answerable_id": "crud_holdout_010",
+      "related_documents": [
+        "crud_holdout_010_news1.md"
+      ],
+      "missing_information": "武汉地铁19号线CBTC信号系统的供应商和版本号",
+      "abstention_reason": "资料报道轨道贯通、线路走向和车站等建设信息，没有信号系统采购或版本资料。",
+      "whole_corpus_literal_checks": {
+        "CBTC": [],
+        "信号系统": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_005",
+      "origin": "custom_unanswerable",
+      "type": "unpublished_research_result",
+      "related_answerable_id": "crud_holdout_005",
+      "related_documents": [
+        "crud_holdout_005_news1.md"
+      ],
+      "missing_information": "查旦湿地最终总碳储量数值",
+      "abstention_reason": "报道明确说样本将运到武汉检测，后续建立模型得出估算结果；已公布的是采样工作，不是最终碳储量。",
+      "whole_corpus_literal_checks": {},
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_006",
+      "origin": "custom_unanswerable",
+      "type": "missing_later_data",
+      "related_answerable_id": "crud_holdout_002",
+      "related_documents": [
+        "crud_holdout_002_news1.md"
+      ],
+      "missing_information": "悠家民宿2026年10月全国营业收入总额",
+      "abstention_reason": "资料只有托管服务、签约量、入住率和回头客比例，没有该月份的收入统计；入住率不能用于推算收入。",
+      "whole_corpus_literal_checks": {
+        "2026": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_007",
+      "origin": "custom_unanswerable",
+      "type": "missing_quantitative_evaluation",
+      "related_answerable_id": "crud_holdout_041",
+      "related_documents": [
+        "crud_holdout_041_news1.md",
+        "crud_holdout_041_news2.md",
+        "crud_holdout_041_news3.md"
+      ],
+      "missing_information": "招聘大模型的公开测试集名称及准确率",
+      "abstention_reason": "报道只说应用测试取得显著成效，未给出公开测试集或准确率；不能把宣传表述转换成量化成绩。",
+      "whole_corpus_literal_checks": {
+        "准确率": [],
+        "测试集": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_008",
+      "origin": "custom_unanswerable",
+      "type": "missing_standard_mapping",
+      "related_answerable_id": "crud_holdout_009",
+      "related_documents": [
+        "crud_holdout_009_news1.md"
+      ],
+      "missing_information": "69个三级子体系与GB/T或ISO标准编号的完整对应表",
+      "abstention_reason": "报道只列出体系数量、五个子体系及标准建设方向，没有69项逐项名称和标准编号对应表。",
+      "whole_corpus_literal_checks": {
+        "GB/T": [],
+        "ISO": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_009",
+      "origin": "custom_unanswerable",
+      "type": "missing_raw_data",
+      "related_answerable_id": "crud_holdout_005",
+      "related_documents": [
+        "crud_holdout_005_news1.md"
+      ],
+      "missing_information": "每个采样点的GPS经纬度原始记录",
+      "abstention_reason": "报道给出采样类型、样本数量和观测参数，没有采样点经纬度清单；不能用湿地整体位置代替逐点原始数据。",
+      "whole_corpus_literal_checks": {
+        "GPS": [],
+        "经纬度": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_010",
+      "origin": "custom_unanswerable",
+      "type": "entity_mismatch",
+      "related_answerable_id": "crud_holdout_023",
+      "related_documents": [
+        "crud_holdout_023_news1.md"
+      ],
+      "missing_information": "UDE2024的实际参展商数量",
+      "abstention_reason": "库中报道的是UDE2023第四届展会，没有UDE2024统计；不能把2023年的近千家直接套用到2024年。",
+      "whole_corpus_literal_checks": {
+        "UDE2024": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    }
+  ]
+}

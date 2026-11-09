@@ -8,7 +8,7 @@ from .retrieval import RetrievalResult
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_CROSS_ENCODER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+DEFAULT_CROSS_ENCODER_MODEL = "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1"
 
 
 class Reranker(ABC):
@@ -111,7 +111,7 @@ class LexicalReranker(Reranker):
 
 
 class CrossEncoderReranker(Reranker):
-    """Uses a sentence-transformers CrossEncoder (e.g. ms-marco MiniLM).
+    """使用 sentence-transformers CrossEncoder，默认模型支持中文等多种语言。
 
     Requires `sentence_transformers` to be installed; the model is downloaded
     on first use. Query and document are passed together as a pair for cross
@@ -174,18 +174,20 @@ class LLMJudgeReranker(Reranker):
 
     def __init__(
         self,
-        model: str = "gpt-4o-mini",
+        model: Optional[str] = None,
         api_key: Optional[str] = None,
         max_chars: int = 1500,
     ):
         from .llm_client import ChatCompletionClient
-        self.model = model
         self.api_key = api_key
         self.max_chars = max_chars
         self._client = ChatCompletionClient(api_key=api_key)
+        self.model = model or (
+            self._client.default_model if self._client.provider == "deepseek" else "gpt-4o-mini"
+        )
         if not self._client.is_configured:
             raise RuntimeError(
-                "LLMJudgeReranker requires OPENROUTER_API_KEY or OPENAI_API_KEY"
+                "模型重排需要配置 DEEPSEEK_API_KEY、OPENROUTER_API_KEY 或 OPENAI_API_KEY"
             )
 
     def score(self, query: str, candidates: List[RetrievalResult]) -> List[RetrievalResult]:
@@ -225,8 +227,10 @@ class RerankerFactory:
     model download fails. A warning is logged on every fallback.
     """
 
-    def __init__(self, model_name: str = DEFAULT_CROSS_ENCODER_MODEL):
-        self.model_name = model_name
+    def __init__(self, model_name: Optional[str] = None):
+        # 显式参数优先，其次读取环境配置，未配置时使用支持中文的多语言模型。
+        configured_model = os.environ.get("RAG_RERANKER_MODEL", "").strip()
+        self.model_name = model_name or configured_model or DEFAULT_CROSS_ENCODER_MODEL
 
     def get_reranker(self, kind: str = "auto") -> Reranker:
         if kind == "lexical":
@@ -266,8 +270,8 @@ class RerankerFactory:
 
 def create_reranker(
     kind: str = "auto",
-    model_name: str = DEFAULT_CROSS_ENCODER_MODEL,
-    llm_model: str = "gpt-4o-mini",
+    model_name: Optional[str] = None,
+    llm_model: Optional[str] = None,
 ) -> Reranker:
     """Backward-compatible wrapper for :class:`RerankerFactory`.
 

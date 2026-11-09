@@ -1,0 +1,18 @@
+{
+  "platform_url": "http://127.0.0.1:8788",
+  "dataset_url": "http://127.0.0.1:8788/ui/#/datasets/crud-rag-zh-20/v1?project=default",
+  "reference": {
+    "project": "default",
+    "name": "crud-rag-zh-20",
+    "version": "v1",
+    "sha256": "dbe1283f4a98030c700fe806277b23e09e1f10e0471d13d8d2bc565f5b924395"
+  },
+  "state": "DATASET_VERSION_STATE_APPROVED",
+  "revision": "2",
+  "record_count": 20,
+  "split": "tuning",
+  "verified_at": "2026-11-05T14:54:59.482806+00:00",
+  "verification": "平台回读 20 条记录与本地题目、参考答案、来源元数据一致；目录可列出该版本。",
+  "evaluation_started": false,
+  "model_api_called": false
+}

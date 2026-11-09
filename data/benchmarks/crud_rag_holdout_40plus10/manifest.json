@@ -1,0 +1,1410 @@
+{
+  "dataset": {
+    "name": "rag基线",
+    "version": "2.0",
+    "language": "zh-CN",
+    "split": "held-out",
+    "created_on": "2026-11-06",
+    "evaluation_status": "not_run",
+    "source_repository": "https://github.com/IAAR-Shanghai/CRUD_RAG",
+    "source_url": "https://raw.githubusercontent.com/IAAR-Shanghai/CRUD_RAG/main/data/crud_split/split_merged.json",
+    "source_sha256": "b199fb281ac526c1c8da7364cad7ea22b7f6fe1d4167e511edbdda8ad3bd943a",
+    "question_count": 50,
+    "document_count": 68,
+    "official_task_counts": {
+      "questanswer_1doc": 20,
+      "questanswer_2docs": 12,
+      "questanswer_3docs": 8
+    },
+    "selection_seed": 2026110602,
+    "replacement_candidate_seed": 20261107,
+    "selection_method": "从原50题按官方任务比例固定抽取20/12/8题，保留原题号和题答；追加10道自拟证据不足题。未依据模型结果选题。",
+    "independence_scope": "排除旧 20 题、此前已审阅候选及其事件 ID、规范化事件描述；另检查新闻文本近重复。相对于已知项目调优记录独立，不保证模型预训练数据独立。",
+    "reference_answer_policy": "40道官方问答保持原文；10道自拟题的参考文本说明应拒答的缺失信息，不宣称客观世界不存在答案。",
+    "review_status": "已做助手来源复核及全库关键字辅助检查，尚未独立人工全量验收。",
+    "corpus_directory": "corpus",
+    "limitations": [
+      "40道可答题来自官方子集；10道拒答题是本地自拟，不是官方CRUD-RAG无答案题。",
+      "拒答标签仅适用于本版本固定语料库及禁止外部补充知识的评测约定，资料变更后需要重审。",
+      "可答与不可答题刻意共享话题，是近主题拒答测试，不代表50个独立事件。",
+      "本集合仍来自调优集已知事件之外的保留资料；不能保证模型预训练数据独立。",
+      "只使用配套小语料，结果不能与完整CRUD-RAG基准直接比较。"
+    ],
+    "parent_questions_sha256": "947990e0f561895572ea3ae92f3772263d76edb172bccff7054bf31f1c88bee2",
+    "answerable_count": 40,
+    "unanswerable_count": 10,
+    "evaluation_instruction": "所有题目只能依据本目录corpus内固定资料回答。证据不足时明确说明缺失信息，不调用外部检索，不依据常识补写未提供的具体事实。",
+    "supersedes_dataset_id": "crud_rag_holdout_50-v1"
+  },
+  "retained_original_ids": [
+    "crud_holdout_002",
+    "crud_holdout_003",
+    "crud_holdout_005",
+    "crud_holdout_006",
+    "crud_holdout_007",
+    "crud_holdout_008",
+    "crud_holdout_009",
+    "crud_holdout_010",
+    "crud_holdout_011",
+    "crud_holdout_012",
+    "crud_holdout_013",
+    "crud_holdout_014",
+    "crud_holdout_016",
+    "crud_holdout_017",
+    "crud_holdout_018",
+    "crud_holdout_019",
+    "crud_holdout_020",
+    "crud_holdout_022",
+    "crud_holdout_023",
+    "crud_holdout_025",
+    "crud_holdout_026",
+    "crud_holdout_028",
+    "crud_holdout_029",
+    "crud_holdout_030",
+    "crud_holdout_031",
+    "crud_holdout_032",
+    "crud_holdout_033",
+    "crud_holdout_034",
+    "crud_holdout_035",
+    "crud_holdout_036",
+    "crud_holdout_038",
+    "crud_holdout_040",
+    "crud_holdout_041",
+    "crud_holdout_042",
+    "crud_holdout_044",
+    "crud_holdout_045",
+    "crud_holdout_046",
+    "crud_holdout_047",
+    "crud_holdout_049",
+    "crud_holdout_050"
+  ],
+  "removed_original_ids": [
+    "crud_holdout_001",
+    "crud_holdout_004",
+    "crud_holdout_015",
+    "crud_holdout_021",
+    "crud_holdout_024",
+    "crud_holdout_027",
+    "crud_holdout_037",
+    "crud_holdout_039",
+    "crud_holdout_043",
+    "crud_holdout_048"
+  ],
+  "retained_official_sources": [
+    {
+      "id": "crud_holdout_002",
+      "source_group": "questanswer_1doc",
+      "source_index": 783,
+      "source_id": "64fa9b33b82641eb8ecc14ff",
+      "event": "08-16，悠家民宿以其独特设计吸引了大量投资者的关注，推出一站式全托管服务，成功签约了近20000多所民宿，入住率超过85%，回头客概率远超40%。",
+      "question_sha256": "1b84d207331781293fa329873d362050c63c1f9da67dc8e3bf1c92400edc5b6a",
+      "answer_sha256": "902bc16214b9c7b5449a2e98300e6448f7f974fe20b19c80cfbe6cfb6cb4676b",
+      "max_previous_text_overlap": 0.0029850746268656717,
+      "documents": [
+        {
+          "file": "crud_holdout_002_news1.md",
+          "sha256": "d0c2f5cb33d94fed3d8dc34fccfef3ecc0b82d7c428119c9b74b033443269621"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_003",
+      "source_group": "questanswer_1doc",
+      "source_index": 282,
+      "source_id": "64fa9b2db82641eb8ecbf567",
+      "event": "2023年7月22日，韩国首尔，由多个韩国民间团体组织的“停战70年朝鲜半岛和平行动”举行反战游行活动，反对韩美日加强军事合作，提倡和平共存、合作共赢的亚洲。",
+      "question_sha256": "e5747b3b62e82687c72e487d9623a8dfa8aa8c9a4f8112441220bf73794151c4",
+      "answer_sha256": "7eddd0c9c23febaa2fd7203928e4688ffbe44057e2d5014d671d4816bac2c607",
+      "max_previous_text_overlap": 0.013927576601671309,
+      "documents": [
+        {
+          "file": "crud_holdout_003_news1.md",
+          "sha256": "2ea00e11e95fbd186675b57f3e8492086944e5bf33cfdd22f49f84796c9ff609"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_005",
+      "source_group": "questanswer_1doc",
+      "source_index": 63,
+      "source_id": "64fa9b28b82641eb8ecbe78c",
+      "event": "2023年7月27日，来自长江科学院的科考队员在西宁长江源区查旦湿地开展湿地碳储量估算科研，这将填补长江源区湿地碳储量科研的空白。",
+      "question_sha256": "557dd8e046421971dfe3580ba5cb242b362c2070d9fb05794a630f609aaeef6d",
+      "answer_sha256": "26b5fdf6ab91a9b5efec717d46a600d8107cf94de47ee9417e08f7d76ef5fc04",
+      "max_previous_text_overlap": 0.012738853503184714,
+      "documents": [
+        {
+          "file": "crud_holdout_005_news1.md",
+          "sha256": "c21431acc07576dd71acc9ddcad12fcbb584572d4483e786fdf9d6508d881ec1"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_006",
+      "source_group": "questanswer_1doc",
+      "source_index": 52,
+      "source_id": "64fa9b28b82641eb8ecbe5f9",
+      "event": "2023年7月28日，安徽省网信办通报整治网络“自媒体”乱象情况，公布典型案例，共清理违规信息4万余条，依法处置违法违规“自媒体”账号2.7万余个，受理处置公众举报投诉6000余条，依法约谈违规“自媒体”平台账号责任人298人次。",
+      "question_sha256": "acc9dda4de71a3cafea8179e0e3804087069374ff23c0a709011125279fe1579",
+      "answer_sha256": "52e61d8d08e4ae9df7487adc261bf420db51c02a11e9dbe3a9aef1492e44342a",
+      "max_previous_text_overlap": 0.01694915254237288,
+      "documents": [
+        {
+          "file": "crud_holdout_006_news1.md",
+          "sha256": "40a36f089f4d48a8756746fee1deaec5ea62e462b3763d38dd8361f4aa80699e"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_007",
+      "source_group": "questanswer_1doc",
+      "source_index": 360,
+      "source_id": "64fa9b2eb82641eb8ecbfb39",
+      "event": "2023年7月28日，国家卫生健康委办公厅在北京印发通知，要求公共场所及女职工较多的用人单位、托育机构加强母婴设施建设，提高母婴设施配置率，以改善母乳喂养支持环境。",
+      "question_sha256": "d6df8c6d63aada0f146e2d1ebe694bd7554ecf87d661ae911524bd92452a8d8b",
+      "answer_sha256": "dcfc10609aa206f9fc95011a79b67fdf90c51d29652b396eefce2d19bdcf0706",
+      "max_previous_text_overlap": 0.02046783625730994,
+      "documents": [
+        {
+          "file": "crud_holdout_007_news1.md",
+          "sha256": "67ce459cfaff583eeb18b9b3630b9de62eab0ea873741d94fe4094faea3f4fa6"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_008",
+      "source_group": "questanswer_1doc",
+      "source_index": 206,
+      "source_id": "64fa9b2cb82641eb8ecbf052",
+      "event": "2023年7月26日，美国白宫发言人让-皮埃尔表示，美国不支持乌克兰对俄罗斯境内发动袭击。",
+      "question_sha256": "59f4ca351786e3fba4a8dd2e135659ed52fe1a64ac09a75d4b61cdcf787c313e",
+      "answer_sha256": "81065df4fd0616e328692f30734c88ff8b2e315d1266946bd50576a18939a58a",
+      "max_previous_text_overlap": 0.01524390243902439,
+      "documents": [
+        {
+          "file": "crud_holdout_008_news1.md",
+          "sha256": "9b24b30122cb058c428ff5326d461d7091a80cc9c6a3234941bb07104b968365"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_009",
+      "source_group": "questanswer_1doc",
+      "source_index": 757,
+      "source_id": "64fa9b33b82641eb8ecc13d4",
+      "event": "8月8日，国家市场监督管理总局及其他部门联合印发《氢能产业标准体系建设指南（2023版）》。",
+      "question_sha256": "eff17f98c6f8df408dccc0c854091da758a352e7cac95827cb33a385b3edd845",
+      "answer_sha256": "e32ca1ae4f3c0d783a2847bee63455b0b2a6efe6e9a3b61e6a5a798024d06fe6",
+      "max_previous_text_overlap": 0.02,
+      "documents": [
+        {
+          "file": "crud_holdout_009_news1.md",
+          "sha256": "ed8418c8a20f2b867a0c8bfd42576e9ceb37744e8ffe52a53ea2d9ed213151a8"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_010",
+      "source_group": "questanswer_1doc",
+      "source_index": 164,
+      "source_id": "64fa9b2cb82641eb8ecbee88",
+      "event": "2023年7月28日，武汉地铁19号线全线轨道铺设完成。",
+      "question_sha256": "78e8f2d7c09e04ef0a98c15c1f4deeb629a7bc9f2bd33ec7b4f0a37a1c95bc30",
+      "answer_sha256": "17eb9ce4135dc74c8dfdd6e01c8307ac46dfd518a6c92f1cf083a2b5847cadee",
+      "max_previous_text_overlap": 0.02046783625730994,
+      "documents": [
+        {
+          "file": "crud_holdout_010_news1.md",
+          "sha256": "cca5fff10c59b39e799cc516db0daa597ec8f0994fd1b493ae9b44cfd27773a2"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_011",
+      "source_group": "questanswer_1doc",
+      "source_index": 215,
+      "source_id": "64fa9b2cb82641eb8ecbf0b7",
+      "event": "2023年8月7日，美国和伊朗在霍尔木兹海峡增强战力，伊朗伊斯兰革命卫队为其海军配备了一批新型无人机和导弹等武器装备，美国可能将向途经霍尔木兹海峡的商船派遣武装船员和海军陆战队员。",
+      "question_sha256": "90d6261a5ee90810c462dcbfb15b3bf251fbfd8d5e197ea736ce99e3884a6f66",
+      "answer_sha256": "fdb3cf1d49bca47cae5780dc18085a534dcdb2a2e56cfacb9ea6dca684a4a596",
+      "max_previous_text_overlap": 0.011940298507462687,
+      "documents": [
+        {
+          "file": "crud_holdout_011_news1.md",
+          "sha256": "e038741fca922e349344afac5315f59d950cfd0bac3160bdd24e1f29acefb5bf"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_012",
+      "source_group": "questanswer_1doc",
+      "source_index": 768,
+      "source_id": "64fa9b33b82641eb8ecc1499",
+      "event": "2021年8月10日，第三方机构朝阳永续发布了今年前7个月国内证券私募行业业绩监测月报，显示百亿级证券私募业绩出现剧烈分化，业绩差距高达31.48个百分点。",
+      "question_sha256": "295162b309e75f910e8f6d04e8265bf4c680035dc22fdd20e38ca387e6fef26c",
+      "answer_sha256": "12b165e0fa4a3f12bdb1d911833f186752ba187a5476bbc52b76fe6054bc6da5",
+      "max_previous_text_overlap": 0.005405405405405406,
+      "documents": [
+        {
+          "file": "crud_holdout_012_news1.md",
+          "sha256": "805a311a7ea9744353e30a833faf68c16258c0a5d0b51125c969fef2f20123df"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_013",
+      "source_group": "questanswer_1doc",
+      "source_index": 230,
+      "source_id": "64fa9b2cb82641eb8ecbf203",
+      "event": "2021年7月24日，韩国蔚山市一家残疾人福利设施报告收到可疑国际邮包，部分打开包裹的人出现身体不适。",
+      "question_sha256": "649bea5f8a5109a818848490e9c4de2fee846b66caafee708876ab6045478583",
+      "answer_sha256": "fd93af6f3d8ab393de742688c43b27039b75813f897f4b6891a6579eec11d7e7",
+      "max_previous_text_overlap": 0.26912181303116145,
+      "documents": [
+        {
+          "file": "crud_holdout_013_news1.md",
+          "sha256": "ed9df885f31ab639e3fc7df840a53814f8bffa9f663282524cc4680bc73d0e3d"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_014",
+      "source_group": "questanswer_1doc",
+      "source_index": 176,
+      "source_id": "64fa9b2cb82641eb8ecbef1d",
+      "event": "2023年7月28日，交通运输部等五部门联合发布表扬2023年春运成绩突出的集体和个人名单，其中湖北省5个集体和6名个人榜上有名。",
+      "question_sha256": "ea7794a011d33582fccdf5220331840e048419f9724b2e55b626e242efb8dcfa",
+      "answer_sha256": "66f423f3ed92d51785b3139b4514e20ab8bc31d639642e0234fc9b07f6c5d405",
+      "max_previous_text_overlap": 0.015105740181268883,
+      "documents": [
+        {
+          "file": "crud_holdout_014_news1.md",
+          "sha256": "91cc1042c521562fa82de0b95eedd707f4e30b414128ae4aa043d1be66dc3060"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_016",
+      "source_group": "questanswer_1doc",
+      "source_index": 58,
+      "source_id": "64fa9b28b82641eb8ecbe6c5",
+      "event": "2023年7月20日，习近平总书记在北京给“科学与中国”院士专家代表回信，呼吁更多科技工作者参与科普事业，以提高全民科学素质。",
+      "question_sha256": "d1eb68b01d021bab431e8a95ab0144c1991dc413ad533ed86857a4efaf28a876",
+      "answer_sha256": "71e9a162cd58b22b64a5d98a70ad16f9ede8a9e2167c84149a54c93f0ea5132c",
+      "max_previous_text_overlap": 0.05555555555555555,
+      "documents": [
+        {
+          "file": "crud_holdout_016_news1.md",
+          "sha256": "a31819d8be1138a8f4ead557564b5b33857586761f42e665037d8f15ce5b1acf"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_017",
+      "source_group": "questanswer_1doc",
+      "source_index": 357,
+      "source_id": "64fa9b2eb82641eb8ecbfb0c",
+      "event": "2023年7月，大连市大连金普新区北方国家版权交易中心商标品牌指导站正式启动线上预审服务，为市场经营主体提供商标注册、保护和运用的服务。",
+      "question_sha256": "a86a78a7ad4bd9593987fc93a84a8ce574d45880a66a076b8169fd73d3752b6c",
+      "answer_sha256": "8e780afc430c2249a46ed744f6865a5b624d8d1ccb53eb749713111501ca0922",
+      "max_previous_text_overlap": 0.01834862385321101,
+      "documents": [
+        {
+          "file": "crud_holdout_017_news1.md",
+          "sha256": "3e3d6dc6f4d64135140b39938939e7fc0170a454ca0d3db6afd4ff12b13538b3"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_018",
+      "source_group": "questanswer_1doc",
+      "source_index": 670,
+      "source_id": "64fa9b32b82641eb8ecc0db0",
+      "event": "07-25 11:43，海兰新上市的海兰GL40电脑一体机给出了数字人直播的全新解决方案，让直播卷出新高度。",
+      "question_sha256": "b7e222a68c0c1512a2f0179d9f826615a07246e2e36651c87012cc5917bd4809",
+      "answer_sha256": "e35204e8ba635e9bd1e57e12cdfca13919bd49ee9ff82c7bebe93a4f4ff6c4f6",
+      "max_previous_text_overlap": 0.0022471910112359553,
+      "documents": [
+        {
+          "file": "crud_holdout_018_news1.md",
+          "sha256": "7d031960df93151ce9014ee6ce792482549ac109d711d42b3b032966da225256"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_019",
+      "source_group": "questanswer_1doc",
+      "source_index": 184,
+      "source_id": "64fa9b2cb82641eb8ecbef70",
+      "event": "2023年8月2日至3日，湖北宜昌市最美退役军人吴林宝带领的救援队、宜昌市“最美退役军人”王博带领的老兵志愿服务队、宜昌市点军区华海救援队等在河北省涿州市刁窝村进行救援，转移了被困的村民。",
+      "question_sha256": "0fca9b33733905459d9b3ba2595b03ac702839bd8c31441bdcf7e885bb6fb6ff",
+      "answer_sha256": "4eca15de84c9622aa06e3877cbb7a7963c7efb728c3488bf48a706c42d3a686c",
+      "max_previous_text_overlap": 0.011142061281337047,
+      "documents": [
+        {
+          "file": "crud_holdout_019_news1.md",
+          "sha256": "8d9ccf1cb5e3b97f05eb278594c36aad47971e91fd6c49e409a36a8b81ff8c11"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_020",
+      "source_group": "questanswer_1doc",
+      "source_index": 170,
+      "source_id": "64fa9b2cb82641eb8ecbeee3",
+      "event": "2023年8月1日，根据欧盟委员会推出的5G观察报告，早期排除中国5G供应商的欧盟国家在5G网络人口覆盖率上大幅度落后，其中瑞典的5G网络人口覆盖率仅略高于20%，位列所有27个国家的最后。",
+      "question_sha256": "a1a57250c64debc536e2699c1faff4963f5fd9663a06602814d767e12d4bc6b4",
+      "answer_sha256": "abf0f7e8a1fbcbb5924a56f49aad86bb39dbb962b47cb37c941f72a8086aeed3",
+      "max_previous_text_overlap": 0.009708737864077669,
+      "documents": [
+        {
+          "file": "crud_holdout_020_news1.md",
+          "sha256": "8aea6ae4c9f847cc870b93e33897b340788f8c2c2a715889dcd68263360d5620"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_022",
+      "source_group": "questanswer_1doc",
+      "source_index": 683,
+      "source_id": "64fa9b32b82641eb8ecc0e2b",
+      "event": "2023年7月27日，中国人民银行上海总部发布会公布，上半年上海市本外币贷款余额增长7.7%，人民币贷款余额增长9.6%，企业贷款加权平均利率为3.60%，下降15个基点。",
+      "question_sha256": "7148cf180b60462346c5d5cb39aff12c8aabac6f5f0dffcacf050d1291e5bd9c",
+      "answer_sha256": "2f2f831a6382b166a148be3f43fa663c9fcf5437365a266b11994af2ed56805c",
+      "max_previous_text_overlap": 0.0219435736677116,
+      "documents": [
+        {
+          "file": "crud_holdout_022_news1.md",
+          "sha256": "c1a918b86a785cd9ddc91f0c323eb93c3637e107604194847ebc7c16f4ea5a5b"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_023",
+      "source_group": "questanswer_1doc",
+      "source_index": 662,
+      "source_id": "64fa9b32b82641eb8ecc0d85",
+      "event": "日前，UDE2023第四届国际半导体显示博览会在深圳召开，聚焦新型显示技术，吸引了来自89个国家及地区的3万余名观众。",
+      "question_sha256": "17551289fb510c17c7d5093acc42becf7c10d2deb2e42af88622ae00694d2903",
+      "answer_sha256": "83d9131a82f3e4049f805bceb4ef2b31b53144cd372e9d2c95d2f014500ce964",
+      "max_previous_text_overlap": 0.0030211480362537764,
+      "documents": [
+        {
+          "file": "crud_holdout_023_news1.md",
+          "sha256": "bfe4e06c6765c5fd0c7779e6397f981d329ca680fbc0ff8666d63b5d8bd75155"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_025",
+      "source_group": "questanswer_1doc",
+      "source_index": 389,
+      "source_id": "64fa9b2eb82641eb8ecbfc88",
+      "event": "2023年8月18日，中国商洛市商州区税务局提升纳税服务质效，打造“五心”服务品牌，改善税收营商环境。",
+      "question_sha256": "ca8afc1bc9e4442ebb9ca70aabbc9a085e2ad5c808d3ce5c74fa1f1072742c6f",
+      "answer_sha256": "db44c3bd16dd3aa9f9047e10fbde7f55086d2d929d24bca97db5e58c2b747f8f",
+      "max_previous_text_overlap": 0.012658227848101266,
+      "documents": [
+        {
+          "file": "crud_holdout_025_news1.md",
+          "sha256": "11833edfbba584d3ce9f00cdb1206bd1fdf33a146eaeb7badbd54b4578e7ebfc"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_026",
+      "source_group": "questanswer_2docs",
+      "source_index": 440,
+      "source_id": "64fa9b2fb82641eb8ecc0097",
+      "event": "2023年7月25日，由英国国家海洋学中心Erik Simon-Lledó和合作者共同进行的研究在《自然-生态与演化》上发表，他们发现在海面下超过4千米的深海中存在一个特殊过渡区，该区域将深海生物体按照不同体型隔开。",
+      "question_sha256": "636eb98a29b528e41c746005b46be3eb2dda8620cbe7cb4f1cdf4418f9cc2808",
+      "answer_sha256": "6dc7d46884bea9643b69f5c71a4aa9f0302ba3ae3e49185c22925538a528ac2e",
+      "max_previous_text_overlap": 0.045307443365695796,
+      "documents": [
+        {
+          "file": "crud_holdout_026_news1.md",
+          "sha256": "6ec8b0f2e9385b084d99a06a14bb52fe16cb33500bf654ac6cac51a709672477"
+        },
+        {
+          "file": "crud_holdout_026_news2.md",
+          "sha256": "90bb7364b7c4072694935e8c77badd971b349060943abcc2a6829ae043f3180e"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_028",
+      "source_group": "questanswer_2docs",
+      "source_index": 59,
+      "source_id": "64fa9b28b82641eb8ecbe751",
+      "event": "2023年7月25日，新兴市场国家和发展中国家（EMDC）发展合作北京论坛在北京举行，参与者包括政府部门、行业协会、智库、媒体、企业等300余位中外嘉宾。",
+      "question_sha256": "ba3f300c6532228e1dc5a8081eabf5654528c6362048d63209314de686a02a62",
+      "answer_sha256": "eb0bfc64089d076c62b81249f1925a68a353ac15b8dff4d87b3590f9484c6273",
+      "max_previous_text_overlap": 0.010830324909747292,
+      "documents": [
+        {
+          "file": "crud_holdout_028_news1.md",
+          "sha256": "bf46b86da5bd43264fee393f5b8297e5974bf185195dd2106844ed9e1c1b806a"
+        },
+        {
+          "file": "crud_holdout_028_news2.md",
+          "sha256": "94f734e5bdbff670712376a7960709fa7a8295c3381e90df2c199052ad8e2449"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_029",
+      "source_group": "questanswer_2docs",
+      "source_index": 181,
+      "source_id": "64fa9b2cb82641eb8ecbef61",
+      "event": "2023年7月31日，武汉关区在《区域全面经济伙伴关系协定》(RCEP)实施后，累计进出口享惠货值达40.55亿元人民币。",
+      "question_sha256": "e903a0d5c291be5f3b5ea4208d640bb9e64c54983cfa1434e8f05f6ade9f54b2",
+      "answer_sha256": "04904d34365c0dcb0d29b82e42cc4df88e0f82c5b4a1811e9d0fd6569729aac1",
+      "max_previous_text_overlap": 0.05177993527508091,
+      "documents": [
+        {
+          "file": "crud_holdout_029_news1.md",
+          "sha256": "b3da9e9c6609f18ab8b43de23ff925151c04b3ef2b9db8151a2b4f2ced24d3fb"
+        },
+        {
+          "file": "crud_holdout_029_news2.md",
+          "sha256": "c19ca3f58db12a9887654012427d2637d588ab08aca7c707e5499352e5b19a4e"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_030",
+      "source_group": "questanswer_2docs",
+      "source_index": 197,
+      "source_id": "64fa9b2cb82641eb8ecbf028",
+      "event": "2023年8月10日，首都医科大学附属北京天坛医院神经外科专家团队在西藏拉萨为西藏自治区第二人民医院推进神经外科学科建设。",
+      "question_sha256": "a422380cb0a1c68d983b201f7d4ce63e7d86560a00dc4b785073e464785d282e",
+      "answer_sha256": "d4f2342912b7ccf988ed0712ae9cfeeb8566d2d1bf5dfbf8a1333ae103030470",
+      "max_previous_text_overlap": 0.007067137809187279,
+      "documents": [
+        {
+          "file": "crud_holdout_030_news1.md",
+          "sha256": "6402faad29ae0353f8cd12a7057a30746ef65fbcffca6fb8d557a5c476d688da"
+        },
+        {
+          "file": "crud_holdout_030_news2.md",
+          "sha256": "f640459f09674a61afcc9938301b8d22302c5ca60fdfcc78065b517fe311af29"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_031",
+      "source_group": "questanswer_2docs",
+      "source_index": 474,
+      "source_id": "64fa9b2fb82641eb8ecc0223",
+      "event": "2023年7月31日，欧盟在布鲁塞尔表态支持西非国家经济共同体(西共体)对尼日尔政变采取的所有措施，要求尼日尔政变军人立即无条件恢复总统巴祖姆的职权。",
+      "question_sha256": "44bae513de8717a45add6de0cffdf990d32b0e6177126065f0d7914f2e7334be",
+      "answer_sha256": "4ef3cdd5ee0c28a5b7e84804861d6159bdd44127db1ac93910f7f236976ec5a8",
+      "max_previous_text_overlap": 0.050955414012738856,
+      "documents": [
+        {
+          "file": "crud_holdout_031_news1.md",
+          "sha256": "453eece3cbaeec780a5ce6e54c38ea377491328f2a9f410e9616c4ec6a3823ce"
+        },
+        {
+          "file": "crud_holdout_031_news2.md",
+          "sha256": "d82d2277e32da8f6827d514ee8f1f5a3b2c5da2b92c56c4a85bbb18d0cbbcd2f"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_032",
+      "source_group": "questanswer_2docs",
+      "source_index": 52,
+      "source_id": "64fa9b28b82641eb8ecbe5fa",
+      "event": "2023年7月29日，来自北京大学、复旦大学、浙江大学、中国科学技术大学、中央财经大学、湖南大学等6所知名高校的47名学生在合肥参加青年学子来皖“就业创业实践”活动，其中10名高校学子被聘为“智汇合肥”青年志愿推介官。",
+      "question_sha256": "00a387b0fed0ca09ef18e5598ff08d7888591a2b7e6e45dabb9e441b020a3171",
+      "answer_sha256": "e6bce253df3c670b144f558be4bc5aad21df8b05cd79dfaa24ddc387199854a2",
+      "max_previous_text_overlap": 0.012195121951219513,
+      "documents": [
+        {
+          "file": "crud_holdout_032_news1.md",
+          "sha256": "ff2b5759683a6e78f58f50626927919d658f3180075d2a7682936210015d5afe"
+        },
+        {
+          "file": "crud_holdout_032_news2.md",
+          "sha256": "7ee2ff52dd0c326ebc730aba440858c8add66b46b7f74479b289426f2e1222c5"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_033",
+      "source_group": "questanswer_2docs",
+      "source_index": 733,
+      "source_id": "64fa9b33b82641eb8ecc1266",
+      "event": "2023年8月8日，美国佛罗里达州内普丘恩比奇一家超市售出的“超级百万”彩票中得15.8亿美元头奖，这是该彩票历史上最高头奖。",
+      "question_sha256": "be7e6a3225dbbdc35ddb4f256f6830ff8e16dbddf898a3a92ef09568217d081f",
+      "answer_sha256": "880e8127d1f09fb8d6fea6d4b00bf736c46af12c27c0a6ba842ef4d32c9a57e3",
+      "max_previous_text_overlap": 0.009230769230769232,
+      "documents": [
+        {
+          "file": "crud_holdout_033_news1.md",
+          "sha256": "da0a7a903fa76e2a3c8aa615fec0f5e0b9247166f081fef772f4cbb53afd494b"
+        },
+        {
+          "file": "crud_holdout_033_news2.md",
+          "sha256": "2586bf66a7c12878902515942d683619275a8c1d86c24fef4dc8a0bea4c8eb83"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_034",
+      "source_group": "questanswer_2docs",
+      "source_index": 448,
+      "source_id": "64fa9b2fb82641eb8ecc00e8",
+      "event": "2023年7月26日，美国教育部民权办公室对哈佛大学在招生过程中是否存在种族歧视进行调查，尤其关注的是哈佛是否偏袒与捐赠人、校友有关系的申请人。",
+      "question_sha256": "6da8d592c5bffa74f0ba1ec6958bae2e300165154d548efe7a5f8dccfd76fa6b",
+      "answer_sha256": "5ea0c6f538a6f8cb46bd0db73e33d2e5f07187c15bec245c20b2305f1f7a7d2b",
+      "max_previous_text_overlap": 0.008152173913043478,
+      "documents": [
+        {
+          "file": "crud_holdout_034_news1.md",
+          "sha256": "3631a9f2014cc0dc19adf9e634b4d4b3c646d2f915dea7a39916e53d26fbd246"
+        },
+        {
+          "file": "crud_holdout_034_news2.md",
+          "sha256": "d95d9883538b795e2271241a625eae47c900944af4d70333eade4fcf0f87ee56"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_035",
+      "source_group": "questanswer_2docs",
+      "source_index": 452,
+      "source_id": "64fa9b2fb82641eb8ecc0107",
+      "event": "2023年7月26日，土耳其总统埃尔多安在安卡拉会见中国中央外办主任王毅，双方就土中关系及合作事宜进行了深入交谈。",
+      "question_sha256": "f91f59f72f490a0629d30754cad1dea78f5abc3874994ca4820650818a6393e4",
+      "answer_sha256": "599d314ffaa89916374dc076b41acb13c193db49e4300bf4d918dc66670490c0",
+      "max_previous_text_overlap": 0.08059701492537313,
+      "documents": [
+        {
+          "file": "crud_holdout_035_news1.md",
+          "sha256": "35234893655aed7cd83046c801ef8d516987f7024680cc4a2fd2bb0901ef1df8"
+        },
+        {
+          "file": "crud_holdout_035_news2.md",
+          "sha256": "5e82a0cb0c5b1b99ea87205fdc281bba1eff6cd4e3a923a457b14218c0fc0565"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_036",
+      "source_group": "questanswer_2docs",
+      "source_index": 397,
+      "source_id": "64fa9b2eb82641eb8ecbfdcf",
+      "event": "2023年7月30日，来自日本、蒙古、俄罗斯、韩国、泰国以及中国的师生在呼和浩特内蒙古展览馆体验剪纸艺术。",
+      "question_sha256": "12fb63bba79e5b4b8442269e869051b968a234ef52454b81cf5af33f630270d8",
+      "answer_sha256": "5016ef0c6aa8216d0a3e39197e20bd96375360f58e15e3b87f0fc35acfe9a685",
+      "max_previous_text_overlap": 0.02242152466367713,
+      "documents": [
+        {
+          "file": "crud_holdout_036_news1.md",
+          "sha256": "da255ed93ac98971b01cdb084f863104a84c09b44b7c9a1e4963ad7ba860f619"
+        },
+        {
+          "file": "crud_holdout_036_news2.md",
+          "sha256": "00a1bd68b03af2c2145411b7d0c2441b184e6e2b5a1725f37df9b1f67ee27132"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_038",
+      "source_group": "questanswer_2docs",
+      "source_index": 246,
+      "source_id": "64fa9b2cb82641eb8ecbf318",
+      "event": "2021年8月1日，国际评级机构惠誉将美国长期外币发行人违约评级从AAA下调至AA+。",
+      "question_sha256": "8a5bd7f742a791954299c855b7a2af2282f6f6f910f513a582750793b4f93c30",
+      "answer_sha256": "06fd5ccdf123ced8460f551563506a9a1f0602e83980dd7ba4000c9417457e2c",
+      "max_previous_text_overlap": 0.019417475728155338,
+      "documents": [
+        {
+          "file": "crud_holdout_038_news1.md",
+          "sha256": "9b0e47c993a98c3fb66192f2eff457eb34b1ff7e5d1067a5844f2c0ecf554930"
+        },
+        {
+          "file": "crud_holdout_038_news2.md",
+          "sha256": "60f843f077bdb3a3aa96dae7028a6923c08faf682be1fd7e837f8d90e44cad91"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_040",
+      "source_group": "questanswer_2docs",
+      "source_index": 170,
+      "source_id": "64fa9b2cb82641eb8ecbeee8",
+      "event": "2023年8月1日，襄阳境内高速公路实行打折收费，通行相关区间的6类货车（总轴数6轴，不含专项作业车）可享受约5折的优惠，实施期暂定1年。同时，2023年8月7日至2023年8月16日，福银高速襄阳北收费站进口及出口超宽车道进行称台改造施工，期间超宽车道将封闭。",
+      "question_sha256": "fc83bb32bed70499d87a6a24143d224091ec095403132a79fea2f0ab5999d489",
+      "answer_sha256": "3de4a932b190e79120e5b35fbddb75a21878e7834f706498a019a3853c7ff58c",
+      "max_previous_text_overlap": 0.02109704641350211,
+      "documents": [
+        {
+          "file": "crud_holdout_040_news1.md",
+          "sha256": "695448d8803af3a80e97f38acaddfc4e524105030cb922d306ba9093617a6c7c"
+        },
+        {
+          "file": "crud_holdout_040_news2.md",
+          "sha256": "2837dcfab3ee1a5d7729287aeb719c630523348620412df5646da0e25196cd75"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_041",
+      "source_group": "questanswer_3docs",
+      "source_index": 653,
+      "source_id": "64fa9b32b82641eb8ecc0d1f",
+      "event": "2021年7月18日，北京，软通动力与百度举行战略合作签约仪式，双方将基于百度智能云文心千帆大模型平台进行深度合作，推动大模型技术创新和行业应用落地。",
+      "question_sha256": "8ffec05f8d94e1ec2f85009d8d581b269530505ef779b2cf1ffbffd1dfc7b3da",
+      "answer_sha256": "3b4745a224bb6cf5f9810614e0d5d123cf84ace17a97cff8defbd50f74614cff",
+      "max_previous_text_overlap": 0.005434782608695652,
+      "documents": [
+        {
+          "file": "crud_holdout_041_news1.md",
+          "sha256": "497cab74f536d9ba586f7bbc9bfd1e9e3fb8d082bec6a0d931b11cbe1e4bd01b"
+        },
+        {
+          "file": "crud_holdout_041_news2.md",
+          "sha256": "70476a0d956171fb785a4e7ac0c86805a158196999095238c6334219e61b53e0"
+        },
+        {
+          "file": "crud_holdout_041_news3.md",
+          "sha256": "620846d3a6dccc0a15bdbc622f7ec4a1942f60c6ef264f9999035ee8f58bb8ed"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_042",
+      "source_group": "questanswer_3docs",
+      "source_index": 353,
+      "source_id": "64fa9b2eb82641eb8ecbfabd",
+      "event": "2023年08月17日，中俄青年经贸发展大会在黑龙江省黑河市结束，由中华全国青年联合会指导、中国国际青年交流中心主办，共青团中央书记处书记、全国青联负责人夏帕克出席。",
+      "question_sha256": "18eac5edffdfdd25ca6ce62a7788b51ef1f6e3a4c7fad4ca910c70072e5f4640",
+      "answer_sha256": "2b52ad4fcf6ae62cfa1df5d87f5cabbc1b41432d76f5bdc1f1eecc6a951b0a3c",
+      "max_previous_text_overlap": 0.00946372239747634,
+      "documents": [
+        {
+          "file": "crud_holdout_042_news1.md",
+          "sha256": "7748224f8563cc5462bc3bf5bb167dfb70c362b6be517b36efb3a424420b7226"
+        },
+        {
+          "file": "crud_holdout_042_news2.md",
+          "sha256": "9919f73c6fb88adbfa41744b69c7169cd05b13d1683a4bd5127ccc1c45031264"
+        },
+        {
+          "file": "crud_holdout_042_news3.md",
+          "sha256": "b43c0998783e8dd6fc47f4ce01f5014216acfe7cee9099249f152cee2c106cc5"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_044",
+      "source_group": "questanswer_3docs",
+      "source_index": 253,
+      "source_id": "64fa9b2db82641eb8ecbf39c",
+      "event": "2023年8月8日，中国铁路南宁局集团有限公司在广西防城港市境内的防东铁路开始铺轨，这是我国首条直通中越边境的高铁。",
+      "question_sha256": "5a5138d60072f4d0641fcc696ff2311e984a191104d87674f7ff54a8dabae925",
+      "answer_sha256": "8bb2c2e8897dc0f5306e37c07c9ba2927c51393a6e17c7a0ed5d186351afeed6",
+      "max_previous_text_overlap": 0.018292682926829267,
+      "documents": [
+        {
+          "file": "crud_holdout_044_news1.md",
+          "sha256": "d4d752dab315345b9fe5be3af627a8a2445e76fc9fa3662857f5181c533f7927"
+        },
+        {
+          "file": "crud_holdout_044_news2.md",
+          "sha256": "f6dccff62161c18ae0281624008622f5ee274ec42fd0232a70acf036a3bb59b3"
+        },
+        {
+          "file": "crud_holdout_044_news3.md",
+          "sha256": "ce75ad1c90b1e73994c857f08f3a764bea523bcfa2205a08ba5ea486b5024a6d"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_045",
+      "source_group": "questanswer_3docs",
+      "source_index": 119,
+      "source_id": "64fa9b2bb82641eb8ecbebf2",
+      "event": "2023年8月10日，国家发改委宣布自8月9日24时起，国内汽、柴油价格每吨分别提高240元、230元，北京92号汽油价格破8元。",
+      "question_sha256": "ce680d150ad79487cecf6024625add99855bad4a33c56cc906a6af51cc3355b0",
+      "answer_sha256": "d61b7528edadcc593511339f03f9e3044e120148a34fe5664f4ae0b390c582b9",
+      "max_previous_text_overlap": 0.03313253012048193,
+      "documents": [
+        {
+          "file": "crud_holdout_045_news1.md",
+          "sha256": "34054f2e32738e499727792f9977ddcf2f5e6ab9a881807401858029dbef922d"
+        },
+        {
+          "file": "crud_holdout_045_news2.md",
+          "sha256": "b0808fc48afff14ecd2126bb38a8edbadca691fff08beaa7d37c4fe0b409d225"
+        },
+        {
+          "file": "crud_holdout_045_news3.md",
+          "sha256": "2b86f273e15844697e9e49569efb378e877776187c479f611dcde808d61278fd"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_046",
+      "source_group": "questanswer_3docs",
+      "source_index": 224,
+      "source_id": "64fa9b2cb82641eb8ecbf15a",
+      "event": "近日，北约在立陶宛举行的维尔纽斯峰会上，日本、韩国、澳大利亚、新西兰四个亚太地区国家领导人再次获邀参会，北约加速东进亚太的动向引发关注。",
+      "question_sha256": "d57a7cd1adb87ebde07d044ea6dec905646993e4e0861f07df386008d953199f",
+      "answer_sha256": "674d47082a9a17891b5118baef2bf4542cba0282b4b7e8ca6af3c5d4a2321aff",
+      "max_previous_text_overlap": 0.012738853503184714,
+      "documents": [
+        {
+          "file": "crud_holdout_046_news1.md",
+          "sha256": "865ec6eb1cabe259f5e45e9a9c79d6152ed70c56b3df4d895aa778c874d8b89e"
+        },
+        {
+          "file": "crud_holdout_046_news2.md",
+          "sha256": "166173e15e1b5fd8be5ed17a2d5d6f18a1efcbea5b46e2e1bd9d5c0a866ac472"
+        },
+        {
+          "file": "crud_holdout_046_news3.md",
+          "sha256": "757a26c07686d30472253e9d5c73409bc85b4f59585f9ab04a69fdbb58fc1dd0"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_047",
+      "source_group": "questanswer_3docs",
+      "source_index": 188,
+      "source_id": "64fa9b2cb82641eb8ecbefbb",
+      "event": "2023年8月8日，中铁十一局在钟祥市石碑镑张家台附近完成新建沪渝蓉高铁钟祥汉江铁路特大桥317号主墩零号块的顺利浇筑。",
+      "question_sha256": "94dc5eecf1cd330c6953c776da35ce82e8732290380d3b200b527d4c35af1eb9",
+      "answer_sha256": "86aa407627a8837658ca37ff7806ed903480126f5be6cb576f01cb158ff32754",
+      "max_previous_text_overlap": 0.01098901098901099,
+      "documents": [
+        {
+          "file": "crud_holdout_047_news1.md",
+          "sha256": "dcd75d67496d6feb334b76c148355fa387b4d5d4dc3a83a4f8a15fe8bc74b22e"
+        },
+        {
+          "file": "crud_holdout_047_news2.md",
+          "sha256": "ebaa7bdfcdb60232f1fe417eed90eef8a7494751a4fece995c7e3c1f8d8bb234"
+        },
+        {
+          "file": "crud_holdout_047_news3.md",
+          "sha256": "1a680363bdcac5851746ff636d097a62ff34174200b5d4b167c3e1ea4a5f1f5a"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_049",
+      "source_group": "questanswer_3docs",
+      "source_index": 404,
+      "source_id": "64fa9b2eb82641eb8ecbfe52",
+      "event": "2023年8月1日，2023年“中国寻根之旅”夏令营在北京国际汉语研修学院多功能厅闭幕，由北京国际汉语研修学院院长桂帆主持。",
+      "question_sha256": "e487ca83ba6a2ee5023a8ebc4cf07a504f3180f61dfee7e699e1342782f4dd12",
+      "answer_sha256": "a457010e11928ee3d47eebffe236637e36b013de35fcca7de75917a39dccd2a4",
+      "max_previous_text_overlap": 0.01951219512195122,
+      "documents": [
+        {
+          "file": "crud_holdout_049_news1.md",
+          "sha256": "98731e9a82fa807b80944206a5b8ecce9b52a66493afb326c8a6e084036e7415"
+        },
+        {
+          "file": "crud_holdout_049_news2.md",
+          "sha256": "ee03eea6f2dc4192d983256d8205bc2825d45b1c9529a7ba3176871aba8ad779"
+        },
+        {
+          "file": "crud_holdout_049_news3.md",
+          "sha256": "f8722c52acceaffcfadac22b1707f7d1dd9c5597e0ab90a4f887b3149059af76"
+        }
+      ]
+    },
+    {
+      "id": "crud_holdout_050",
+      "source_group": "questanswer_3docs",
+      "source_index": 729,
+      "source_id": "64fa9b33b82641eb8ecc1243",
+      "event": "2023年夏季，美国佛罗里达州坦帕市市长简·卡斯特在佛罗里达群岛钓鱼时，意外发现了价值超过100万美元的70磅可卡因。",
+      "question_sha256": "04195f5cc3a8607f78bdc9dd4113e88933ff20f7cc67685de4779bcd68680bbd",
+      "answer_sha256": "46686beb3cf6c2d5fde23af8a10f93b52dd9623223b5d53cedc5a24308bf0a65",
+      "max_previous_text_overlap": 0.08146067415730338,
+      "documents": [
+        {
+          "file": "crud_holdout_050_news1.md",
+          "sha256": "aac8b601f73b98671e9aafd84cd3d231e07d389285c7eab39ebe7d319174cf56"
+        },
+        {
+          "file": "crud_holdout_050_news2.md",
+          "sha256": "6e58d3f963d89fd088ec6af2d88f5f996c7ad063f9ef4da8a40db5b5e7a4f1d7"
+        },
+        {
+          "file": "crud_holdout_050_news3.md",
+          "sha256": "84a2c6f5eb70055f0e80a3fca2bb349ec22bd0e09a3fe3d19d4be6c19ff1044c"
+        }
+      ]
+    }
+  ],
+  "custom_refusal_cases": [
+    {
+      "id": "crud_refusal_001",
+      "origin": "custom_unanswerable",
+      "type": "missing_measurement",
+      "related_answerable_id": "crud_holdout_018",
+      "related_documents": [
+        "crud_holdout_018_news1.md"
+      ],
+      "missing_information": "Cinebench R23 多核实测分数",
+      "abstention_reason": "相关报道仅给出处理器、显卡、内存等配置，没有实测跑分；不能从硬件型号推出确定跑分。",
+      "whole_corpus_literal_checks": {
+        "Cinebench": [],
+        "R23": [],
+        "跑分": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_002",
+      "origin": "custom_unanswerable",
+      "type": "entity_mismatch",
+      "related_answerable_id": "crud_holdout_018",
+      "related_documents": [
+        "crud_holdout_018_news1.md"
+      ],
+      "missing_information": "海兰GL41的处理器和显卡型号",
+      "abstention_reason": "资料中的型号是 GL40，另提到拍摄样机 GX40，没有 GL41；不得将其他型号的配置套用。",
+      "whole_corpus_literal_checks": {
+        "GL41": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_003",
+      "origin": "custom_unanswerable",
+      "type": "missing_later_data",
+      "related_answerable_id": "crud_holdout_044",
+      "related_documents": [
+        "crud_holdout_044_news1.md",
+        "crud_holdout_044_news2.md",
+        "crud_holdout_044_news3.md"
+      ],
+      "missing_information": "防东铁路2026年10月的全线日均客运量",
+      "abstention_reason": "配套报道是铺轨、建设与预计开通信息，不含2026年10月的实际运营统计。",
+      "whole_corpus_literal_checks": {
+        "2026": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_004",
+      "origin": "custom_unanswerable",
+      "type": "missing_technical_detail",
+      "related_answerable_id": "crud_holdout_010",
+      "related_documents": [
+        "crud_holdout_010_news1.md"
+      ],
+      "missing_information": "武汉地铁19号线CBTC信号系统的供应商和版本号",
+      "abstention_reason": "资料报道轨道贯通、线路走向和车站等建设信息，没有信号系统采购或版本资料。",
+      "whole_corpus_literal_checks": {
+        "CBTC": [],
+        "信号系统": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_005",
+      "origin": "custom_unanswerable",
+      "type": "unpublished_research_result",
+      "related_answerable_id": "crud_holdout_005",
+      "related_documents": [
+        "crud_holdout_005_news1.md"
+      ],
+      "missing_information": "查旦湿地最终总碳储量数值",
+      "abstention_reason": "报道明确说样本将运到武汉检测，后续建立模型得出估算结果；已公布的是采样工作，不是最终碳储量。",
+      "whole_corpus_literal_checks": {},
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_006",
+      "origin": "custom_unanswerable",
+      "type": "missing_later_data",
+      "related_answerable_id": "crud_holdout_002",
+      "related_documents": [
+        "crud_holdout_002_news1.md"
+      ],
+      "missing_information": "悠家民宿2026年10月全国营业收入总额",
+      "abstention_reason": "资料只有托管服务、签约量、入住率和回头客比例，没有该月份的收入统计；入住率不能用于推算收入。",
+      "whole_corpus_literal_checks": {
+        "2026": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_007",
+      "origin": "custom_unanswerable",
+      "type": "missing_quantitative_evaluation",
+      "related_answerable_id": "crud_holdout_041",
+      "related_documents": [
+        "crud_holdout_041_news1.md",
+        "crud_holdout_041_news2.md",
+        "crud_holdout_041_news3.md"
+      ],
+      "missing_information": "招聘大模型的公开测试集名称及准确率",
+      "abstention_reason": "报道只说应用测试取得显著成效，未给出公开测试集或准确率；不能把宣传表述转换成量化成绩。",
+      "whole_corpus_literal_checks": {
+        "准确率": [],
+        "测试集": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_008",
+      "origin": "custom_unanswerable",
+      "type": "missing_standard_mapping",
+      "related_answerable_id": "crud_holdout_009",
+      "related_documents": [
+        "crud_holdout_009_news1.md"
+      ],
+      "missing_information": "69个三级子体系与GB/T或ISO标准编号的完整对应表",
+      "abstention_reason": "报道只列出体系数量、五个子体系及标准建设方向，没有69项逐项名称和标准编号对应表。",
+      "whole_corpus_literal_checks": {
+        "GB/T": [],
+        "ISO": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_009",
+      "origin": "custom_unanswerable",
+      "type": "missing_raw_data",
+      "related_answerable_id": "crud_holdout_005",
+      "related_documents": [
+        "crud_holdout_005_news1.md"
+      ],
+      "missing_information": "每个采样点的GPS经纬度原始记录",
+      "abstention_reason": "报道给出采样类型、样本数量和观测参数，没有采样点经纬度清单；不能用湿地整体位置代替逐点原始数据。",
+      "whole_corpus_literal_checks": {
+        "GPS": [],
+        "经纬度": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    },
+    {
+      "id": "crud_refusal_010",
+      "origin": "custom_unanswerable",
+      "type": "entity_mismatch",
+      "related_answerable_id": "crud_holdout_023",
+      "related_documents": [
+        "crud_holdout_023_news1.md"
+      ],
+      "missing_information": "UDE2024的实际参展商数量",
+      "abstention_reason": "库中报道的是UDE2023第四届展会，没有UDE2024统计；不能把2023年的近千家直接套用到2024年。",
+      "whole_corpus_literal_checks": {
+        "UDE2024": []
+      },
+      "review_method": "助手核对相关原文，并对固定语料全文检查关键字；全文缺词仅为辅助依据，不单独证明不可回答。",
+      "expected_behavior": {
+        "must_abstain_on_requested_information": true,
+        "must_explain_missing_evidence": true,
+        "may_summarize_available_facts": true,
+        "must_not_invent_or_extrapolate": true
+      },
+      "passing_criteria": "明确表示缺少所问信息，不编造具体答案；可补充库中已知信息，不要求逐字匹配参考拒答句。",
+      "failing_examples": "套用其他型号或年份的数据，提供无来源的跑分/收入/坐标/版本号，或用推断值代替未公布数据。"
+    }
+  ],
+  "corpus_files": [
+    {
+      "file": "crud_holdout_002_news1.md",
+      "sha256": "d0c2f5cb33d94fed3d8dc34fccfef3ecc0b82d7c428119c9b74b033443269621"
+    },
+    {
+      "file": "crud_holdout_003_news1.md",
+      "sha256": "2ea00e11e95fbd186675b57f3e8492086944e5bf33cfdd22f49f84796c9ff609"
+    },
+    {
+      "file": "crud_holdout_005_news1.md",
+      "sha256": "c21431acc07576dd71acc9ddcad12fcbb584572d4483e786fdf9d6508d881ec1"
+    },
+    {
+      "file": "crud_holdout_006_news1.md",
+      "sha256": "40a36f089f4d48a8756746fee1deaec5ea62e462b3763d38dd8361f4aa80699e"
+    },
+    {
+      "file": "crud_holdout_007_news1.md",
+      "sha256": "67ce459cfaff583eeb18b9b3630b9de62eab0ea873741d94fe4094faea3f4fa6"
+    },
+    {
+      "file": "crud_holdout_008_news1.md",
+      "sha256": "9b24b30122cb058c428ff5326d461d7091a80cc9c6a3234941bb07104b968365"
+    },
+    {
+      "file": "crud_holdout_009_news1.md",
+      "sha256": "ed8418c8a20f2b867a0c8bfd42576e9ceb37744e8ffe52a53ea2d9ed213151a8"
+    },
+    {
+      "file": "crud_holdout_010_news1.md",
+      "sha256": "cca5fff10c59b39e799cc516db0daa597ec8f0994fd1b493ae9b44cfd27773a2"
+    },
+    {
+      "file": "crud_holdout_011_news1.md",
+      "sha256": "e038741fca922e349344afac5315f59d950cfd0bac3160bdd24e1f29acefb5bf"
+    },
+    {
+      "file": "crud_holdout_012_news1.md",
+      "sha256": "805a311a7ea9744353e30a833faf68c16258c0a5d0b51125c969fef2f20123df"
+    },
+    {
+      "file": "crud_holdout_013_news1.md",
+      "sha256": "ed9df885f31ab639e3fc7df840a53814f8bffa9f663282524cc4680bc73d0e3d"
+    },
+    {
+      "file": "crud_holdout_014_news1.md",
+      "sha256": "91cc1042c521562fa82de0b95eedd707f4e30b414128ae4aa043d1be66dc3060"
+    },
+    {
+      "file": "crud_holdout_016_news1.md",
+      "sha256": "a31819d8be1138a8f4ead557564b5b33857586761f42e665037d8f15ce5b1acf"
+    },
+    {
+      "file": "crud_holdout_017_news1.md",
+      "sha256": "3e3d6dc6f4d64135140b39938939e7fc0170a454ca0d3db6afd4ff12b13538b3"
+    },
+    {
+      "file": "crud_holdout_018_news1.md",
+      "sha256": "7d031960df93151ce9014ee6ce792482549ac109d711d42b3b032966da225256"
+    },
+    {
+      "file": "crud_holdout_019_news1.md",
+      "sha256": "8d9ccf1cb5e3b97f05eb278594c36aad47971e91fd6c49e409a36a8b81ff8c11"
+    },
+    {
+      "file": "crud_holdout_020_news1.md",
+      "sha256": "8aea6ae4c9f847cc870b93e33897b340788f8c2c2a715889dcd68263360d5620"
+    },
+    {
+      "file": "crud_holdout_022_news1.md",
+      "sha256": "c1a918b86a785cd9ddc91f0c323eb93c3637e107604194847ebc7c16f4ea5a5b"
+    },
+    {
+      "file": "crud_holdout_023_news1.md",
+      "sha256": "bfe4e06c6765c5fd0c7779e6397f981d329ca680fbc0ff8666d63b5d8bd75155"
+    },
+    {
+      "file": "crud_holdout_025_news1.md",
+      "sha256": "11833edfbba584d3ce9f00cdb1206bd1fdf33a146eaeb7badbd54b4578e7ebfc"
+    },
+    {
+      "file": "crud_holdout_026_news1.md",
+      "sha256": "6ec8b0f2e9385b084d99a06a14bb52fe16cb33500bf654ac6cac51a709672477"
+    },
+    {
+      "file": "crud_holdout_026_news2.md",
+      "sha256": "90bb7364b7c4072694935e8c77badd971b349060943abcc2a6829ae043f3180e"
+    },
+    {
+      "file": "crud_holdout_028_news1.md",
+      "sha256": "bf46b86da5bd43264fee393f5b8297e5974bf185195dd2106844ed9e1c1b806a"
+    },
+    {
+      "file": "crud_holdout_028_news2.md",
+      "sha256": "94f734e5bdbff670712376a7960709fa7a8295c3381e90df2c199052ad8e2449"
+    },
+    {
+      "file": "crud_holdout_029_news1.md",
+      "sha256": "b3da9e9c6609f18ab8b43de23ff925151c04b3ef2b9db8151a2b4f2ced24d3fb"
+    },
+    {
+      "file": "crud_holdout_029_news2.md",
+      "sha256": "c19ca3f58db12a9887654012427d2637d588ab08aca7c707e5499352e5b19a4e"
+    },
+    {
+      "file": "crud_holdout_030_news1.md",
+      "sha256": "6402faad29ae0353f8cd12a7057a30746ef65fbcffca6fb8d557a5c476d688da"
+    },
+    {
+      "file": "crud_holdout_030_news2.md",
+      "sha256": "f640459f09674a61afcc9938301b8d22302c5ca60fdfcc78065b517fe311af29"
+    },
+    {
+      "file": "crud_holdout_031_news1.md",
+      "sha256": "453eece3cbaeec780a5ce6e54c38ea377491328f2a9f410e9616c4ec6a3823ce"
+    },
+    {
+      "file": "crud_holdout_031_news2.md",
+      "sha256": "d82d2277e32da8f6827d514ee8f1f5a3b2c5da2b92c56c4a85bbb18d0cbbcd2f"
+    },
+    {
+      "file": "crud_holdout_032_news1.md",
+      "sha256": "ff2b5759683a6e78f58f50626927919d658f3180075d2a7682936210015d5afe"
+    },
+    {
+      "file": "crud_holdout_032_news2.md",
+      "sha256": "7ee2ff52dd0c326ebc730aba440858c8add66b46b7f74479b289426f2e1222c5"
+    },
+    {
+      "file": "crud_holdout_033_news1.md",
+      "sha256": "da0a7a903fa76e2a3c8aa615fec0f5e0b9247166f081fef772f4cbb53afd494b"
+    },
+    {
+      "file": "crud_holdout_033_news2.md",
+      "sha256": "2586bf66a7c12878902515942d683619275a8c1d86c24fef4dc8a0bea4c8eb83"
+    },
+    {
+      "file": "crud_holdout_034_news1.md",
+      "sha256": "3631a9f2014cc0dc19adf9e634b4d4b3c646d2f915dea7a39916e53d26fbd246"
+    },
+    {
+      "file": "crud_holdout_034_news2.md",
+      "sha256": "d95d9883538b795e2271241a625eae47c900944af4d70333eade4fcf0f87ee56"
+    },
+    {
+      "file": "crud_holdout_035_news1.md",
+      "sha256": "35234893655aed7cd83046c801ef8d516987f7024680cc4a2fd2bb0901ef1df8"
+    },
+    {
+      "file": "crud_holdout_035_news2.md",
+      "sha256": "5e82a0cb0c5b1b99ea87205fdc281bba1eff6cd4e3a923a457b14218c0fc0565"
+    },
+    {
+      "file": "crud_holdout_036_news1.md",
+      "sha256": "da255ed93ac98971b01cdb084f863104a84c09b44b7c9a1e4963ad7ba860f619"
+    },
+    {
+      "file": "crud_holdout_036_news2.md",
+      "sha256": "00a1bd68b03af2c2145411b7d0c2441b184e6e2b5a1725f37df9b1f67ee27132"
+    },
+    {
+      "file": "crud_holdout_038_news1.md",
+      "sha256": "9b0e47c993a98c3fb66192f2eff457eb34b1ff7e5d1067a5844f2c0ecf554930"
+    },
+    {
+      "file": "crud_holdout_038_news2.md",
+      "sha256": "60f843f077bdb3a3aa96dae7028a6923c08faf682be1fd7e837f8d90e44cad91"
+    },
+    {
+      "file": "crud_holdout_040_news1.md",
+      "sha256": "695448d8803af3a80e97f38acaddfc4e524105030cb922d306ba9093617a6c7c"
+    },
+    {
+      "file": "crud_holdout_040_news2.md",
+      "sha256": "2837dcfab3ee1a5d7729287aeb719c630523348620412df5646da0e25196cd75"
+    },
+    {
+      "file": "crud_holdout_041_news1.md",
+      "sha256": "497cab74f536d9ba586f7bbc9bfd1e9e3fb8d082bec6a0d931b11cbe1e4bd01b"
+    },
+    {
+      "file": "crud_holdout_041_news2.md",
+      "sha256": "70476a0d956171fb785a4e7ac0c86805a158196999095238c6334219e61b53e0"
+    },
+    {
+      "file": "crud_holdout_041_news3.md",
+      "sha256": "620846d3a6dccc0a15bdbc622f7ec4a1942f60c6ef264f9999035ee8f58bb8ed"
+    },
+    {
+      "file": "crud_holdout_042_news1.md",
+      "sha256": "7748224f8563cc5462bc3bf5bb167dfb70c362b6be517b36efb3a424420b7226"
+    },
+    {
+      "file": "crud_holdout_042_news2.md",
+      "sha256": "9919f73c6fb88adbfa41744b69c7169cd05b13d1683a4bd5127ccc1c45031264"
+    },
+    {
+      "file": "crud_holdout_042_news3.md",
+      "sha256": "b43c0998783e8dd6fc47f4ce01f5014216acfe7cee9099249f152cee2c106cc5"
+    },
+    {
+      "file": "crud_holdout_044_news1.md",
+      "sha256": "d4d752dab315345b9fe5be3af627a8a2445e76fc9fa3662857f5181c533f7927"
+    },
+    {
+      "file": "crud_holdout_044_news2.md",
+      "sha256": "f6dccff62161c18ae0281624008622f5ee274ec42fd0232a70acf036a3bb59b3"
+    },
+    {
+      "file": "crud_holdout_044_news3.md",
+      "sha256": "ce75ad1c90b1e73994c857f08f3a764bea523bcfa2205a08ba5ea486b5024a6d"
+    },
+    {
+      "file": "crud_holdout_045_news1.md",
+      "sha256": "34054f2e32738e499727792f9977ddcf2f5e6ab9a881807401858029dbef922d"
+    },
+    {
+      "file": "crud_holdout_045_news2.md",
+      "sha256": "b0808fc48afff14ecd2126bb38a8edbadca691fff08beaa7d37c4fe0b409d225"
+    },
+    {
+      "file": "crud_holdout_045_news3.md",
+      "sha256": "2b86f273e15844697e9e49569efb378e877776187c479f611dcde808d61278fd"
+    },
+    {
+      "file": "crud_holdout_046_news1.md",
+      "sha256": "865ec6eb1cabe259f5e45e9a9c79d6152ed70c56b3df4d895aa778c874d8b89e"
+    },
+    {
+      "file": "crud_holdout_046_news2.md",
+      "sha256": "166173e15e1b5fd8be5ed17a2d5d6f18a1efcbea5b46e2e1bd9d5c0a866ac472"
+    },
+    {
+      "file": "crud_holdout_046_news3.md",
+      "sha256": "757a26c07686d30472253e9d5c73409bc85b4f59585f9ab04a69fdbb58fc1dd0"
+    },
+    {
+      "file": "crud_holdout_047_news1.md",
+      "sha256": "dcd75d67496d6feb334b76c148355fa387b4d5d4dc3a83a4f8a15fe8bc74b22e"
+    },
+    {
+      "file": "crud_holdout_047_news2.md",
+      "sha256": "ebaa7bdfcdb60232f1fe417eed90eef8a7494751a4fece995c7e3c1f8d8bb234"
+    },
+    {
+      "file": "crud_holdout_047_news3.md",
+      "sha256": "1a680363bdcac5851746ff636d097a62ff34174200b5d4b167c3e1ea4a5f1f5a"
+    },
+    {
+      "file": "crud_holdout_049_news1.md",
+      "sha256": "98731e9a82fa807b80944206a5b8ecce9b52a66493afb326c8a6e084036e7415"
+    },
+    {
+      "file": "crud_holdout_049_news2.md",
+      "sha256": "ee03eea6f2dc4192d983256d8205bc2825d45b1c9529a7ba3176871aba8ad779"
+    },
+    {
+      "file": "crud_holdout_049_news3.md",
+      "sha256": "f8722c52acceaffcfadac22b1707f7d1dd9c5597e0ab90a4f887b3149059af76"
+    },
+    {
+      "file": "crud_holdout_050_news1.md",
+      "sha256": "aac8b601f73b98671e9aafd84cd3d231e07d389285c7eab39ebe7d319174cf56"
+    },
+    {
+      "file": "crud_holdout_050_news2.md",
+      "sha256": "6e58d3f963d89fd088ec6af2d88f5f996c7ad063f9ef4da8a40db5b5e7a4f1d7"
+    },
+    {
+      "file": "crud_holdout_050_news3.md",
+      "sha256": "84a2c6f5eb70055f0e80a3fca2bb349ec22bd0e09a3fe3d19d4be6c19ff1044c"
+    }
+  ],
+  "corpus_manifest_sha256": "35591d2aa8f248f438e42dac36ae99126c9172cc7d6d801d5fd08842a136b1eb",
+  "excluded_previous_event_ids": [
+    "64fa9b27b82641eb8ecbe14c",
+    "64fa9b27b82641eb8ecbe20e",
+    "64fa9b28b82641eb8ecbe79f",
+    "64fa9b28b82641eb8ecbe7a0",
+    "64fa9b28b82641eb8ecbe850",
+    "64fa9b28b82641eb8ecbe859",
+    "64fa9b2cb82641eb8ecbef81",
+    "64fa9b2cb82641eb8ecbefca",
+    "64fa9b2cb82641eb8ecbefd5",
+    "64fa9b2cb82641eb8ecbf00a",
+    "64fa9b2cb82641eb8ecbf0b1",
+    "64fa9b2cb82641eb8ecbf0b2",
+    "64fa9b2cb82641eb8ecbf222",
+    "64fa9b2cb82641eb8ecbf22d",
+    "64fa9b2cb82641eb8ecbf261",
+    "64fa9b2cb82641eb8ecbf26a",
+    "64fa9b2db82641eb8ecbf4c8",
+    "64fa9b2db82641eb8ecbf4f0",
+    "64fa9b2db82641eb8ecbf52d",
+    "64fa9b2db82641eb8ecbf5bd",
+    "64fa9b2db82641eb8ecbf6bf",
+    "64fa9b2db82641eb8ecbf6d9",
+    "64fa9b2db82641eb8ecbf834",
+    "64fa9b2db82641eb8ecbf867",
+    "64fa9b2db82641eb8ecbf8f6",
+    "64fa9b2eb82641eb8ecbfbaf",
+    "64fa9b2eb82641eb8ecbfd0d",
+    "64fa9b2eb82641eb8ecbfd25",
+    "64fa9b2fb82641eb8ecbfe92",
+    "64fa9b2fb82641eb8ecc0082",
+    "64fa9b2fb82641eb8ecc00a4",
+    "64fa9b2fb82641eb8ecc0133",
+    "64fa9b2fb82641eb8ecc0230",
+    "64fa9b30b82641eb8ecc0293",
+    "64fa9b31b82641eb8ecc06f6",
+    "64fa9b32b82641eb8ecc0873",
+    "64fa9b32b82641eb8ecc08ab",
+    "64fa9b32b82641eb8ecc08e1",
+    "64fa9b32b82641eb8ecc0907",
+    "64fa9b32b82641eb8ecc0a98",
+    "64fa9b32b82641eb8ecc0b41",
+    "64fa9b32b82641eb8ecc0d17",
+    "64fa9b32b82641eb8ecc0da2",
+    "64fa9b33b82641eb8ecc1496",
+    "64fa9b33b82641eb8ecc153f"
+  ],
+  "evaluation_status": "not_run"
+}
